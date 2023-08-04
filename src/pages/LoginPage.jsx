@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
  
 const api_url = "http://localhost:5005";
 
@@ -8,11 +9,12 @@ function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(undefined);
+    const { userAuthentication } = useContext(AuthContext)   // TODO: when token available
     
     const navigate = useNavigate();
    
     
-    const handleLoginSubmit = (event) => {
+    const handleLoginSubmit = async (event) => {
         event.preventDefault()
 
 
@@ -21,12 +23,11 @@ function LoginPage() {
 
             localStorage.setItem("authToken", data.token); // TODO: check for keyname (backend)
         
-            await authenticateUser();
-            nav("/");           // TODO: add route
+            await userAuthentication();
+            navigate("/");           // TODO: add route 
                 
         } catch (error) {
-            console.log(err);
-            setErrorMessage(err.response.data.errorMessage);
+            setErrorMessage(error.response.data.errorMessage);
         }
 
     };
