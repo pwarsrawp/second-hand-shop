@@ -23,7 +23,7 @@ function LoginPage() {
 
             localStorage.setItem("authToken", data.token); // TODO: check for keyname (backend)
         
-            await userAuthentication();
+            // await userAuthentication();
             navigate("/");           // TODO: add route 
                 
         } catch (error) {
