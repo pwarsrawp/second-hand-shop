@@ -11,7 +11,7 @@ function SignupPage() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5005/auth/login", {
+      const res = await axios.post("http://localhost:5005/auth/signup", {
         email,
         password,
       });

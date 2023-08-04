@@ -9,7 +9,7 @@ function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(undefined);
-    const { userAuthentication } = useContext(AuthContext)   // TODO: when token available
+    const { userAuthentication } = useContext(AuthContext)   
     
     const navigate = useNavigate();
    
@@ -19,12 +19,12 @@ function LoginPage() {
 
 
         try {
-            const { data } = await axios.post("http://localhost:5005/auth/login", {email,password});
+            const { data } = await axios.post(`${api_url}/auth/login`, {email,password});
 
-            localStorage.setItem("authToken", data.token); // TODO: check for keyname (backend)
+            localStorage.setItem("authToken", data.token); 
         
-            // await userAuthentication();
-            navigate("/");           // TODO: add route 
+            await userAuthentication();   // TODO: runtime error?
+            navigate("/profile");         
                 
         } catch (error) {
             setErrorMessage(error.response.data.errorMessage);
