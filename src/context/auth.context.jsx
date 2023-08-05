@@ -12,7 +12,6 @@ function AuthContextWrapper({ children }) {
 
     const userAuthentication = async () => {
         const token = localStorage.getItem("authToken");
-        console.log('token: ', token);
 
         if (token) {
           try {
@@ -20,7 +19,6 @@ function AuthContextWrapper({ children }) {
                 headers: { authorization: `Bearer ${token}` },
             });
             
-            console.log('after verification data: ', data);
             // authorization successful
             setUser(data.currentUser);
             setIsLoading(false);
