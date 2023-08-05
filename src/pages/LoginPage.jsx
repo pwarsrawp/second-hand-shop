@@ -17,7 +17,6 @@ function LoginPage() {
     const handleLoginSubmit = async (event) => {
         event.preventDefault()
 
-
         try {
             const { data } = await axios.post(`${api_url}/auth/login`, {email,password});
 
