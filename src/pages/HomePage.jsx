@@ -37,8 +37,8 @@ function HomePage() {
                   <img src={product.imageUrl} style={{height:"200px"}} />
                 </div>
                 <div>
-                  <h1>{product.price}</h1>
                   <h2>{product.title}</h2>
+                  <h5>€ {product.price}</h5>
                   <button className="heart-btn" onClick={addToFavorites}></button>
                 </div>
               </div>
