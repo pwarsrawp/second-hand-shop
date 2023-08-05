@@ -34,7 +34,7 @@ function HomePage() {
             <Link to={`/products/${product._id}`} key={product._id}>
               <div className="product-card">
                 <div className='img-gallery'>
-                  <img src={product.imageUrl} />
+                  <img src={product.imageUrl} style={{height:"200px"}} />
                 </div>
                 <div>
                   <h1>{product.price}</h1>
