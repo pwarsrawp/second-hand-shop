@@ -9,14 +9,13 @@ const fetchAllProducts = async (url, setter) => {
     }
 };
 
-const fetchQueryProducts = (query, products, setter) => {
+const filterProducts = (query, products, setter) => {
     if(!query) return setter(products);
 
     const filtered = products.filter((product) => {
         return product.title.toLowerCase().includes(query.toLowerCase())
     })
     setter(filtered)
-    console.log('filtered: ', filtered);
 };
 
 const addToFavorites = (id) => {
@@ -26,6 +25,6 @@ const addToFavorites = (id) => {
 
 export {
     fetchAllProducts,
-    fetchQueryProducts,
+    filterProducts,
     addToFavorites
 }

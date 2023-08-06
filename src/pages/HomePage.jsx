@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { fetchAllProducts, fetchQueryProducts, addToFavorites } from '../functions/product.functions';
+import { fetchAllProducts, filterProducts, addToFavorites } from '../functions/product.functions';
 
 
 function HomePage() {
@@ -16,7 +16,7 @@ function HomePage() {
   }, [])
 
   useEffect(() => {
-    fetchQueryProducts(query, products, setFilteredProducts);
+    filterProducts(query, products, setFilteredProducts);
     console.log(filteredProducts)
   }, [query]);
 
