@@ -6,46 +6,47 @@ import {
   updateFavoriteList,
 } from "../functions/product.functions";
 import { AuthContext } from "../context/auth.context";
+import "./HomePage.css"
 
 function HomePage() {
   const [products, setProducts] = useState([]);
   const [query, setQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [favorite, setFavorite] = useState();
+  const [favorite, setFavorite] = useState([]);
   const { isLoggedIn, user } = useContext(AuthContext);
 
   const api_url = `http://localhost:5005`;
 
   useEffect(() => {
     const fetchProducts = async () => {
-        const productsData = await fetchAll(`${api_url}/products`);
-        setProducts(productsData);
-        setFilteredProducts(productsData);
+      const productsData = await fetchAll(`${api_url}/products`);
+      setProducts(productsData);
+      setFilteredProducts(productsData);
     };
 
-  //   const fetchFavorites = async () => {
-  //     if (user && user._id) {
-  //         const userData = await fetchAll(`${api_url}/users/${user._id}`);
-  //         setFavorite(userData.favorites);
-  //     }
-  // };
-
+    const fetchFavorites = async () => {
+      if (user) {
+        const userData = await fetchAll(`${api_url}/users/${user._id}`);
+        if (userData) {
+          setFavorite(userData.favorites || []); 
+        }
+      }
+    };
+    
+    fetchFavorites();
     fetchProducts();
-    // fetchFavorites();
-}, []);
-
-
+  }, []);
+  
   useEffect(() => {
     filterProducts(query, products, setFilteredProducts);
   }, [query]);
-  
-  const handleFavorite = async (productId) => {
 
+  const handleFavorite = async (productId) => {
     if (isLoggedIn) {
       try {
-        await updateFavoriteList(productId, setFavorite, user._id);        
+        await updateFavoriteList(productId, setFavorite, user._id);
       } catch (error) {
-        console.log('updating favorites didnt work')
+        console.log("updating favorites didnt work");
       }
     }
   };
@@ -63,7 +64,11 @@ function HomePage() {
       <div className="product-container">
         {filteredProducts.map((product) => {
           return (
-            <div key={product._id} className="product-card" style={{ border: "1px solid grey" }}>
+            <div
+              key={product._id}
+              className="product-card"
+              style={{ border: "1px solid grey" }}
+            >
               <Link to={`/products/${product._id}`}>
                 <div className="img-gallery">
                   <img src={product.imageUrl} style={{ height: "200px" }} />
@@ -74,7 +79,7 @@ function HomePage() {
                 </div>
               </Link>
               <button
-                className="heart-btn"
+                className={`heart-btn ${favorite.includes(product._id) ? "active" : "not-active"}`}
                 onClick={() => handleFavorite(product._id)}
               >
                 Favorite
