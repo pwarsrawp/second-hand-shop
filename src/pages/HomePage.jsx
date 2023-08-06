@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  fetchAllProducts,
+  fetchAll,
   filterProducts,
   updateFavoriteList,
 } from "../functions/product.functions";
@@ -14,25 +14,40 @@ function HomePage() {
   const [favorite, setFavorite] = useState();
   const { isLoggedIn, user } = useContext(AuthContext);
 
-  const api_url = `http://localhost:5005/products`;
+  const api_url = `http://localhost:5005`;
 
   useEffect(() => {
-    fetchAllProducts(api_url, setProducts);
-    fetchAllProducts(api_url, setFilteredProducts);
-  }, []);
+    const fetchProducts = async () => {
+        const productsData = await fetchAll(`${api_url}/products`);
+        setProducts(productsData);
+        setFilteredProducts(productsData);
+    };
+
+  //   const fetchFavorites = async () => {
+  //     if (user && user._id) {
+  //         const userData = await fetchAll(`${api_url}/users/${user._id}`);
+  //         setFavorite(userData.favorites);
+  //     }
+  // };
+
+    fetchProducts();
+    // fetchFavorites();
+}, []);
+
 
   useEffect(() => {
     filterProducts(query, products, setFilteredProducts);
   }, [query]);
+  
+  const handleFavorite = async (productId) => {
 
-  useEffect(() => {
     if (isLoggedIn) {
-      updateFavoriteList(favorite, user, setFavorite);
+      try {
+        await updateFavoriteList(productId, setFavorite, user._id);        
+      } catch (error) {
+        console.log('updating favorites didnt work')
+      }
     }
-  }, [favorite]);
-
-  const handleFavorite = (productId) => {
-    setFavorite(productId);
   };
 
   return filteredProducts ? (
@@ -62,7 +77,7 @@ function HomePage() {
                 className="heart-btn"
                 onClick={() => handleFavorite(product._id)}
               >
-                Add to favorites
+                Favorite
               </button>
             </div>
           );
