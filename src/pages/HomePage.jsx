@@ -1,27 +1,60 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import { fetchAllProducts, fetchQueryProducts, addToFavorites } from '../functions/product.functions';
-
+import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  fetchAll,
+  filterProducts,
+  updateFavoriteList,
+} from "../functions/product.functions";
+import { AuthContext } from "../context/auth.context";
+import "./HomePage.css"
 
 function HomePage() {
-  const [products, setProducts] = useState([])
-  const [query, setQuery] = useState("")
-  const [queryProducts, setQueryProducts] = useState([])
+  const [products, setProducts] = useState([]);
+  const [query, setQuery] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [favorite, setFavorite] = useState([]);
+  const { isLoggedIn, user } = useContext(AuthContext);
 
-  const api_url = `http://localhost:5005/products`;
-
-  useEffect(() => {
-    fetchAllProducts(api_url, setProducts)
-  }, [])
+  const api_url = `http://localhost:5005`;
 
   useEffect(() => {
-    fetchQueryProducts(query, products, setQueryProducts);
+    const fetchProducts = async () => {
+      const productsData = await fetchAll(`${api_url}/products`);
+      setProducts(productsData);
+      setFilteredProducts(productsData);
+    };
+
+    const fetchFavorites = async () => {
+      if (user) {
+        const userData = await fetchAll(`${api_url}/users/${user._id}`);
+        if (userData) {
+          setFavorite(userData.favorites || []); 
+        }
+      }
+    };
+    
+    fetchFavorites();
+    fetchProducts();
+  }, []);
+  
+  useEffect(() => {
+    filterProducts(query, products, setFilteredProducts);
   }, [query]);
 
-  return products ? (
+  const handleFavorite = async (productId) => {
+    if (isLoggedIn) {
+      try {
+        await updateFavoriteList(productId, setFavorite, user._id);
+      } catch (error) {
+        console.log("updating favorites didnt work");
+      }
+    }
+  };
+
+  return filteredProducts ? (
     <div className="container">
       <div>
-      <label>Search Product</label>
+        <label>Search Product</label>
       </div>
       <input
         name="query"
@@ -29,20 +62,29 @@ function HomePage() {
         onChange={(event) => setQuery(event.target.value)}
       />
       <div className="product-container">
-        {products.map((product) => {
+        {filteredProducts.map((product) => {
           return (
-            <Link to={`/products/${product._id}`} key={product._id}>
-              <div className="product-card">
-                <div className='img-gallery'>
-                  <img src={product.imageUrl} style={{height:"200px"}} />
+            <div
+              key={product._id}
+              className="product-card"
+              style={{ border: "1px solid grey" }}
+            >
+              <Link to={`/products/${product._id}`}>
+                <div className="img-gallery">
+                  <img src={product.imageUrl} style={{ height: "200px" }} />
                 </div>
                 <div>
                   <h2>{product.title}</h2>
                   <h5>€ {product.price}</h5>
-                  <button className="heart-btn" onClick={addToFavorites}></button>
                 </div>
-              </div>
-            </Link>
+              </Link>
+              <button
+                className={`heart-btn ${favorite.includes(product._id) ? "active" : "not-active"}`}
+                onClick={() => handleFavorite(product._id)}
+              >
+                Favorite
+              </button>
+            </div>
           );
         })}
         <hr></hr>
@@ -53,4 +95,4 @@ function HomePage() {
   );
 }
 
-export default HomePage
+export default HomePage;
