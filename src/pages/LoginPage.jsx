@@ -22,7 +22,7 @@ function LoginPage() {
 
             localStorage.setItem("authToken", data.token); 
         
-            await userAuthentication();   // TODO: runtime error?
+            await userAuthentication(); 
             navigate("/profile");         
                 
         } catch (error) {
