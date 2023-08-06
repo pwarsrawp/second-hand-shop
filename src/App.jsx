@@ -4,11 +4,12 @@ import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import Login from "./pages/LoginPage";
 import Purchases from "./pages/PurchaseDetailPage";
-import Products from "./pages/ProductDetailPage";
+import Product from "./pages/ProductDetailPage";
 import Profile from "./pages/ProfilePage";
 import Error from "./pages/ErrorPage";
 // import IsPrivate from "./components/IsPrivate";
 import "./App.css";
+import { AuthContextWrapper } from "./context/auth.context";
 
 function App() {
   return (
@@ -17,10 +18,15 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/purchases" element={<Purchases />} />
+        <Route path="/product" element={<Product />} />
+
+        {/* Private Routes */}
+        <Route path="/profile" element={<AuthContextWrapper><Profile /></AuthContextWrapper>} />
+        <Route path="/purchases" element={<AuthContextWrapper><Purchases /></AuthContextWrapper>} />
+
+        {/* 404 Page */}
         <Route path="*" element={<Error />} />
+
       </Routes>
     </>
   );

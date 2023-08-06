@@ -10,12 +10,13 @@ const fetchAllProducts = async (url, setter) => {
 };
 
 const fetchQueryProducts = (query, products, setter) => {
-    if(!query) return products;
+    if(!query) return setter(products);
 
-    const queryArray = products.filter((product) => {
-        return product.title.includes(query)
+    const filtered = products.filter((product) => {
+        return product.title.toLowerCase().includes(query.toLowerCase())
     })
-    setter(queryArray)
+    setter(filtered)
+    console.log('filtered: ', filtered);
 };
 
 const addToFavorites = (id) => {

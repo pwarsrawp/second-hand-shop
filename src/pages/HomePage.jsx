@@ -6,19 +6,21 @@ import { fetchAllProducts, fetchQueryProducts, addToFavorites } from '../functio
 function HomePage() {
   const [products, setProducts] = useState([])
   const [query, setQuery] = useState("")
-  const [queryProducts, setQueryProducts] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([])
 
   const api_url = `http://localhost:5005/products`;
 
   useEffect(() => {
     fetchAllProducts(api_url, setProducts)
+    fetchAllProducts(api_url, setFilteredProducts)
   }, [])
 
   useEffect(() => {
-    fetchQueryProducts(query, products, setQueryProducts);
+    fetchQueryProducts(query, products, setFilteredProducts);
+    console.log(filteredProducts)
   }, [query]);
 
-  return products ? (
+  return filteredProducts ? (
     <div className="container">
       <div>
       <label>Search Product</label>
@@ -29,7 +31,7 @@ function HomePage() {
         onChange={(event) => setQuery(event.target.value)}
       />
       <div className="product-container">
-        {products.map((product) => {
+        {filteredProducts.map((product) => {
           return (
             <Link to={`/products/${product._id}`} key={product._id}>
               <div className="product-card">
