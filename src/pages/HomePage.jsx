@@ -7,7 +7,7 @@ import {
 } from "../functions/product.functions";
 import { AuthContext } from "../context/auth.context";
 import "./HomePage.css";
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 function HomePage() {
@@ -55,7 +55,7 @@ function HomePage() {
 
   return filteredProducts ? (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="container">
         <div>
           <label>Search Product</label>
