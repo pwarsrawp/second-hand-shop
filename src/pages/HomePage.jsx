@@ -6,8 +6,9 @@ import {
   updateFavoriteList,
 } from "../functions/product.functions";
 import { AuthContext } from "../context/auth.context";
-import "./HomePage.css"
+import "./HomePage.css";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -29,15 +30,15 @@ function HomePage() {
       if (user) {
         const userData = await fetchAll(`${api_url}/users/${user._id}`);
         if (userData) {
-          setFavorite(userData.favorites || []); 
+          setFavorite(userData.favorites || []);
         }
       }
     };
-    
+
     fetchFavorites();
     fetchProducts();
   }, []);
-  
+
   useEffect(() => {
     filterProducts(query, products, setFilteredProducts);
   }, [query]);
@@ -84,15 +85,17 @@ function HomePage() {
               <button
                 className={`heart-btn ${favorite.includes(product._id) ? "active" : "not-active"}`}
                 onClick={() => handleFavorite(product._id)}
-              >
-                Favorite
-              </button>
-            </div>
-          );
-        })}
-        <hr></hr>
+
+                >
+                  Favorite
+                </button>
+              </div>
+            );
+          })}
+          <hr></hr>
+        </div>
       </div>
-    </div>
+      <Footer />
     </>
   ) : (
     <h1>Loading...</h1>
