@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function PurchaseDetailPage() {
-  return (
-    <div>PurchaseDetailPage</div>
-  )
+  return <div>PurchaseDetailPage</div>;
 }
 
-export default PurchaseDetailPage
+export default PurchaseDetailPage;
