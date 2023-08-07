@@ -18,7 +18,7 @@ function SignupPage() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5005/auth/signup", {
+      await axios.post("http://localhost:5005/auth/signup", {
         fullname,
         username,
         email,
@@ -27,8 +27,8 @@ function SignupPage() {
         address: {
           street,
           city,
-          country
-        }
+          country,
+        },
       });
       navigate("/login");
     } catch (error) {
