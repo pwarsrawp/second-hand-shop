@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../components/Navbar";
 
 function ErrorPage() {
   return (
-    <div>ErrorPage</div>
-  )
+    <>
+      <Navbar />
+      <div>ErrorPage</div>
+    </>
+  );
 }
 
-export default ErrorPage
+export default ErrorPage;
