@@ -1,0 +1,24 @@
+  /* Style the dropdown container */
+  .dropdown-container {
+    display: inline-block;
+    position: relative;
+  }
+
+  /* Style the select element */
+  select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  /* Style the dropdown arrow */
+  select::after {
+    content: '\25BE'; /* Unicode character for the down arrow */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 18px;
+  }
