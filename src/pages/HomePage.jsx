@@ -7,6 +7,7 @@ import {
 } from "../functions/product.functions";
 import { AuthContext } from "../context/auth.context";
 import "./HomePage.css"
+import Navbar from "../components/Navbar";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -52,6 +53,8 @@ function HomePage() {
   };
 
   return filteredProducts ? (
+    <>
+    <Navbar />
     <div className="container">
       <div>
         <label>Search Product</label>
@@ -90,6 +93,7 @@ function HomePage() {
         <hr></hr>
       </div>
     </div>
+    </>
   ) : (
     <h1>Loading...</h1>
   );
