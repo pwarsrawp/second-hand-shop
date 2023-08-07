@@ -10,4 +10,4 @@ function PurchaseDetailPage() {
   )
 }
 
-export default PurchaseDetailPage
+export default PurchaseDetailPage;
