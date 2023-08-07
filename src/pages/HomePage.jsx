@@ -7,7 +7,7 @@ import {
 } from "../functions/product.functions";
 import { AuthContext } from "../context/auth.context";
 import "./HomePage.css";
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 function HomePage() {
@@ -55,6 +55,7 @@ function HomePage() {
 
   return filteredProducts ? (
     <>
+
     <Navbar />
     <div className="container">
       <div>
@@ -85,7 +86,6 @@ function HomePage() {
               <button
                 className={`heart-btn ${favorite.includes(product._id) ? "active" : "not-active"}`}
                 onClick={() => handleFavorite(product._id)}
-
                 >
                   Favorite
                 </button>

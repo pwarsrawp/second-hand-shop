@@ -22,14 +22,41 @@ function App() {
         <Route path="/product" element={<Product />} />
 
         {/* Private Routes */}
-        <Route path="/profile" element={<IsPrivate><Profile /></IsPrivate>} />
-        <Route path="/purchases" element={<IsPrivate><Purchases /></IsPrivate>} />
-        <Route path="/favorites" element={<IsPrivate><FavoritesPage /></IsPrivate>} />
-        <Route path="/upload" element={<IsPrivate><UploadPage /></IsPrivate>} />
+        <Route
+          path="/profile"
+          element={
+            <IsPrivate>
+              <Profile />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/purchases"
+          element={
+            <IsPrivate>
+              <Purchases />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/favorites"
+          element={
+            <IsPrivate>
+              <FavoritesPage />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/upload"
+          element={
+            <IsPrivate>
+              <UploadPage />
+            </IsPrivate>
+          }
+        />
 
         {/* 404 Page */}
         <Route path="*" element={<Error />} />
-
       </Routes>
     </>
   );
