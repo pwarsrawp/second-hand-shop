@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../components/Navbar";
 
 function UploadPage() {
   return (
-    <div>UploadPage</div>
-  )
+    <>
+      <Navbar />
+      <div>UploadPage</div>
+    </>
+  );
 }
 
-export default UploadPage
+export default UploadPage;

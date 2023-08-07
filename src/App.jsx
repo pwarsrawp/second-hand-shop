@@ -6,7 +6,7 @@ import Login from "./pages/LoginPage";
 import Purchases from "./pages/PurchaseDetailPage";
 import Product from "./pages/ProductDetailPage";
 import Profile from "./pages/ProfilePage";
-import FavoritesPage from "./pages/FavoritesPage";
+import FavoritesPage from "./pages/FavouritesPage";
 import UploadPage from "./pages/UploadPage";
 import Error from "./pages/ErrorPage";
 import IsPrivate from "./context/auth.private";

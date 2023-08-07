@@ -6,13 +6,13 @@ function Navbar() {
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
-    <nav>
+    <nav style={{display: "flex", alignItems: "center", gap: "10px"}}>
       <div>
         <Link to={"/"}>
           <h4>Home</h4>
         </Link>
       </div>
-      <div>
+      <div style={{display: "flex", alignItems: "center", gap:"10px"}}>
         {isLoggedIn && (
           <>
             <Link to={"/purchases"}>

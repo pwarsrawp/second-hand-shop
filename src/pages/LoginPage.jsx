@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import Navbar from "../components/Navbar";
  
 const api_url = "http://localhost:5005";
 
@@ -34,6 +35,7 @@ function LoginPage() {
 
   return (
      <div>
+      <Navbar />
       <h1>Login</h1>
  
       <form onSubmit={handleLoginSubmit}>
@@ -58,7 +60,7 @@ function LoginPage() {
       { errorMessage && <p className="error-message">{errorMessage}</p> }
  
       <p>Not yet a member?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+      <Link to={"/signup"}>Sign Up</Link>
     </div>
   )
 }
