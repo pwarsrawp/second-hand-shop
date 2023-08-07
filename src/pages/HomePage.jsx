@@ -6,11 +6,9 @@ import {
   updateFavoriteList,
 } from "../functions/product.functions";
 import { AuthContext } from "../context/auth.context";
-
 import "./HomePage.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -57,38 +55,23 @@ function HomePage() {
 
   return filteredProducts ? (
     <>
-
-    <Navbar />
-    <div className="container">
-      <div>
-        <label>Search Product</label>
-      </div>
-      <input
-        name="query"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-      />
-      <div className="product-container">
-        {filteredProducts.map((product) => {
-          return (
-            <div
-              key={product._id}
-              className="product-card"
-              style={{ border: "1px solid grey" }}
-            >
-              <Link to={`/products/${product._id}`}>
-                <div className="img-gallery">
-                  <img src={product.imageUrl} style={{ height: "200px" }} />
-                </div>
-                <div>
-                  <h2>{product.title}</h2>
-                  <h5>€ {product.price}</h5>
-                </div>
-              </Link>
-              <button
-                className={`heart-btn ${favorite.includes(product._id) ? "active" : "not-active"}`}
-                onClick={() => handleFavorite(product._id)}
-
+      <Navbar />
+      <div className="container">
+        <div>
+          <label>Search Product</label>
+        </div>
+        <input
+          name="query"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+        <div className="product-container">
+          {filteredProducts.map((product) => {
+            return (
+              <div
+                key={product._id}
+                className="product-card"
+                style={{ border: "1px solid grey" }}
               >
                 <Link to={`/products/${product._id}`}>
                   <div className="img-gallery">
@@ -113,9 +96,7 @@ function HomePage() {
           <hr></hr>
         </div>
       </div>
-
       <Footer />
-
     </>
   ) : (
     <h1>Loading...</h1>
