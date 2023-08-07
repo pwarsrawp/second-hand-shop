@@ -6,10 +6,11 @@ import Login from "./pages/LoginPage";
 import Purchases from "./pages/PurchaseDetailPage";
 import Product from "./pages/ProductDetailPage";
 import Profile from "./pages/ProfilePage";
+import FavoritesPage from "./pages/FavoritesPage";
+import UploadPage from "./pages/UploadPage";
 import Error from "./pages/ErrorPage";
-// import IsPrivate from "./components/IsPrivate";
+import IsPrivate from "./context/auth.private";
 import "./App.css";
-import { AuthContextWrapper } from "./context/auth.context";
 
 function App() {
   return (
@@ -21,8 +22,10 @@ function App() {
         <Route path="/product" element={<Product />} />
 
         {/* Private Routes */}
-        <Route path="/profile" element={<AuthContextWrapper><Profile /></AuthContextWrapper>} />
-        <Route path="/purchases" element={<AuthContextWrapper><Purchases /></AuthContextWrapper>} />
+        <Route path="/profile" element={<IsPrivate><Profile /></IsPrivate>} />
+        <Route path="/purchases" element={<IsPrivate><Purchases /></IsPrivate>} />
+        <Route path="/favorites" element={<IsPrivate><FavoritesPage /></IsPrivate>} />
+        <Route path="/upload" element={<IsPrivate><UploadPage /></IsPrivate>} />
 
         {/* 404 Page */}
         <Route path="*" element={<Error />} />
