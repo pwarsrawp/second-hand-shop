@@ -69,21 +69,24 @@ function HomePage() {
       <div className="product-container">
         {filteredProducts.map((product) => {
           return (
-            <div
-              key={product._id}
-              className="product-card"
-              style={{ border: "1px solid grey" }}
-            >
-                <div className="img-gallery">
-                  <img src={product.imageUrl} style={{ height: "200px" }} />
+            <Link
+                to={`/products/${product._id}`}
+                key={product._id}
+                className="product-card"
+                style={linkStyle}
+              >
+                <div className="img-gallery" style={{ backgroundImage : `url(${product.imageUrl})`}}>
                 </div>
-                <div className="text-container-bottom">
+                <div>
                   <h2>{product.title}</h2>
-                </div>
-              <button
-                className={`heart-btn ${favorite.includes(product._id) ? "active" : "not-active"}`}
-                onClick={() => handleFavorite(product._id)}
 
+                  <h5>€ {product.price}</h5>
+                </div>
+                {/* <button
+                  className={`heart-btn ${
+                    favorite.includes(product._id) ? "active" : "not-active"
+                  }`}
+                  onClick={() => handleFavorite(product._id)}
                 >
                   Favorite
                 </button> */}
