@@ -13,6 +13,7 @@ function UploadPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Arts and Crafts");
+  const [condition, setCondition] = useState("new");
   const [price, setPrice] = useState(0);
   const [uploadDone, setUploadDone] = useState(false);
   const { user } = useContext(AuthContext);
@@ -29,6 +30,7 @@ function UploadPage() {
       data.append("price", price);
       data.append("seller", user._id);
       data.append("imageUrl", event.target.image.files[0]);
+      data.append("item_condition", condition);
       const res = await postOne(`${api_url}/products`, data);
       console.log(res.data);
       setRes(res.data);
@@ -88,7 +90,7 @@ function UploadPage() {
             </div>
 
             <div>
-              <label>Select an option:</label>
+              <label>Select a Category:</label>
               <div className="dropdown-container">
                 <select
                   name="category"
@@ -111,6 +113,28 @@ function UploadPage() {
               </div>
             </div>
 
+            <div>
+              <label>Select a Condition:</label>
+              <div className="dropdown-container">
+                <select
+                  name="state"
+                  required
+                  onChange={(event) => setCondition(event.target.value)}
+                >
+                  <option value="new">new</option>
+                  <option value="as good as new">
+                    as good as new
+                  </option>
+                  <option value="good">good</option>
+                  <option value="fair">fair</option>
+                  <option value="has given it all">
+                    has given it all
+                  </option>
+                </select>
+              </div>
+            </div>
+
+
             {/* CLOUDINARY */}
             <div className="App">
               <label htmlFor="file" className="btn-grey">
@@ -125,9 +149,7 @@ function UploadPage() {
                // multiple={false}
                 accept="image/jpg, image/png"
               />         
-              {file && (
-                <button onClick={deleteSelectedFile}>Remove File</button>
-              )}
+
               <div>
                 <button className="btn-green">
                   {loading ? "uploading..." : "upload"}
