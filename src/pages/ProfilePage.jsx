@@ -26,14 +26,18 @@ const Profile = () => {
     setAddress("");
   };
   return isLoggedIn ? (
+   <>
+   <Navbar/> 
     <div>
       <h2>Welcome {user.name}!</h2>
       <p>{user.phone}</p>
       <p>{user.email}</p>
       <p>{user.address}</p>
     </div>
+    </> 
   ) : (
     <>
+    <Navbar/>
       <h2>Edit your details..</h2>
       <form onSubmit={handleSubmit}>
         <label>Name :</label>

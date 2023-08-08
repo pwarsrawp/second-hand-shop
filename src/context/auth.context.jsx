@@ -55,7 +55,6 @@ function AuthContextWrapper({ children }) {
     <AuthContext.Provider
       value={{
         user,
-        setUser,
         isLoading,
         isLoggedIn,
         userAuthentication,
