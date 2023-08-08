@@ -13,7 +13,7 @@ function HomePage() {
   const [query, setQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [favorite, setFavorite] = useState([]);
-  const { isLoggedIn, user } = useContext(AuthContext);
+  const { isLoggedIn, user, setUserUpdate } = useContext(AuthContext);
 
   /* SETUP */
   useEffect(() => {
@@ -43,10 +43,8 @@ function HomePage() {
   const handleFavorite = async (productId) => {
     if (isLoggedIn) {
       try {
-        console.log(productId, user)
-        console.log("next step: calling update function")
         const newFavorites = await updateFavoriteList(productId, user);
-        console.log("newFavorites:", newFavorites)
+        setUserUpdate(true)
         setFavorite(newFavorites)
       } catch (error) {
         console.log("updating favorites didnt work", error);

@@ -17,29 +17,25 @@ const updateFavoriteList = async (productId, user) => {
 
     console.log(productId, user);
     try {
-      const userResponse = await fetchOne(`${api_url}/users/${user._id}`);
-      const userData = userResponse;
+        const userResponse = await fetchOne(`${api_url}/users/${user._id}`);
+        const userData = userResponse;
 
-      const favArray = userData.favorites || []
-
-
-      const newFavArray = favArray.includes(productId)
-      ? userData.favorites.filter((product) => product !== productId)   // delete from Favorites
-      : [...userData.favorites, productId];   // add to Favorites
+        const favArray = userData.favorites || []
 
 
-      // update DB
-      await updateOne(`${api_url}/users/${user._id}`, {favorites: newFavArray }); 
+        const newFavArray = favArray.includes(productId)
+            ? userData.favorites.filter((product) => product !== productId)   // delete from Favorites
+            : [...userData.favorites, productId];   // add to Favorites
 
-      return newFavArray
-      // update user 
-      // TODO: implement Mats logic
-    //   setUser({ ...user, favorites: newFavArray });
 
+        // update DB
+        await updateOne(`${api_url}/users/${user._id}`, { favorites: newFavArray });
+
+        return newFavArray
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
-  };
+};
 
 
 
