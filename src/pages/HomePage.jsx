@@ -9,6 +9,7 @@ import { AuthContext } from "../context/auth.context";
 import "./HomePage.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { AiOutlineHeart } from 'react-icons/ai';
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ function HomePage() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [favorite, setFavorite] = useState([]);
   const { isLoggedIn, user } = useContext(AuthContext);
-  const linkStyle = { "textDecoration": "none", "color": "black" }
+  const linkStyle = { textDecoration: "none", color: "black" };
   const api_url = `http://localhost:5005`;
 
   useEffect(() => {
@@ -72,12 +73,23 @@ function HomePage() {
                 className="product-card"
                 style={linkStyle}
               >
-                <div className="img-gallery" style={{ backgroundImage : `url(${product.imageUrl})`}}>
+                <div
+                  className="img-container"
+                  style={{ backgroundImage: `url(${product.imageUrl})` }}
+                ></div>
+                <div className="text-container-top">
+                <h5>€ {product.price}</h5>
+                  <button
+                    className={`heart-btn ${
+                      favorite.includes(product._id) ? "active" : "not-active"
+                    }`}
+                    onClick={() => handleFavorite(product._id)}
+                  >
+                    <AiOutlineHeart size={20} style={{color: "#6BBAEC"}}/>
+                  </button>                  
                 </div>
-                <div>
+                <div className="text-container-bottom">
                   <h2>{product.title}</h2>
-
-                  <h5>€ {product.price}</h5>
                 </div>
                 {/* <button
                   className={`heart-btn ${
