@@ -70,12 +70,12 @@ function HomePage() {
           {filteredProducts.map((product) => {
             return (
               <div key={product._id}>
-                  <div
-                    className="img-gallery"
-                    style={{ backgroundImage: `url(${product.imageUrl})` }}
-                  ></div>
+                <div
+                  className="img-gallery"
+                  style={{ backgroundImage: `url(${product.imageUrl})` }}
+                ></div>
                 <Link
-                  to={`/products/${product._id}`}                  
+                  to={`/products/${product._id}`}
                   className="product-card"
                   style={linkStyle}
                 >
