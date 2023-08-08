@@ -1,0 +1,43 @@
+.nav-bar-top {
+    margin-bottom: 1rem;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem auto;
+}
+form input {
+    border-radius: 15px;
+    border: none;
+    padding: 0.3rem 0.3rem 0.3rem 1rem;
+    margin: 0.5rem;
+    height: 30px;
+    width: 250px;
+    background-color: #EDF7FD;
+    outline: none;
+}
+form button {
+    border-radius: 15px;
+    border: none;
+    height: 30px;
+    width: 100px;
+    background-color: #6BBAEC;
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+.bottom-text {
+    text-align: center;
+    text-decoration: none;
+}
+.bottom-text p {
+    margin-bottom: 0.5rem;
+}

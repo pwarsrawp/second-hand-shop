@@ -8,13 +8,7 @@ function Footer() {
   return (
     <>
       <div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
+        <div>
           <div>
             <h3>Guarantee</h3>
             <p>Buy with confidence warranty on all products!</p>
@@ -47,13 +41,7 @@ function Footer() {
         <Link to={"/profile"}>
           <h4>Profile</h4>
         </Link>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
+        <div>
           <div>
             <h3>CONTACT DETAILS</h3>
             <p>Address: Schoutstraat 10, 1111 EV, Amsterdam</p>

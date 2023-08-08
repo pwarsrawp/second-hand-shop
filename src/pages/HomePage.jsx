@@ -7,8 +7,9 @@ import {
 } from "../functions/product.functions";
 import { AuthContext } from "../context/auth.context";
 import "./HomePage.css";
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { AiOutlineHeart } from 'react-icons/ai';
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ function HomePage() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [favorite, setFavorite] = useState([]);
   const { isLoggedIn, user } = useContext(AuthContext);
-
+  const linkStyle = { textDecoration: "none", color: "black" };
   const api_url = `http://localhost:5005`;
 
   useEffect(() => {
@@ -68,28 +69,28 @@ function HomePage() {
       <div className="product-container">
         {filteredProducts.map((product) => {
           return (
-            <div
-              key={product._id}
-              className="product-card"
-              style={{ border: "1px solid grey" }}
-            >
-                <div className="img-gallery">
-                  <img src={product.imageUrl} style={{ height: "200px" }} />
+            <Link
+                to={`/products/${product._id}`}
+                key={product._id}
+                className="product-card"
+                style={linkStyle}
+              >
+                <div className="img-gallery" style={{ backgroundImage : `url(${product.imageUrl})`}}>
                 </div>
                 <div>
-              <Link to={`/products/${product._id}`}>
                   <h2>{product.title}</h2>
-              </Link>
+
                   <h5>€ {product.price}</h5>
                 </div>
-              <button
-                className={`heart-btn ${favorite.includes(product._id) ? "active" : "not-active"}`}
-                onClick={() => handleFavorite(product._id)}
-
+                {/* <button
+                  className={`heart-btn ${
+                    favorite.includes(product._id) ? "active" : "not-active"
+                  }`}
+                  onClick={() => handleFavorite(product._id)}
                 >
                   Favorite
-                </button>
-              </div>
+                </button> */}
+              </Link>
             );
           })}
           <hr></hr>
