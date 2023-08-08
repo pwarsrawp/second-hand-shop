@@ -1,35 +1,37 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import logo from "../assets/logo.png"
+import { AiOutlineHome } from 'react-icons/ai';
+import { AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { PiHandshakeFill } from 'react-icons/pi';
 
 function Navbar() {
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
-    <nav style={{display: "flex", alignItems: "center", gap: "10px"}}>
-      <div>
-        <Link to={"/"}>
-          <h4>Home</h4>
+    <nav className="nav-bar-top">
+      <Link to={"/"}>
+        <AiOutlineHome size={30} style={{color: "#6BBAEC"}}/>
         </Link>
-      </div>
-      <div style={{display: "flex", alignItems: "center", gap:"10px"}}>
         {isLoggedIn && (
-          <>
-            <Link to={"/purchases"}>
-              <h4>Purchases</h4>
-            </Link>
+          <>            
             <Link to={"/favorites"}>
-              <h4>Favorites</h4>
+            <AiOutlineHeart size={30} style={{color: "#6BBAEC"}}/>
             </Link>
             <Link to={"/upload"}>
-              <h4>Upload</h4>
+            <AiOutlinePlusCircle size={30} style={{color: "#6BBAEC"}}/>
             </Link>
+            <Link to={"/purchases"}>
+            <PiHandshakeFill size={30} style={{color: "#6BBAEC"}}/>
+            </Link>           
           </>
         )}
         <Link to={"/profile"}>
-          <h4>Profile</h4>
+          <AiOutlineUser size={30} style={{color: "#6BBAEC"}} />
         </Link>
-      </div>
     </nav>
   );
 }

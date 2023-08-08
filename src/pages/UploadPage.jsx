@@ -2,6 +2,8 @@ import Navbar from "../components/Navbar";
 import { useState } from "react";
 import axios from "axios";
 import "./UploadPage.css";
+import { useContext } from 'react';
+import { AuthContext } from "../context/auth.context";
 
 function UploadPage() {
   const [file, setFile] = useState(null);
@@ -11,7 +13,8 @@ function UploadPage() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Arts and Crafts");
   const [price, setPrice] = useState(0);
-
+  const [uploadDone, setUploadDone] = useState(false);
+  const { user } = useContext(AuthContext);
   
   const handleUpload = async (event) => {
     event.preventDefault()
@@ -22,10 +25,12 @@ function UploadPage() {
       data.append("description", description);
       data.append("category", category);
       data.append("price", price);
+      data.append("seller", user._id);
       data.append("imageUrl", event.target.image.files[0]);
       const res = await axios.post("http://localhost:5005/products", data);
       console.log(res.data);
       setRes(res.data);
+      setUploadDone(true);
     } catch (error) {
       alert(error.message);
     } finally {
@@ -118,18 +123,6 @@ function UploadPage() {
                // multiple={false}
                 accept="image/jpg, image/png"
               />         
-              <code>
-                {Object.keys(res).length > 0
-                  ? Object.keys(res).map((key) => (
-                      <p className="output-item" key={key}>
-                        <span>{key}:</span>
-                        <span>
-                          {typeof res[key] === "object" ? "object" : res[key]}
-                        </span>
-                      </p>
-                    ))
-                  : null}
-              </code>
               {file && (
                 <button onClick={deleteSelectedFile}>Remove File</button>
               )}
@@ -140,6 +133,24 @@ function UploadPage() {
               </div>
             </div>
           </form>
+          {uploadDone ? (
+        <p>Upload done!</p>
+      ) : (
+        <code>
+          {Object.keys(res).length > 0
+            ? Object.keys(res).map((key) => (
+                <p className="output-item" key={key}>
+                  <span>{key}:</span>
+                  <span>
+                    {typeof res[key] === "object" ? "object" : res[key]}
+                  </span>
+                </p>
+              ))
+            : null}
+        </code>
+      )}
+
+
         </div>
       </div>
     </>
