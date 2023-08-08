@@ -1,14 +1,5 @@
-import axios from "axios";
-
-
-const fetchAll = async (url) => {
-    try {
-        const { data } = await axios.get(url)
-        return data;
-    } catch (error) {
-        console.log(error);
-    }
-};
+const api_url = import.meta.env.VITE_API_URL;
+import { fetchOne, updateOne } from "../functions/api.calls";
 
 const filterProducts = (query, products, setter) => {
     if (!query) return setter(products);
@@ -21,34 +12,29 @@ const filterProducts = (query, products, setter) => {
 
 
 
-const updateFavoriteList = async (productId, setter, user) => {
-
+const updateFavoriteList = async (productId, user) => {
     try {
-        const { data } = await axios.get(`http://localhost:5005/users/${user}`)
-        let favArray = data.favorites
+        const userResponse = await fetchOne(`${api_url}/users/${user._id}`);
+        const userData = userResponse;
 
-        
-        if (favArray.includes(productId)) {     // already favorite -> delete
-            const copyArr = [...favArray]
-            favArray = copyArr.filter((product) => {
-                return product !== productId
-            })
-        } else {                                // not yet favorite -> add
-            favArray = [...favArray, productId]
-        }
+        const favArray = userData.favorites || []
 
-        // update user's db-entry
-        await axios.put(`http://localhost:5005/users/${user}`, { favorites: favArray });
-        setter(favArray)
+        const newFavArray = favArray.includes(productId)
+            ? userData.favorites.filter((product) => product !== productId)   // delete from Favorites
+            : [...userData.favorites, productId];   // add to Favorites
+
+
+        // update DB
+        await updateOne(`${api_url}/users/${user._id}`, { favorites: newFavArray });
+
+        return newFavArray
     } catch (error) {
         console.log(error);
     }
 };
 
 
-
 export {
-    fetchAll,
     filterProducts,
     updateFavoriteList
 }

@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
-// import { AuthContext } from "../context/auth.context";
+import { AuthContext } from "../context/auth.context";
 
 const Profile = () => {
   const [name, setName] = useState("");
@@ -15,7 +15,7 @@ const Profile = () => {
   const handleEmailInput = (event) => setEmail(event.target.value);
   const handleAddressInput = (event) => setAddress(event.target.value);
 
-  const { isLoggedIn, user } = useContext();
+  const { isLoggedIn, user } = useContext(AuthContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     const newUser = { name, number, email, address };
