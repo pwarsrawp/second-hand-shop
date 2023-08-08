@@ -1,57 +1,53 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
-const api_url = `http://localhost:5005`;
+import { fetchAll } from "../functions/api.calls";
+import { updateFavoriteList } from "../functions/product.functions";
+const api_url = import.meta.env.VITE_API_URL;
 
 function Favorite() {
-  const { user } = useContext(AuthContext);
+  const { user, setUserUpdate, isLoggedIn } = useContext(AuthContext);
   const [favoriteProductIds, setFavoriteProductIds] = useState([]);
-  const [favoriteProducts, setFavoriteProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
 
+  /* ALL PRODUCTS */
   useEffect(() => {
-    const fetchFavoriteIds = async () => {
+    const fetchAllProducts = async() =>{
       try {
-        const { data } = await axios.get(`${api_url}/users/${user._id}`);
-        setFavoriteProductIds(data.favorites);
+        const products = await fetchAll(`${api_url}/products`)
+        setAllProducts(products)
       } catch (error) {
-        console.error("Error fetching Favorite-IDs:", error);
+        console.log("couldnt fetch products: ", error)
       }
-    };
-
-    fetchFavoriteIds();
-  }, []);
-
-  useEffect(() => {
-    const fetchFavoriteProducts = async () => {
-      try {
-        const favoriteProducts = await Promise.all(
-          // map over all favorite-ids
-          favoriteProductIds.map(async (productId) => {
-            try {
-              const { data } = await axios.get(
-                `${api_url}/products/${productId}`
-              );
-              return data;
-            } catch (error) {
-              console.log("Error fetching Favorite-Products: ", error);
-              return null;
-            }
-          })
-        );
-        setFavoriteProducts(favoriteProducts);
-      } catch (error) {
-        console.error("Error fetching favorite products:", error);
-      }
-    };
-
-    fetchFavoriteProducts();
+    } 
+    fetchAllProducts()
   }, [favoriteProductIds]);
 
-  return favoriteProducts ? (
+
+ /* FAVORITES */  
+  useEffect(() => {
+    if (user) setFavoriteProductIds(user.favorites)
+  }, []);
+
+  const handleFavorite = async (productId) => {
+    if (isLoggedIn) {
+      try {
+        const newFavorites = await updateFavoriteList(productId, user);
+        setUserUpdate(true)
+        setFavoriteProductIds(newFavorites)
+      } catch (error) {
+        console.log("updating favorites didnt work", error);
+      }
+    }
+  };
+
+
+  return allProducts ? (
     <>
-      <h2>Your Wishlist</h2>
+      <h1>Wishlist</h1>
       <div className="product-container">
-        {favoriteProducts.map((product) => {
+        {allProducts
+        .filter(product => favoriteProductIds.includes(product._id)) 
+        .map((product) => {
           return (
             <div key={product._id}>
               <h3>{product.title}</h3>
@@ -62,8 +58,12 @@ function Favorite() {
                 alt={product.title}
               />
               <div>
-                {/* TODO: Move functions into context. Change button to update favorites-array in db */}
-                <button className={"heart-btn active"}>Favorite</button>
+              <button
+                className={`heart-btn active`}
+                onClick={() => handleFavorite(product._id)}
+                >
+                  Favorite
+                </button>
               </div>
             </div>
           );

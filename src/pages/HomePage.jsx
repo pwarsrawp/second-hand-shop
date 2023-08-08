@@ -1,95 +1,98 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 import {
-  fetchAll,
   filterProducts,
   updateFavoriteList,
 } from "../functions/product.functions";
-import { AuthContext } from "../context/auth.context";
+import { fetchAll } from "../functions/api.calls";
 import "./HomePage.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from "react-icons/ai";
+const api_url = import.meta.env.VITE_API_URL;
 
 function HomePage() {
   const [products, setProducts] = useState([]);
   const [query, setQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [favorite, setFavorite] = useState([]);
-  const { isLoggedIn, user } = useContext(AuthContext);
   const linkStyle = { textDecoration: "none", color: "black" };
-  const api_url = `http://localhost:5005`;
+  const { isLoggedIn, user, setUserUpdate } = useContext(AuthContext);
 
+  /* SETUP */
   useEffect(() => {
     const fetchProducts = async () => {
       const productsData = await fetchAll(`${api_url}/products`);
       setProducts(productsData);
       setFilteredProducts(productsData);
     };
-
-    const fetchFavorites = async () => {
-      if (user) {
-        const userData = await fetchAll(`${api_url}/users/${user._id}`);
-        if (userData) {
-          setFavorite(userData.favorites || []);
-        }
-      }
-    };
-
-    fetchFavorites();
     fetchProducts();
   }, []);
 
+  /* SEARCH BAR */
   useEffect(() => {
     filterProducts(query, products, setFilteredProducts);
   }, [query]);
 
+  /* FAVORITES */
+  useEffect(() => {
+    if (user) {
+      setFavorite(user.favorites);
+    }
+  }, [user]);
+
   const handleFavorite = async (productId) => {
     if (isLoggedIn) {
       try {
-        await updateFavoriteList(productId, setFavorite, user._id);
+        const newFavorites = await updateFavoriteList(productId, user);
+        setUserUpdate(true);
+        setFavorite(newFavorites);
       } catch (error) {
-        console.log("updating favorites didnt work");
+        console.log("updating favorites didn work", error);
       }
     }
   };
 
   return filteredProducts ? (
     <>
-    <Navbar />
-    <div className="container">
-      <div>
-        <label>Search Product</label>
-      </div>
-      <input
-        name="query"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-      />
-      <div className="product-container">
-        {filteredProducts.map((product) => {
-          return (
-            <Link
-                to={`/products/${product._id}`}
+      <Navbar />
+      <div className="container">
+        <div>
+          <label>Search Product</label>
+        </div>
+        <input
+          name="query"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+        <div className="product-container">
+          {filteredProducts.map((product) => {
+            return (
+              <Link
                 key={product._id}
+                to={`/products/${product._id}`}
                 className="product-card"
                 style={linkStyle}
               >
-                <div className="img-gallery" style={{ backgroundImage : `url(${product.imageUrl})`}}>
+                <div
+                  className="img-container"
+                  style={{ backgroundImage: `url(${product.imageUrl})` }}
+                ></div>
+                <div className="text-container-top">
+                  <h5>€ {product.price}</h5>
+                  <button
+                    className={`heart-btn ${
+                      favorite.includes(product._id) ? "active" : "not-active"
+                    }`}
+                    onClick={() => handleFavorite(product._id)}
+                  >
+                    <AiOutlineHeart size={20} style={{ color: "#6BBAEC" }} />
+                  </button>
                 </div>
                 <div>
                   <h2>{product.title}</h2>
-
-                  <h5>€ {product.price}</h5>
                 </div>
-                {/* <button
-                  className={`heart-btn ${
-                    favorite.includes(product._id) ? "active" : "not-active"
-                  }`}
-                  onClick={() => handleFavorite(product._id)}
-                >
-                  Favorite
-                </button> */}
               </Link>
             );
           })}
