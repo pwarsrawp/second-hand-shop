@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import { fetchAll } from "../functions/api.calls";
@@ -44,7 +43,7 @@ function Favorite() {
 
   return allProducts ? (
     <>
-      <h2>Your Wishlist</h2>
+      <h1>Wishlist</h1>
       <div className="product-container">
         {allProducts
         .filter(product => favoriteProductIds.includes(product._id)) 
