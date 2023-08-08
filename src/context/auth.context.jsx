@@ -41,6 +41,8 @@ function AuthContextWrapper({ children }) {
         userAuthentication();
       }, []);
 
+      console.log('User:', user);
+
     return (
         <AuthContext.Provider value={{
                 user,

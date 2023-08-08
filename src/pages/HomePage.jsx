@@ -7,7 +7,7 @@ import {
 } from "../functions/product.functions";
 import { AuthContext } from "../context/auth.context";
 import "./HomePage.css";
-// import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { AiOutlineHeart } from 'react-icons/ai';
 

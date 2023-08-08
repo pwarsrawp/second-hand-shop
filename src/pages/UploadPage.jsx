@@ -2,6 +2,8 @@ import Navbar from "../components/Navbar";
 import { useState } from "react";
 import axios from "axios";
 import "./UploadPage.css";
+import { useContext } from 'react';
+import { AuthContext } from "../context/auth.context";
 
 function UploadPage() {
   const [file, setFile] = useState(null);
@@ -12,6 +14,7 @@ function UploadPage() {
   const [category, setCategory] = useState("Arts and Crafts");
   const [price, setPrice] = useState(0);
   const [uploadDone, setUploadDone] = useState(false);
+  const { user } = useContext(AuthContext);
   
   const handleUpload = async (event) => {
     event.preventDefault()
@@ -22,6 +25,7 @@ function UploadPage() {
       data.append("description", description);
       data.append("category", category);
       data.append("price", price);
+      data.append("seller", user._id);
       data.append("imageUrl", event.target.image.files[0]);
       const res = await axios.post("http://localhost:5005/products", data);
       console.log(res.data);
