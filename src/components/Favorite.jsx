@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import { fetchAll } from "../functions/api.calls";
@@ -44,20 +43,19 @@ function Favorite() {
 
   return allProducts ? (
     <>
-      <h2>Your Wishlist</h2>
+      <h1>Wishlist</h1>
       <div className="product-container">
         {allProducts
         .filter(product => favoriteProductIds.includes(product._id)) 
         .map((product) => {
           return (
-            <div key={product._id} style={{ border: "1px solid grey" }}>
+            <div key={product._id}>
               <h3>{product.title}</h3>
               <h3>{product.price}</h3>
               <p>{product.description}</p>
               <img
                 src={product.imageUrl}
                 alt={product.title}
-                style={{ height: "200px" }}
               />
               <div>
               <button
