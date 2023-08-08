@@ -1,7 +1,6 @@
 const api_url = import.meta.env.VITE_API_URL;
 import { fetchOne, updateOne } from "../functions/api.calls";
 
-
 const filterProducts = (query, products, setter) => {
     if (!query) return setter(products);
 
@@ -14,14 +13,11 @@ const filterProducts = (query, products, setter) => {
 
 
 const updateFavoriteList = async (productId, user) => {
-
-    console.log(productId, user);
     try {
         const userResponse = await fetchOne(`${api_url}/users/${user._id}`);
         const userData = userResponse;
 
         const favArray = userData.favorites || []
-
 
         const newFavArray = favArray.includes(productId)
             ? userData.favorites.filter((product) => product !== productId)   // delete from Favorites
@@ -36,8 +32,6 @@ const updateFavoriteList = async (productId, user) => {
         console.log(error);
     }
 };
-
-
 
 
 export {

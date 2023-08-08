@@ -47,7 +47,7 @@ function HomePage() {
         setUserUpdate(true)
         setFavorite(newFavorites)
       } catch (error) {
-        console.log("updating favorites didnt work", error);
+        console.log("updating favorites didn work", error);
       }
     }
   };

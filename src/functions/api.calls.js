@@ -25,7 +25,6 @@ import axios from "axios";
   const updateOne = async (url, body) => {
     try {
       await axios.put(url, body);
-      console.log("Update successfull")
     } catch (error) {
       console.log("Could not update specific entry: ", error);
     }
