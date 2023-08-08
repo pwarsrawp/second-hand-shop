@@ -12,6 +12,8 @@ import Error from "./pages/ErrorPage";
 import IsPrivate from "./context/auth.private";
 import "./App.css";
 
+import UserEditForm from "./components/UserEditForm";
+
 function App() {
   return (
     <>
@@ -27,6 +29,15 @@ function App() {
           element={
             <IsPrivate>
               <Profile />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/editProfile"
+          element={
+            <IsPrivate>
+              <UserEditForm />
             </IsPrivate>
           }
         />

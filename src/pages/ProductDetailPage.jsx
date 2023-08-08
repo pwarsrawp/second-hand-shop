@@ -1,9 +1,12 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchProduct } from "../utils/usersAPICalls";
 
-function ProductDetailPage() {
-  return (
-    <div>ProductDetailPage</div>
-  )
-}
+const ProductDetailPage = () => {
+  const { productId } = useParams();
+  const navigate = useNavigate();
 
-export default ProductDetailPage
+  return <div>ProductDetailPage</div>;
+};
+
+export default ProductDetailPage;
