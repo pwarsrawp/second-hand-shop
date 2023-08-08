@@ -53,14 +53,13 @@ function Favorite() {
       <div className="product-container">
         {favoriteProducts.map((product) => {
           return (
-            <div key={product._id} style={{ border: "1px solid grey" }}>
+            <div key={product._id}>
               <h3>{product.title}</h3>
               <h3>{product.price}</h3>
               <p>{product.description}</p>
               <img
                 src={product.imageUrl}
                 alt={product.title}
-                style={{ height: "200px" }}
               />
               <div>
                 {/* TODO: Move functions into context. Change button to update favorites-array in db */}
