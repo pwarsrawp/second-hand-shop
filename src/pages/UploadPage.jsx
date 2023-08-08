@@ -15,6 +15,7 @@ function UploadPage() {
   const [category, setCategory] = useState("Arts and Crafts");
   const [condition, setCondition] = useState("new");
   const [price, setPrice] = useState(0);
+  const [sold, setSold] = useState("false");
   const [uploadDone, setUploadDone] = useState(false);
   const { user } = useContext(AuthContext);
   const api_url = import.meta.env.VITE_API_URL;
@@ -28,6 +29,7 @@ function UploadPage() {
       data.append("description", description);
       data.append("category", category);
       data.append("price", price);
+      data.append("sold", sold);
       data.append("seller", user._id);
       data.append("imageUrl", event.target.image.files[0]);
       data.append("item_condition", condition);
@@ -35,6 +37,7 @@ function UploadPage() {
       console.log(res.data);
       setRes(res.data);
       setUploadDone(true);
+      setSold(false);
     } catch (error) {
       alert(error.message);
     } finally {
