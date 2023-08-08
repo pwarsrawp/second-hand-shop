@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Navbar from "../components/Navbar";
-import "./LoginPage.css";
 import { postOne } from "../functions/api.calls";
 const api_url = import.meta.env.VITE_API_URL;
 
@@ -47,7 +46,7 @@ function LoginPage() {
   };
 
   return (
-    <div>
+    <div className="login-form">
       <Navbar />
       <h1>Login</h1>
       <form onSubmit={handleLoginSubmit}>
@@ -75,7 +74,7 @@ function LoginPage() {
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <div className="bottom-text">
+      <div className="login-form-bottom-text">
         <p>Not yet a member?</p>
         <Link to={"/signup"}>Sign Up</Link>
       </div>

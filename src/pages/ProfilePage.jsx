@@ -1,3 +1,4 @@
+import Navbar from "../components/Navbar";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
@@ -6,6 +7,7 @@ const Profile = () => {
   const { user } = useContext(AuthContext);
   return (
     <>
+      <Navbar />
       <div>
         <h2>Welcome {user.fullname}!</h2>
         <p>{user.username}</p>

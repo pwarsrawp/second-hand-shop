@@ -6,7 +6,6 @@ import {
   updateFavoriteList,
 } from "../functions/product.functions";
 import { fetchAll } from "../functions/api.calls";
-import "./HomePage.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -57,16 +56,16 @@ function HomePage() {
   return filteredProducts ? (
     <>
       <Navbar />
-      <div className="container">
-        <div>
+      <div className="body-container">
+        <div className="search-bar-container">
           <label>Search Product</label>
+            <input
+              name="query"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+            />          
         </div>
-        <input
-          name="query"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
-        <div className="product-container">
+        <div className="products-container">
           {filteredProducts.map((product) => {
             return (
               <Link
@@ -76,10 +75,10 @@ function HomePage() {
                 style={linkStyle}
               >
                 <div
-                  className="img-container"
+                  className="product-card-img-container"
                   style={{ backgroundImage: `url(${product.imageUrl})` }}
                 ></div>
-                <div className="text-container-top">
+                <div className="product-card-price-container">
                   <h5>€ {product.price}</h5>
                   <button
                     className={`heart-btn ${
@@ -90,7 +89,7 @@ function HomePage() {
                     <AiOutlineHeart size={20} style={{ color: "#6BBAEC" }} />
                   </button>
                 </div>
-                <div>
+                <div className="product-card-title-container">
                   <h2>{product.title}</h2>
                 </div>
               </Link>
@@ -102,7 +101,10 @@ function HomePage() {
       <Footer />
     </>
   ) : (
-    <h1>Loading...</h1>
+    <>
+      <Navbar />
+      <h1 className="loading-h1">Loading...</h1>
+    </>
   );
 }
 

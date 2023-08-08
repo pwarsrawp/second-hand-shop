@@ -1,7 +1,6 @@
 import Navbar from "../components/Navbar";
 import { useState } from "react";
 import axios from "axios";
-import "./UploadPage.css";
 import { useContext } from 'react';
 import { AuthContext } from "../context/auth.context";
 import { postOne } from "../functions/api.calls";
@@ -48,25 +47,20 @@ function UploadPage() {
   return (
     <>
       <Navbar />
-      <div>
-        <div>
+      <div className="upload-page-container">
+      <h1>Post new product</h1>
           <form onSubmit={handleUpload} encType="multipart/form-data">
-            <div>
-              <label>
-                Title:
+            
+              <label>Title:</label>
                 <input
                   value={title}
                   name="title"
-                  placeholder="Title"
                   onChange={(event) => setTitle(event.target.value)}
                   required
-                />
-              </label>
-            </div>
-
-            <div>
-              <label>
-                Description:
+                />              
+            
+            
+              <label>Description:</label>
                 <textarea
                   name="description"
                   value={description}
@@ -74,27 +68,21 @@ function UploadPage() {
                   required
                 >
                   {""}
-                </textarea>
-              </label>
-            </div>
-
-            <div>
-              <label>
-                Price:
+                </textarea>              
+            
+            
+              <label>Price:</label>
                 <input
                   type="number"
                   value={price}
                   name="price"
-                  placeholder="Price"
                   onChange={(event) => setPrice(event.target.value)}
                   required
-                />
-              </label>
-            </div>
-
-            <div>
+                />              
+            
+            
               <label>Select a Category:</label>
-              <div className="dropdown-container">
+              <div className="upload-page-dropdown-container">
                 <select
                   name="category"
                   required
@@ -114,9 +102,8 @@ function UploadPage() {
                   <option value="Miscellaneous">Miscellaneous</option>
                 </select>
               </div>
-            </div>
-
-            <div>
+            
+            
               <label>Select a Condition:</label>
               <div className="dropdown-container">
                 <select
@@ -135,7 +122,7 @@ function UploadPage() {
                   </option>
                 </select>
               </div>
-            </div>
+            
 
 
             {/* CLOUDINARY */}
@@ -179,7 +166,6 @@ function UploadPage() {
 
 
         </div>
-      </div>
     </>
   );
 }

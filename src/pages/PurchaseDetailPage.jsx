@@ -1,12 +1,12 @@
-import Navbar from '../components/Navbar'
+import Navbar from "../components/Navbar";
 
 function PurchaseDetailPage() {
   return (
     <>
-    <Navbar />
-    <div>PurchaseDetailPage</div>
+      <Navbar />
+      <div>PurchaseDetailPage</div>
     </>
-  )
+  );
 }
 
 export default PurchaseDetailPage;
