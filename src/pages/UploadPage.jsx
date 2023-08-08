@@ -11,7 +11,7 @@ function UploadPage() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Arts and Crafts");
   const [price, setPrice] = useState(0);
-
+  const [uploadDone, setUploadDone] = useState(false);
   
   const handleUpload = async (event) => {
     event.preventDefault()
@@ -26,6 +26,7 @@ function UploadPage() {
       const res = await axios.post("http://localhost:5005/products", data);
       console.log(res.data);
       setRes(res.data);
+      setUploadDone(true);
     } catch (error) {
       alert(error.message);
     } finally {
@@ -118,18 +119,6 @@ function UploadPage() {
                // multiple={false}
                 accept="image/jpg, image/png"
               />         
-              <code>
-                {Object.keys(res).length > 0
-                  ? Object.keys(res).map((key) => (
-                      <p className="output-item" key={key}>
-                        <span>{key}:</span>
-                        <span>
-                          {typeof res[key] === "object" ? "object" : res[key]}
-                        </span>
-                      </p>
-                    ))
-                  : null}
-              </code>
               {file && (
                 <button onClick={deleteSelectedFile}>Remove File</button>
               )}
@@ -140,6 +129,24 @@ function UploadPage() {
               </div>
             </div>
           </form>
+          {uploadDone ? (
+        <p>Upload done!</p>
+      ) : (
+        <code>
+          {Object.keys(res).length > 0
+            ? Object.keys(res).map((key) => (
+                <p className="output-item" key={key}>
+                  <span>{key}:</span>
+                  <span>
+                    {typeof res[key] === "object" ? "object" : res[key]}
+                  </span>
+                </p>
+              ))
+            : null}
+        </code>
+      )}
+
+
         </div>
       </div>
     </>
