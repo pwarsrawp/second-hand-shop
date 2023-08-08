@@ -4,6 +4,7 @@ import axios from "axios";
 import "./UploadPage.css";
 import { useContext } from 'react';
 import { AuthContext } from "../context/auth.context";
+import { postOne } from "../functions/api.calls";
 
 function UploadPage() {
   const [file, setFile] = useState(null);
@@ -15,6 +16,7 @@ function UploadPage() {
   const [price, setPrice] = useState(0);
   const [uploadDone, setUploadDone] = useState(false);
   const { user } = useContext(AuthContext);
+  const api_url = import.meta.env.VITE_API_URL;
   
   const handleUpload = async (event) => {
     event.preventDefault()
@@ -27,7 +29,7 @@ function UploadPage() {
       data.append("price", price);
       data.append("seller", user._id);
       data.append("imageUrl", event.target.image.files[0]);
-      const res = await axios.post("http://localhost:5005/products", data);
+      const res = await postOne(`${api_url}/products`, data);
       console.log(res.data);
       setRes(res.data);
       setUploadDone(true);

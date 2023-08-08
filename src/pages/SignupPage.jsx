@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "./SignupPage.css";
+import { postOne } from "../functions/api.calls";
+const api_url = import.meta.env.VITE_API_URL;
 
 function SignupPage() {
   const [fullname, setFullName] = useState("");
@@ -19,7 +21,7 @@ function SignupPage() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5005/auth/signup", {
+      await postOne(`${api_url}/auth/signup`, {
         fullname,
         username,
         email,
