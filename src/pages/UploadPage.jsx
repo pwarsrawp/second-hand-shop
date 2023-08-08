@@ -9,17 +9,21 @@ function UploadPage() {
   const [res, setRes] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Arts and Crafts");
   const [price, setPrice] = useState(0);
 
-  const handleSelectFile = (e) => setFile(e.target.files[0]);
-  const deleteSelectedFile = () => setFile(null);
-  const handleUpload = async () => {
+  
+  const handleUpload = async (event) => {
+    event.preventDefault()
     try {
       setLoading(true);
       const data = new FormData();
-      data.append("my_file", file);
-      const res = await axios.post("http://localhost:5005/products", file);
+      data.append("title", title);
+      data.append("description", description);
+      data.append("category", category);
+      data.append("price", price);
+      data.append("imageUrl", event.target.image.files[0]);
+      const res = await axios.post("http://localhost:5005/products", data);
       console.log(res.data);
       setRes(res.data);
     } catch (error) {
@@ -34,7 +38,7 @@ function UploadPage() {
       <Navbar />
       <div>
         <div>
-          <form>
+          <form onSubmit={handleUpload} encType="multipart/form-data">
             <div>
               <label>
                 Title:
@@ -106,13 +110,14 @@ function UploadPage() {
                 {" "}
                 select file
               </label>
-              {file && <center> {file.name}</center>}
+              {file && <center> {file.name}</center>}             
               <input
+                name="image"
                 id="file"
                 type="file"
-                onChange={handleSelectFile}
-                multiple={false}
-              />
+               // multiple={false}
+                accept="image/jpg, image/png"
+              />         
               <code>
                 {Object.keys(res).length > 0
                   ? Object.keys(res).map((key) => (
@@ -129,7 +134,7 @@ function UploadPage() {
                 <button onClick={deleteSelectedFile}>Remove File</button>
               )}
               <div>
-                <button onClick={handleUpload} className="btn-green">
+                <button className="btn-green">
                   {loading ? "uploading..." : "upload"}
                 </button>
               </div>
