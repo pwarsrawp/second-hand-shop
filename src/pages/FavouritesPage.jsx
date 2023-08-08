@@ -1,7 +1,13 @@
-import React from "react";
+import Navbar from "../components/Navbar";
+import Favorite from "../components/Favorite";
 
 function FavouritesPage() {
-  return <div>FavouritesPage</div>;
+  return (
+    <>
+      <Navbar />
+      <Favorite />
+    </>
+  );
 }
 
 export default FavouritesPage;

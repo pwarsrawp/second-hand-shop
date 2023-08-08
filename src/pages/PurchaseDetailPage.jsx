@@ -1,7 +1,12 @@
-import React from "react";
+import Navbar from '../components/Navbar'
 
 function PurchaseDetailPage() {
-  return <div>PurchaseDetailPage</div>;
+  return (
+    <>
+    <Navbar />
+    <div>PurchaseDetailPage</div>
+    </>
+  )
 }
 
 export default PurchaseDetailPage;

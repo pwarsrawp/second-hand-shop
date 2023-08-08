@@ -16,7 +16,7 @@ function Footer() {
           }}
         >
           <div>
-            <h3>Gurantee</h3>
+            <h3>Guarantee</h3>
             <p>Buy with confidence warranty on all products!</p>
           </div>
           <div>

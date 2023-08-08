@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 function SignupPage() {
   const [fullname, setFullName] = useState("");
@@ -17,7 +18,7 @@ function SignupPage() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5005/auth/signup", {
+      await axios.post("http://localhost:5005/auth/signup", {
         fullname,
         username,
         email,
@@ -26,8 +27,8 @@ function SignupPage() {
         address: {
           street,
           city,
-          country
-        }
+          country,
+        },
       });
       navigate("/login");
     } catch (error) {
@@ -37,6 +38,7 @@ function SignupPage() {
 
   return (
     <div>
+      <Navbar />
       <h2>Sign Up </h2>
       <form onSubmit={handleSignup}>
         <label>Full name: </label>
@@ -77,7 +79,7 @@ function SignupPage() {
         <input
           type="tel"
           value={phone}
-          pattern="[+][0-9]{2}[ ][0-9]{11,14}"
+          // pattern="[+][0-9]{2}[ ][0-9]{11,14}"
           placeholder="+34 12345678901"
           required
           onChange={(event) => {
@@ -110,6 +112,9 @@ function SignupPage() {
         />
         <button type="submit">Signup</button>
       </form>
+
+      <p>Already a member?</p>
+      <Link to={"/login"}>Login</Link>
     </div>
   );
 }
