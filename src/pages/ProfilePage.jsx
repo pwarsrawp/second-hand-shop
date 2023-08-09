@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import profileImg from "../assets/user.png"
 import { PiPenFill } from 'react-icons/pi';
+import LogoutButton from "../components/Logout";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
@@ -21,6 +22,9 @@ const Profile = () => {
         <Link to="/editProfile">
           <button><PiPenFill size={15}/></button>
         </Link>
+      <div className="logout button">
+        <LogoutButton />
+      </div>
       </div>
     </>
   );
