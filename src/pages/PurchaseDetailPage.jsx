@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { fetchProduct } from "../utils/usersAPICalls";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { fetchOne,postOne } from "../functions/api.calls";
 const api_url = import.meta.env.VITE_API_URL;
