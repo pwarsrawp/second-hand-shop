@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchProduct } from "../utils/usersAPICalls";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { fetchOne,postOne } from "../functions/api.calls";
+import { fetchOne, postOne, updateOne } from "../functions/api.calls";
 const api_url = import.meta.env.VITE_API_URL;
 
 function PurchasePage() {
@@ -12,6 +10,7 @@ function PurchasePage() {
   const [seller, setSeller] = useState("");
   const [buyer, setBuyer] = useState("");
   const [sold, setSold] = useState("");
+  const [user] = useState("");
 
   const navigate = useNavigate();
 
@@ -27,17 +26,28 @@ function PurchasePage() {
 
   const handlePurchase = async (e) => {
     e.preventDefault();
-    try {
-      await postOne(`${api_url}/purchase`, {
-        seller,
-        buyer,
-        product,
-        sold,
-        
-      });
-      navigate("/profile");
-    } catch (error) {
-      console.log(error);
+    
+    if (user._id === product.seller) {
+      try {
+        await updateOne(`/products/${product._id}`, { sold: true });
+        navigate("/profile");
+      } catch (error) {
+        console.error("Error updating product:", error);
+      }
+    } else {
+      // Handle buyer action (e.g., create purchase record)
+      try {
+        await postOne("/purchases", {
+          seller: product.seller,
+          buyer: user._id,
+          product: product._id,
+          sold: false, // This may depend on your business logic
+        });
+        navigate("/profile");
+      } catch (error) {
+        console.error("Error creating purchase:", error);
+      }
+
     }
   };
 
@@ -48,13 +58,18 @@ function PurchasePage() {
     <div className="signup-form">
       <Navbar />
       <h2>Product Purchase Page</h2>
-      <form onSubmit={handlePurchase}></form>
-      <h3>{product.title}</h3>
-      <p>{product.price}</p>   
-      <p>{product.seller}</p>     {/*this is an ObjectId!*/}
+      <form onSubmit={handlePurchase}>
+        <h3>{product.title}</h3>
+        <p>{product.price}</p>   
+        <p>{product.seller}</p>     {/*this is an ObjectId!*/}
 
-        
-      <button type="submit">Signup</button>  
+      
+        {user._id === product.seller ? (
+          <button type="submit">Confirm Sell</button>
+          ) : (
+          <button type="submit">Confirm Purchase</button>
+        )}
+      </form>
     </div>
   );
 }
