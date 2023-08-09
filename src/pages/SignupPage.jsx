@@ -2,7 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import "./SignupPage.css";
+import { postOne } from "../functions/api.calls";
+const api_url = import.meta.env.VITE_API_URL;
 
 function SignupPage() {
   const [fullname, setFullName] = useState("");
@@ -19,7 +20,7 @@ function SignupPage() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5005/auth/signup", {
+      await postOne(`${api_url}/auth/signup`, {
         fullname,
         username,
         email,
@@ -38,11 +39,11 @@ function SignupPage() {
   };
 
   return (
-    <>
+    <div className="signup-form">
       <Navbar />
-      <h1>Sign Up </h1>
+      <h1>Sign Up</h1>
       <form onSubmit={handleSignup}>
-        <label>Full name: </label>
+        <label>Full name:</label>
         <input
           value={fullname}
           required
@@ -50,7 +51,7 @@ function SignupPage() {
             setFullName(event.target.value);
           }}
         />
-        <label>Username: </label>
+        <label>Username:</label>
         <input
           value={username}
           required
@@ -58,7 +59,7 @@ function SignupPage() {
             setUsername(event.target.value);
           }}
         />
-        <label>Email: </label>
+        <label>Email:</label>
         <input
           type="email"
           value={email}
@@ -67,7 +68,7 @@ function SignupPage() {
             setEmail(event.target.value);
           }}
         />
-        <label>Password: </label>
+        <label>Password:</label>
         <input
           type="password"
           value={password}
@@ -76,7 +77,7 @@ function SignupPage() {
             setPassword(event.target.value);
           }}
         />
-        <label>Phone: </label>
+        <label>Phone:</label>
         <input
           type="tel"
           value={phone}
@@ -87,7 +88,7 @@ function SignupPage() {
             setPhone(event.target.value);
           }}
         />
-        <label>Street: </label>
+        <label>Street:</label>
         <input
           value={street}
           required
@@ -95,7 +96,7 @@ function SignupPage() {
             setStreet(event.target.value);
           }}
         />
-        <label>City: </label>
+        <label>City:</label>
         <input
           value={city}
           required
@@ -103,7 +104,7 @@ function SignupPage() {
             setCity(event.target.value);
           }}
         />
-        <label>Country: </label>
+        <label>Country:</label>
         <input
           value={country}
           required
@@ -114,11 +115,11 @@ function SignupPage() {
         <button type="submit">Signup</button>
       </form>
 
-      <div className="bottom-text">
+      <div className="signup-form-bottom-text">
         <p>Already a member?</p>
         <Link to={"/login"}>Login</Link>
       </div>
-    </>
+    </div>
   );
 }
 

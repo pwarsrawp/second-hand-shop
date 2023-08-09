@@ -19,5 +19,9 @@ const UpdateUserPage = () => {
   }, []);
 
   return <>{user && <UserEditForm />}</>;
+
+    </>
+  );
+
 };
 export default UpdateUserPage;

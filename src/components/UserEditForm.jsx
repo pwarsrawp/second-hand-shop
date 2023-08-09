@@ -1,7 +1,11 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+
 import { sendUser } from "../utils/usersAPICalls";
 import { AuthContext } from "../context/auth.context";
+
+import Navbar from "../components/Navbar";
+
 
 const UserEditForm = () => {
   const { user, setUserUpdate } = useContext(AuthContext);
@@ -57,7 +61,10 @@ const UserEditForm = () => {
 
   return (
     <>
-      <h2>Edit your details..</h2>
+      <Navbar />
+      <div className="update-form">
+        
+
 
       <form onSubmit={handleSubmit}>
         <label>Name :</label>
@@ -135,6 +142,8 @@ const UserEditForm = () => {
         />
         <button type="submit">Update your Profile</button>
       </form>
+
+         
     </>
   );
 };

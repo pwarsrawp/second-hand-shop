@@ -33,10 +33,11 @@ import axios from "axios";
   /* POST one */ 
   const postOne = async (url, body) => {
     try {
-      await axios.post(url, body);
-      console.log("Created successfully")
+      const response = await axios.post(url, body)
+      return response
     } catch (error) {
-      console.log("Could not create new entry: ", error);
+      console.log("Could not create new entry: ", error)
+      throw error
     }
   };
 

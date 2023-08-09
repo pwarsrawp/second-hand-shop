@@ -1,37 +1,38 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import logo from "../assets/logo.png"
-import { AiOutlineHome } from 'react-icons/ai';
-import { AiOutlineUser } from 'react-icons/ai';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { PiHandshakeFill } from 'react-icons/pi';
+import { PiHouseFill } from "react-icons/pi";
+import { PiUserFill } from "react-icons/pi";
+import { PiHeartFill } from "react-icons/pi";
+import { PiPlusCircleBold } from "react-icons/pi";
+import { PiHandshakeFill } from "react-icons/pi";
 
 function Navbar() {
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <nav className="nav-bar-top">
+      <div className="nav-bar-top-link-container">
       <Link to={"/"}>
-        <AiOutlineHome size={30} style={{color: "#6BBAEC"}}/>
-        </Link>
-        {isLoggedIn && (
-          <>            
-            <Link to={"/favorites"}>
-            <AiOutlineHeart size={30} style={{color: "#6BBAEC"}}/>
-            </Link>
-            <Link to={"/upload"}>
-            <AiOutlinePlusCircle size={30} style={{color: "#6BBAEC"}}/>
-            </Link>
-            <Link to={"/purchases"}>
-            <PiHandshakeFill size={30} style={{color: "#6BBAEC"}}/>
-            </Link>           
-          </>
-        )}
-        <Link to={"/profile"}>
-          <AiOutlineUser size={30} style={{color: "#6BBAEC"}} />
-        </Link>
+        <PiHouseFill size={30} style={{ color: "#1778b5" }} />
+      </Link>
+      {isLoggedIn && (
+        <>
+          <Link to={"/favorites"}>
+            <PiHeartFill size={30} style={{ color: "#1778b5" }} />
+          </Link>
+          <Link to={"/upload"}>
+            <PiPlusCircleBold size={30} style={{ color: "#1778b5" }} />
+          </Link>
+          <Link to={"/purchases"}>
+            <PiHandshakeFill size={30} style={{ color: "#1778b5" }} />
+          </Link>
+        </>
+      )}
+      <Link to={"/profile"}>
+        <PiUserFill size={30} style={{ color: "#1778b5" }} />
+      </Link>
+      </div>
     </nav>
   );
 }
