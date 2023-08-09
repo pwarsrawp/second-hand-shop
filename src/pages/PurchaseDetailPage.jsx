@@ -19,7 +19,7 @@ function PurchasePage() {
     
     if (user._id === product.seller) {
       try {
-        await updateOne(`/product/${product._id}`, { sold: true });
+        await updateOne(`/products/${product._id}`, { sold: true });
         navigate("/profile");
       } catch (error) {
         console.error("Error updating product:", error);

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+const api_url = import.meta.env.VITE_API_URL;
 
 const ProductDetailPage = () => {
   const [product, setProduct] = useState(null);
@@ -10,7 +11,7 @@ const ProductDetailPage = () => {
     const getOneProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5005/products/${productId}`
+          `${api_url}/products/${productId}`
         );
         setProduct(response.data);
         console.log(response.data);
