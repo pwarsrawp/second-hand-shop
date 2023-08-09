@@ -1,14 +1,13 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-
 import { sendUser } from "../utils/usersAPICalls";
 import { AuthContext } from "../context/auth.context";
-
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 
 const UserEditForm = () => {
   const { user, setUserUpdate } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const [fullname, setFullName] = useState(user.fullname);
   const [username, setUsername] = useState(user.username);
@@ -17,8 +16,8 @@ const UserEditForm = () => {
   const [street, setStreet] = useState(user.address.street);
   const [city, setCity] = useState(user.address.city);
   const [country, setCountry] = useState(user.address.country);
-  const [password, setPassword] = useState(user.password);
-  const [passwordHash, setPasswordHash] = useState(user.passwordHash);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   const handleNameInput = (event) => setFullName(event.target.value);
   const handlePhoneInput = (event) => setPhone(event.target.value);
@@ -27,9 +26,8 @@ const UserEditForm = () => {
   const handleStreetInput = (event) => setStreet(event.target.value);
   const handleCityInput = (event) => setCity(event.target.value);
   const handleCountryInput = (event) => setCountry(event.target.value);
-  const handlePasswordInput = (event) => setPassword(event.target.value);
-  const handlePasswordHashInput = (event) =>
-    setPasswordHash(event.target.value);
+  const handleOldPasswordInput = (event) => setOldPassword(event.target.value);
+  const handleNewPasswordInput = (event) => setNewPassword(event.target.value);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -45,16 +43,14 @@ const UserEditForm = () => {
           city: city,
           country: country,
         },
-        password: password,
-        passwordHash: passwordHash,
+        oldPassword: oldPassword,
+        newPassword: newPassword,
       };
 
-      const response = await sendUser(UpdatedUser, user._id, "PUT");
-
-      const parsed = await response.json();
+      await sendUser(UpdatedUser, user._id, "PUT");
 
       setUserUpdate(true);
-      // navigate(`/users/${parsed._id}`);
+      navigate(`/profile`);
     };
     handleUpdateUser();
   };
@@ -74,6 +70,7 @@ const UserEditForm = () => {
           placeholder="enter name"
           value={fullname}
           onChange={handleNameInput}
+          required
         />
         <label>User Name :</label>
         <input
@@ -82,6 +79,7 @@ const UserEditForm = () => {
           placeholder="user name"
           value={username}
           onChange={handleUsernameInput}
+          required
         />
         <label>Mobile number :</label>
         <input
@@ -90,30 +88,32 @@ const UserEditForm = () => {
           placeholder="mobile number"
           value={phone}
           onChange={handlePhoneInput}
+          required
         />
         <label>Email :</label>
         <input
           name="email"
-          type="text"
+          type="email"
           placeholder="your email address"
           value={email}
           onChange={handleEmailInput}
+          required
         />
         <label>Password :</label>
         <input
           name="password"
-          type="text"
+          type="password"
           placeholder="current password"
-          value={password}
-          onChange={handlePasswordInput}
+          value={oldPassword}
+          onChange={handleOldPasswordInput}
         />
         <label>New Password :</label>
         <input
           name="new password"
-          type="text"
+          type="password"
           placeholder="new password"
-          value={password}
-          onChange={handlePasswordHashInput}
+          value={newPassword}
+          onChange={handleNewPasswordInput}
         />
 
         <label>Street :</label>
@@ -123,6 +123,7 @@ const UserEditForm = () => {
           placeholder="street"
           value={street}
           onChange={handleStreetInput}
+          required
         />
         <label>City :</label>
         <input
@@ -131,6 +132,7 @@ const UserEditForm = () => {
           placeholder="city"
           value={city}
           onChange={handleCityInput}
+          required
         />
         <label>Country :</label>
         <input
@@ -139,13 +141,16 @@ const UserEditForm = () => {
           placeholder="country"
           value={country}
           onChange={handleCountryInput}
+          required
         />
         <button type="submit">Update your Profile</button>
       </form>
+      </div>
 
          
     </>
   );
 };
+
 
 export default UserEditForm;
