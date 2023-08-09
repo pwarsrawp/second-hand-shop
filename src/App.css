@@ -371,3 +371,60 @@ table {
 .footer-hours-container p {
   font-weight: 300;
 }
+
+/* FOOTER */
+.footer-container {
+  background-color: #edf7fd;
+  padding: 1.5rem 1.5rem;
+}
+.footer-text-container {
+}
+.footer-text-container h3 {
+  font-weight: 500;
+}
+.footer-text-container p {
+  font-weight: 300;
+  font-style: italic;
+}
+.footer-text-item {
+  margin-bottom: 0.7rem;
+}
+.footer-contact-container {
+  margin: 1rem 0;
+}
+.footer-contact-container h3 {
+  font-weight: 600;
+}
+.footer-contact-container p {
+  font-weight: 300;
+}
+.footer-hours-container {
+}
+.footer-hours-container h3 {
+  font-weight: 600;
+}
+.footer-hours-container p {
+  font-weight: 300;
+}
+
+/* ERROR-PAGE */
+.error-background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../public/Error_Page_IMG.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.error-h1 {
+  font-size: 7rem;
+  font-weight: 700;
+}
+.error-h2 {
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin: 30px;
+}
