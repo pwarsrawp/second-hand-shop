@@ -27,7 +27,7 @@ const UserEditForm = ({ onSubmit }) => {
     <>
       <Navbar />
       <div className="update-form">
-        <h1>Edit your details..</h1>
+        <h1>Edit your details...</h1>
         <form onSubmit={handleSubmit}>
           <label>Name :</label>
           <input

@@ -9,6 +9,7 @@ import { fetchAll } from "../functions/api.calls";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { AiOutlineHeart } from "react-icons/ai";
+import ClipLoader from "react-spinners/ClipLoader";
 const api_url = import.meta.env.VITE_API_URL;
 
 function HomePage() {
