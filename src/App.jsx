@@ -4,7 +4,6 @@ import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import Login from "./pages/LoginPage";
 import Purchases from "./pages/PurchaseDetailPage";
-import Product from "./pages/ProductDetailPage";
 import Profile from "./pages/ProfilePage";
 import FavoritesPage from "./pages/FavouritesPage";
 import UploadPage from "./pages/UploadPage";
@@ -13,6 +12,7 @@ import IsPrivate from "./context/auth.private";
 import "./App.css";
 
 import UserEditForm from "./components/UserEditForm";
+import ProductDetailPage from "./pages/ProductDetailPage";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/products/:productId" element={<ProductDetailPage />} />
 
         {/* Private Routes */}
         <Route
