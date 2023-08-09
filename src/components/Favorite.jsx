@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import { fetchAll } from "../functions/api.calls";
 import { updateFavoriteList } from "../functions/product.functions";
+import { PiHeartFill } from "react-icons/pi";
 const api_url = import.meta.env.VITE_API_URL;
 
 function Favorite() {
@@ -11,65 +12,60 @@ function Favorite() {
 
   /* ALL PRODUCTS */
   useEffect(() => {
-    const fetchAllProducts = async() =>{
+    const fetchAllProducts = async () => {
       try {
-        const products = await fetchAll(`${api_url}/products`)
-        setAllProducts(products)
+        const products = await fetchAll(`${api_url}/products`);
+        setAllProducts(products);
       } catch (error) {
-        console.log("couldnt fetch products: ", error)
+        console.log("couldnt fetch products: ", error);
       }
-    } 
-    fetchAllProducts()
+    };
+    fetchAllProducts();
   }, [favoriteProductIds]);
 
-
- /* FAVORITES */  
+  /* FAVORITES */
   useEffect(() => {
-    if (user) setFavoriteProductIds(user.favorites)
+    if (user) setFavoriteProductIds(user.favorites);
   }, []);
 
   const handleFavorite = async (productId) => {
     if (isLoggedIn) {
       try {
         const newFavorites = await updateFavoriteList(productId, user);
-        setUserUpdate(true)
-        setFavoriteProductIds(newFavorites)
+        setUserUpdate(true);
+        setFavoriteProductIds(newFavorites);
       } catch (error) {
         console.log("updating favorites didnt work", error);
       }
     }
   };
 
-
   return allProducts ? (
-    <>
+    <div className="favorites-container">
       <h1>Wishlist</h1>
-      <div className="product-container">
-        {allProducts
-        .filter(product => favoriteProductIds.includes(product._id)) 
+      {allProducts
+        .filter((product) => favoriteProductIds.includes(product._id))
         .map((product) => {
           return (
-            <div key={product._id}>
-              <h3>{product.title}</h3>
-              <h3>{product.price}</h3>
-              <p>{product.description}</p>
-              <img
-                src={product.imageUrl}
-                alt={product.title}
-              />
-              <div>
-              <button
-                className={`heart-btn active`}
-                onClick={() => handleFavorite(product._id)}
+            <div key={product._id} className="favorite-product-container">
+              <div className="favorite-product-image-container">
+                <img src={product.imageUrl} alt={product.title} />
+              </div>
+              <div className="favorite-product-price">
+                <h2>{product.price} €</h2>
+                <button
+                  className={`heart-btn active`}
+                  onClick={() => handleFavorite(product._id)}
                 >
-                  Favorite
+                  <PiHeartFill size={25} style={{ color: "#E27688" }} />
                 </button>
               </div>
+              <h3>{product.title}</h3>
+              <p>{product.description}</p>
             </div>
           );
         })}
-      </div>
-    </>
+    </div>
   ) : (
     <h1>Loading...</h1>
   );
