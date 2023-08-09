@@ -42,7 +42,7 @@ function App() {
           }
         />
         <Route
-          path="/purchase"
+          path="/purchase/:productId"
           element={
             <IsPrivate>
               <Purchases />

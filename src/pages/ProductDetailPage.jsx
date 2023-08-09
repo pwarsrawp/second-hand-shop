@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { PiHandshakeFill } from "react-icons/pi";
 const api_url = import.meta.env.VITE_API_URL;
 
 const ProductDetailPage = () => {
@@ -36,6 +37,9 @@ const ProductDetailPage = () => {
       <p>{product.item_condition}</p>
       <p>{product.state}</p>
       <p>{product.seller}</p>
+      <Link to={`/purchase/${productId}`}>
+            <PiHandshakeFill size={30} style={{ color: "#1778b5" }} />
+          </Link>
     </div>
   );
 };
