@@ -121,7 +121,7 @@ function UploadPage() {
           <div className="upload-page-upload-file-container">
             <label htmlFor="file" className="btn-grey">
               {" "}
-              Select file:
+              Image:
             </label>
             {file && <center> {file.name}</center>}
             <input
@@ -130,14 +130,14 @@ function UploadPage() {
               type="file"
               // multiple={false}
               accept="image/jpg, image/png"
-            />
-
-            <div>
+              className="upload-page-upload-file-input"
+            />            
+          </div>
+          <div>
               <button className="btn-green">
-                {loading ? "uploading..." : "Upload"}
+                {loading ? "posting..." : "Post"}
               </button>
             </div>
-          </div>
         </form>
         {uploadDone ? (
           <p>Upload done!</p>
