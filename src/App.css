@@ -338,3 +338,25 @@ table {
   display: inline-block;
   position: relative;
 }
+
+
+.error-background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../public/Error_Page_IMG.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.error-h1 {
+  font-size: 7rem;
+  font-weight: 700;
+}
+.error-h2 {
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin: 30px;
+}
