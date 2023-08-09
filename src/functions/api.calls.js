@@ -7,7 +7,7 @@ import axios from "axios";
       const { data } = await axios.get(url);
       return data;
     } catch (error) {
-      console.log(error);
+      console.log("Could not fetch all data: ",error);
     }
   };
 

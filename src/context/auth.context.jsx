@@ -37,7 +37,6 @@ function AuthContextWrapper({ children }) {
         setIsLoading(false);
         setIsLoggedIn(true);
       } catch (error) {
-        console.log("authorization failed: ", error);
         setUser(null);
         setIsLoading(false);
         setIsLoggedIn(false);
@@ -57,8 +56,18 @@ function AuthContextWrapper({ children }) {
 
   useEffect(() => {
     if(userUpdate){
-      fetchOne(`${api_url}/users/${user._id}`)
-    }
+      
+      const fetchUser = async() => {
+        try {
+          const response = await fetchOne(`${api_url}/users/${user._id}`)
+          setUser(response)
+          setUserUpdate(false)
+        } catch (error) {
+          console.log("error updating user: ", error)
+        }
+      }
+      fetchUser()
+    } 
   }, [userUpdate])
 
 
