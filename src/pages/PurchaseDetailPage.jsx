@@ -14,22 +14,12 @@ function PurchasePage() {
 
   const navigate = useNavigate();
 
-  /* PRODUCT SETUP */
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const productsData = await fetchOne(`${api_url}/purchase`);
-      setProducts(productsData);
-      setFilteredProducts(productsData);
-    };
-    fetchProducts();
-  }, []);
-
   const handlePurchase = async (e) => {
     e.preventDefault();
     
     if (user._id === product.seller) {
       try {
-        await updateOne(`/products/${product._id}`, { sold: true });
+        await updateOne(`/product/${product._id}`, { sold: true });
         navigate("/profile");
       } catch (error) {
         console.error("Error updating product:", error);

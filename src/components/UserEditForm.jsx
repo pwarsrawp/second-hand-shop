@@ -4,7 +4,6 @@ import { AuthContext } from "../context/auth.context";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 
-
 const UserEditForm = () => {
   const { user, setUserUpdate } = useContext(AuthContext);
   const navigate = useNavigate()
@@ -59,7 +58,7 @@ const UserEditForm = () => {
     <>
       <Navbar />
       <div className="update-form">
-        
+
 
 
       <form onSubmit={handleSubmit}>
@@ -147,7 +146,6 @@ const UserEditForm = () => {
       </form>
       </div>
 
-         
     </>
   );
 };

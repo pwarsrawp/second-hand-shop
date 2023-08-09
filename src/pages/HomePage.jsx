@@ -9,6 +9,7 @@ import { fetchAll } from "../functions/api.calls";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { AiOutlineHeart } from "react-icons/ai";
+import Spinner from "../components/Spinner";
 const api_url = import.meta.env.VITE_API_URL;
 
 function HomePage() {
@@ -59,12 +60,12 @@ function HomePage() {
       <div className="body-container">
         <div className="search-bar-container">
           <label>Search Product</label>
-            <input
-              name="query"
-              value={query}
-              placeholder="What are you looking for today?"
-              onChange={(event) => setQuery(event.target.value)}
-            />          
+          <input
+            name="query"
+            value={query}
+            placeholder="What are you looking for today?"
+            onChange={(event) => setQuery(event.target.value)}
+          />
         </div>
         <div className="products-container">
           {filteredProducts.map((product) => {
@@ -80,16 +81,17 @@ function HomePage() {
                   style={{ backgroundImage: `url(${product.imageUrl})` }}
                 ></div> */}
                 <div className="product-card-img-container">
-                  <img src={product.imageUrl} alt=""/>
+                  <img src={product.imageUrl} alt="" />
                 </div>
                 <div className="product-card-price-container">
                   <h5>€ {product.price}</h5>
                   <button
-                    className={`heart-btn ${ favorite ? (
-                      favorite.includes(product._id) ? "active" : "not-active"
-                    ) : (
-                      "not active"
-                    )
+                    className={`heart-btn ${
+                      favorite
+                        ? favorite.includes(product._id)
+                          ? "active"
+                          : "not-active"
+                        : "not active"
                     }`}
                     onClick={() => handleFavorite(product._id)}
                   >
@@ -101,7 +103,7 @@ function HomePage() {
                 </div>
               </Link>
             );
-          })}          
+          })}
         </div>
       </div>
       <Footer />
@@ -109,7 +111,10 @@ function HomePage() {
   ) : (
     <>
       <Navbar />
-      <h1 className="loading-h1">Loading...</h1>
+      <div className="loading-spinner-container">
+        <h1>Bare with me...</h1>
+        <Spinner />
+      </div>      
     </>
   );
 }
