@@ -1,6 +1,8 @@
+const api_url = import.meta.env.VITE_API_URL;
+
 export const fetchUser = async (userId, setter) => {
   try {
-    const response = await fetch(`http://localhost:5005/api/users/${userId}`);
+    const response = await fetch(`${api_url}/users/${userId}`);
     if (response.status === 200) {
       const parsedUser = await response.json();
       setter(parsedUser);
@@ -12,7 +14,7 @@ export const fetchUser = async (userId, setter) => {
 export const fetchProduct = async (productId, setter) => {
   try {
     const response = await fetch(
-      `http://localhost:5005/api/users/${productId}`
+      `${api_url}/products/${productId}`
     );
     if (response.status === 200) {
       const parsedProduct = await response.json();
@@ -24,7 +26,7 @@ export const fetchProduct = async (productId, setter) => {
 };
 
 export const sendUser = async (user, userId = "", method = "POST") => {
-  return fetch(`http://localhost:5005/api/users/${userId}`, {
+  return fetch(`${api_url}/users/${userId}`, {
     method,
     headers: {
       "Content-Type": "application/json",
