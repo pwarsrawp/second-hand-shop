@@ -3,6 +3,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Spinner from "../components/Spinner";
+import { useParams, Link } from "react-router-dom";
+import { PiHandshakeFill } from "react-icons/pi";
 const api_url = import.meta.env.VITE_API_URL;
 
 const ProductDetailPage = () => {
@@ -48,7 +50,10 @@ const ProductDetailPage = () => {
           <p>{product.description}</p>
         </div>
         <div className="product-details-fourth-line">
-          <p><span>Condition: </span>{product.item_condition}</p>
+          <p>
+            <span>Condition: </span>
+            {product.item_condition}
+          </p>
         </div>
         {/* <p>{product.state}</p>
         <p>{product.seller}</p> */}
@@ -56,6 +61,9 @@ const ProductDetailPage = () => {
           <button>Buy</button>
           <button>Chat</button>
         </div>
+        <Link to={`/purchase/${productId}`}>
+          <PiHandshakeFill size={30} style={{ color: "#1778b5" }} />
+        </Link>
       </div>
     </>
   );
