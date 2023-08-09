@@ -10,6 +10,18 @@ function AuthContextWrapper({ children }) {
   const [user, setUser] = useState(null);
   const [userUpdate, setUserUpdate] = useState(false);
 
+  /* LOGOUT */
+  const logout = () => {
+    try {
+      localStorage.removeItem("authToken");
+      setUser(null);
+      setIsLoggedIn(false);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error while logging out:", error);
+    }
+  };
+
   /* AUTHENTICATION */
   const userAuthentication = async () => {
     const token = localStorage.getItem("authToken");
@@ -58,7 +70,8 @@ function AuthContextWrapper({ children }) {
         isLoading,
         isLoggedIn,
         userAuthentication,
-        setUserUpdate
+        setUserUpdate,
+        logout,
       }}
     >
       {children}
