@@ -33,7 +33,6 @@ function UploadPage() {
       data.append("imageUrl", event.target.image.files[0]);
       data.append("item_condition", condition);
       const res = await postOne(`${api_url}/products`, data);
-      console.log(res.data);
       setRes(res.data);
       setUploadDone(true);
       setSold(false);
