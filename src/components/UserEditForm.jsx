@@ -137,6 +137,9 @@ const UserEditForm = () => {
             onChange={handleCountryInput}
           />
           <button type="submit">Update your Profile</button>
+          <Link to="/">
+            <button type="submit">Home</button>
+          </Link>
         </form>
       </div>
     </>
