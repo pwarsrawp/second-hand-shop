@@ -1,13 +1,12 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-
 import { sendUser } from "../utils/usersAPICalls";
 import { AuthContext } from "../context/auth.context";
-
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const UserEditForm = () => {
   const { user, setUserUpdate } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const [fullname, setFullName] = useState(user.fullname);
   const [username, setUsername] = useState(user.username);
@@ -16,8 +15,8 @@ const UserEditForm = () => {
   const [street, setStreet] = useState(user.address.street);
   const [city, setCity] = useState(user.address.city);
   const [country, setCountry] = useState(user.address.country);
-  const [password, setPassword] = useState(user.password);
-  const [passwordHash, setPasswordHash] = useState(user.passwordHash);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   const handleNameInput = (event) => setFullName(event.target.value);
   const handlePhoneInput = (event) => setPhone(event.target.value);
@@ -26,9 +25,8 @@ const UserEditForm = () => {
   const handleStreetInput = (event) => setStreet(event.target.value);
   const handleCityInput = (event) => setCity(event.target.value);
   const handleCountryInput = (event) => setCountry(event.target.value);
-  const handlePasswordInput = (event) => setPassword(event.target.value);
-  const handlePasswordHashInput = (event) =>
-    setPasswordHash(event.target.value);
+  const handleOldPasswordInput = (event) => setOldPassword(event.target.value);
+  const handleNewPasswordInput = (event) => setNewPassword(event.target.value);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,16 +42,14 @@ const UserEditForm = () => {
           city: city,
           country: country,
         },
-        password: password,
-        passwordHash: passwordHash,
+        oldPassword: oldPassword,
+        newPassword: newPassword,
       };
 
-      const response = await sendUser(UpdatedUser, user._id, "PUT");
-
-      const parsed = await response.json();
+      await sendUser(UpdatedUser, user._id, "PUT");
 
       setUserUpdate(true);
-      // navigate(`/users/${parsed._id}`);
+      navigate(`/profile`);
     };
     handleUpdateUser();
   };
@@ -62,88 +58,97 @@ const UserEditForm = () => {
     <>
       <Navbar />
       <div className="update-form">
-        <form onSubmit={handleSubmit}>
-          <label>Name :</label>
-          <input
-            name="fullname"
-            type="text"
-            placeholder="enter name"
-            value={fullname}
-            onChange={handleNameInput}
-          />
-          <label>User Name :</label>
-          <input
-            name="username"
-            type="text"
-            placeholder="user name"
-            value={username}
-            onChange={handleUsernameInput}
-          />
-          <label>Mobile number :</label>
-          <input
-            name="phone"
-            type="text"
-            placeholder="mobile number"
-            value={phone}
-            onChange={handlePhoneInput}
-          />
-          <label>Email :</label>
-          <input
-            name="email"
-            type="text"
-            placeholder="your email address"
-            value={email}
-            onChange={handleEmailInput}
-          />
-          <label>Password :</label>
-          <input
-            name="password"
-            type="text"
-            placeholder="current password"
-            value={password}
-            onChange={handlePasswordInput}
-          />
-          <label>New Password :</label>
-          <input
-            name="new password"
-            type="text"
-            placeholder="new password"
-            value={password}
-            onChange={handlePasswordHashInput}
-          />
 
-          <label>Street :</label>
-          <input
-            name="street"
-            type="text"
-            placeholder="street"
-            value={street}
-            onChange={handleStreetInput}
-          />
-          <label>City :</label>
-          <input
-            name="city"
-            type="text"
-            placeholder="city"
-            value={city}
-            onChange={handleCityInput}
-          />
-          <label>Country :</label>
-          <input
-            name="country"
-            type="text"
-            placeholder="country"
-            value={country}
-            onChange={handleCountryInput}
-          />
-          <button type="submit">Update your Profile</button>
-          <Link to="/">
-            <button type="submit">Home</button>
-          </Link>
-        </form>
+
+
+      <form onSubmit={handleSubmit}>
+        <label>Name :</label>
+        <input
+          name="fullname"
+          type="text"
+          placeholder="enter name"
+          value={fullname}
+          onChange={handleNameInput}
+          required
+        />
+        <label>User Name :</label>
+        <input
+          name="username"
+          type="text"
+          placeholder="user name"
+          value={username}
+          onChange={handleUsernameInput}
+          required
+        />
+        <label>Mobile number :</label>
+        <input
+          name="phone"
+          type="text"
+          placeholder="mobile number"
+          value={phone}
+          onChange={handlePhoneInput}
+          required
+        />
+        <label>Email :</label>
+        <input
+          name="email"
+          type="email"
+          placeholder="your email address"
+          value={email}
+          onChange={handleEmailInput}
+          required
+        />
+        <label>Password :</label>
+        <input
+          name="password"
+          type="password"
+          placeholder="current password"
+          value={oldPassword}
+          onChange={handleOldPasswordInput}
+        />
+        <label>New Password :</label>
+        <input
+          name="new password"
+          type="password"
+          placeholder="new password"
+          value={newPassword}
+          onChange={handleNewPasswordInput}
+        />
+
+        <label>Street :</label>
+        <input
+          name="street"
+          type="text"
+          placeholder="street"
+          value={street}
+          onChange={handleStreetInput}
+          required
+        />
+        <label>City :</label>
+        <input
+          name="city"
+          type="text"
+          placeholder="city"
+          value={city}
+          onChange={handleCityInput}
+          required
+        />
+        <label>Country :</label>
+        <input
+          name="country"
+          type="text"
+          placeholder="country"
+          value={country}
+          onChange={handleCountryInput}
+          required
+        />
+        <button type="submit">Update your Profile</button>
+      </form>
       </div>
+
     </>
   );
 };
+
 
 export default UserEditForm;

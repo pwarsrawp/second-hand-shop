@@ -30,7 +30,6 @@ function LoginPage() {
       }
 
       await userAuthentication();
-      console.log("success 2")
       navigate("/profile");
     } catch (error) {
       if (

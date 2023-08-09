@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -34,7 +33,7 @@ function SignupPage() {
       });
       navigate("/login");
     } catch (error) {
-      console.log(error);
+      console.log("Issue with the sign up: ", error);
     }
   };
 

@@ -17,7 +17,7 @@ function Favorite() {
         const products = await fetchAll(`${api_url}/products`);
         setAllProducts(products);
       } catch (error) {
-        console.log("couldnt fetch products: ", error);
+        console.log("Issue fetching products: ", error);
       }
     };
     fetchAllProducts();
@@ -35,7 +35,7 @@ function Favorite() {
         setUserUpdate(true);
         setFavoriteProductIds(newFavorites);
       } catch (error) {
-        console.log("updating favorites didnt work", error);
+        console.log("Issue updating favorites: ", error);
       }
     }
   };
@@ -67,7 +67,13 @@ function Favorite() {
         })}
     </div>
   ) : (
-    <h1>Loading...</h1>
+    <>
+      <Navbar />
+      <div className="loading-spinner-container">
+        <h1>Bare with me...</h1>
+        <Spinner />
+      </div>      
+    </>
   );
 }
 
