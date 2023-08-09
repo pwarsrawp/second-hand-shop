@@ -26,7 +26,10 @@ const UpdateUserPage = () => {
     navigate(`/users/${parsed._id}`);
   };
   return (
-    <>{user && <UserEditForm onSubmit={handleUpdateUser} user={user} />}</>
+    <>
+      
+      {user && <UserEditForm onSubmit={handleUpdateUser} user={user} />}
+    </>
   );
 };
 export default UpdateUserPage;

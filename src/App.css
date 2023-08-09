@@ -283,6 +283,75 @@ table {
   margin-bottom: 0.5rem;
 }
 
+/* PROFILE PAGE */
+.profile-page-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  align-items: center;
+  margin: 1rem auto;
+}
+.profile-page-container img {
+  width: 40%;
+  margin-bottom: 1rem;
+}
+.profile-page-container h2 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.profile-page-container p {
+  margin-bottom: 1rem;
+}
+.profile-page-container button {
+  border-radius: 15px;
+  border: none;
+  height: 35px;
+  width: 35px;
+  background-color: #6bbaec;
+}
+
+/* UPDATE USER PAGE */
+.update-form h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.update-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem auto;
+}
+.update-form input {
+  border-radius: 15px;
+  border: none;
+  padding: 0.3rem 0.3rem 0.3rem 2rem;
+  margin: 0.5rem;
+  height: 30px;
+  width: 250px;
+  background-color: #edf7fd;
+  outline: none;
+}
+.update-form button {
+  border-radius: 15px;
+  border: none;
+  height: 30px;
+  width: 100px;
+  background-color: #6bbaec;
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.update-form-bottom-text {
+  text-align: center;
+  text-decoration: none;
+}
+.update-form-bottom-text p {
+  margin-bottom: 0.5rem;
+}
+
+
 /* UPLOAD PAGE */
 .upload-page-container select {
   border: 1px solid #ccc;
@@ -291,8 +360,8 @@ table {
   font-size: 14px;
   cursor: pointer;
   padding: 0.3rem 0.3rem 0.3rem 1rem;
-  margin: 0.5rem;
   text-align: center;
+  margin-bottom: 0.5rem;
 }
 /* Style the dropdown arrow */
 .upload-page-container select::after {
@@ -315,11 +384,14 @@ table {
   align-items: center;
   margin: 1.5rem auto;
 }
+.upload-page-container label {
+  margin-bottom: 0.5rem;
+}
 .upload-page-container input {
   border-radius: 15px;
   border: none;
   padding: 0.3rem 0.3rem 0.3rem 2rem;
-  margin: 0.5rem;
+  margin-bottom: 1rem;
   height: 30px;
   width: 250px;
   background-color: #edf7fd;
@@ -329,7 +401,7 @@ table {
   border-radius: 15px;
   border: none;
   padding: 1rem 0.3rem 0.5rem 2rem;
-  margin: 0.5rem;
+  margin-bottom: 1rem;
   height: 100px;
   width: 250px;
   background-color: #edf7fd;
@@ -338,6 +410,25 @@ table {
 .upload-page-dropdown-container {
   display: inline-block;
   position: relative;
+  margin-bottom: 0.7rem;
+}
+.upload-page-upload-file-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.upload-page-upload-file-container input {
+  background: transparent;
+}
+.upload-page-container button {
+  border-radius: 15px;
+  border: none;
+  height: 30px;
+  width: 100px;
+  background-color: #6bbaec;
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 /* FOOTER */

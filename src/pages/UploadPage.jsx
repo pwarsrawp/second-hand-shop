@@ -105,7 +105,7 @@ function UploadPage() {
             
             
               <label>Select a Condition:</label>
-              <div className="dropdown-container">
+              <div className="upload-page-dropdown-container">
                 <select
                   name="state"
                   required
@@ -126,10 +126,10 @@ function UploadPage() {
 
 
             {/* CLOUDINARY */}
-            <div className="App">
+            <div className="upload-page-upload-file-container">
               <label htmlFor="file" className="btn-grey">
                 {" "}
-                select file
+                Select file:
               </label>
               {file && <center> {file.name}</center>}             
               <input
@@ -142,7 +142,7 @@ function UploadPage() {
 
               <div>
                 <button className="btn-green">
-                  {loading ? "uploading..." : "upload"}
+                  {loading ? "uploading..." : "Upload"}
                 </button>
               </div>
             </div>

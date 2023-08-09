@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 // eslint-disable-next-line react/prop-types
 const UserEditForm = ({ onSubmit }) => {
@@ -24,56 +25,58 @@ const UserEditForm = ({ onSubmit }) => {
 
   return (
     <>
-      <h2>Edit your details..</h2>
+      <Navbar />
+      <div className="update-form">
+        <h1>Edit your details..</h1>
+        <form onSubmit={handleSubmit}>
+          <label>Name :</label>
+          <input
+            name="fullname"
+            type="text"
+            value={fullname}
+            onChange={handleNameInput}
+          />
+          <label>User Name :</label>
+          <input
+            name="username"
+            type="text"
+            value={username}
+            onChange={handleUsernameInput}
+          />
+          <label>Mobile number :</label>
+          <input
+            name="phone"
+            type="text"
+            value={phone}
+            onChange={handlePhoneInput}
+          />
+          <label>Email :</label>
+          <input
+            name="email"
+            type="text"
+            value={email}
+            onChange={handleEmailInput}
+          />
 
-      <form onSubmit={handleSubmit}>
-        <label>Name :</label>
-        <input
-          name="fullname"
-          type="text"
-          value={fullname}
-          onChange={handleNameInput}
-        />
-        <label>User Name :</label>
-        <input
-          name="username"
-          type="text"
-          value={username}
-          onChange={handleUsernameInput}
-        />
-        <label>Mobile number :</label>
-        <input
-          name="phone"
-          type="text"
-          value={phone}
-          onChange={handlePhoneInput}
-        />
-        <label>Email :</label>
-        <input
-          name="email"
-          type="text"
-          value={email}
-          onChange={handleEmailInput}
-        />
-
-        <label>Street :</label>
-        <input
-          name="street"
-          type="text"
-          value={street}
-          onChange={handleStreetInput}
-        />
-        <label>Country :</label>
-        <input
-          name="country"
-          type="text"
-          value={country}
-          onChange={handleCountryInput}
-        />
-        <Link to="/">
-          <button type="submit">Update your Profile</button>
-        </Link>
-      </form>
+          <label>Street :</label>
+          <input
+            name="street"
+            type="text"
+            value={street}
+            onChange={handleStreetInput}
+          />
+          <label>Country :</label>
+          <input
+            name="country"
+            type="text"
+            value={country}
+            onChange={handleCountryInput}
+          />
+          <Link to="/">
+            <button type="submit">Update</button>
+          </Link>
+        </form>
+      </div>
     </>
   );
 };
