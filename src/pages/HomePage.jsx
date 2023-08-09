@@ -74,10 +74,13 @@ function HomePage() {
                 className="product-card"
                 style={linkStyle}
               >
-                <div
+                {/* <div
                   className="product-card-img-container"
                   style={{ backgroundImage: `url(${product.imageUrl})` }}
-                ></div>
+                ></div> */}
+                <div className="product-card-img-container">
+                  <img src={product.imageUrl} alt=""/>
+                </div>
                 <div className="product-card-price-container">
                   <h5>€ {product.price}</h5>
                   <button
