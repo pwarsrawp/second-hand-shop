@@ -1,32 +1,23 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { fetchUser, sendUser } from "../utils/usersAPICalls";
+import { useContext, useEffect, useState } from "react";
+
 import UserEditForm from "../components/UserEditForm";
 
 const UpdateUserPage = () => {
   const navigate = useNavigate();
   const { userId } = useParams();
-  const [user, setUser] = useState();
+  const [currUser, setCurrUser] = useState(null);
+  // const [user, setUser] = useState();
+  const { setUserUpdate, user } = useContext();
 
   useEffect(() => {
-    fetchUser(userId, setUser);
+    // fetchUser(userId, setUser);
+    if (user) {
+      console.log("this is our curr user: ", user);
+      setCurrUser(user);
+    }
   }, []);
 
-  const handleUpdateUser = async (payload) => {
-    const UpdatedUser = {
-      name: payload.name,
-      usernmae: payload.username,
-      email: payload.email,
-      phone: payload.phone,
-      street: payload.street,
-      country: payload.country,
-    };
-    const response = await sendUser(UpdatedUser, userId, "PUT");
-    const parsed = await response.json();
-    navigate(`/users/${parsed._id}`);
-  };
-  return (
-    <>{user && <UserEditForm onSubmit={handleUpdateUser} user={user} />}</>
-  );
+  return <>{user && <UserEditForm />}</>;
 };
 export default UpdateUserPage;
