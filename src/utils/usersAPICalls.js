@@ -11,9 +11,7 @@ export const fetchUser = async (userId, setter) => {
 };
 export const fetchProduct = async (productId, setter) => {
   try {
-    const response = await fetch(
-      `http://localhost:5005/api/users/${productId}`
-    );
+    const response = await fetch(`http://localhost:5005/users/${productId}`);
     if (response.status === 200) {
       const parsedProduct = await response.json();
       setter(parsedProduct);
@@ -24,7 +22,7 @@ export const fetchProduct = async (productId, setter) => {
 };
 
 export const sendUser = async (user, userId = "", method = "POST") => {
-  return fetch(`http://localhost:5005/api/users/${userId}`, {
+  return fetch(`http://localhost:5005/users/${userId}`, {
     method,
     headers: {
       "Content-Type": "application/json",
