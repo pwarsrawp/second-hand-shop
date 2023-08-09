@@ -59,12 +59,12 @@ function HomePage() {
       <div className="body-container">
         <div className="search-bar-container">
           <label>Search Product</label>
-            <input
-              name="query"
-              value={query}
-              placeholder="What are you looking for today?"
-              onChange={(event) => setQuery(event.target.value)}
-            />          
+          <input
+            name="query"
+            value={query}
+            placeholder="What are you looking for today?"
+            onChange={(event) => setQuery(event.target.value)}
+          />
         </div>
         <div className="products-container">
           {filteredProducts.map((product) => {
@@ -80,7 +80,7 @@ function HomePage() {
                   style={{ backgroundImage: `url(${product.imageUrl})` }}
                 ></div> */}
                 <div className="product-card-img-container">
-                  <img src={product.imageUrl} alt=""/>
+                  <img src={product.imageUrl} alt="" />
                 </div>
                 <div className="product-card-price-container">
                   <h5>€ {product.price}</h5>
@@ -98,7 +98,7 @@ function HomePage() {
                 </div>
               </Link>
             );
-          })}          
+          })}
         </div>
       </div>
       <Footer />
