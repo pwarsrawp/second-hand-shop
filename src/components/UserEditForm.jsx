@@ -1,15 +1,11 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { sendUser } from "../utils/usersAPICalls";
 import { AuthContext } from "../context/auth.context";
-
 import Navbar from "../components/Navbar";
-
 
 const UserEditForm = () => {
   const { user, setUserUpdate } = useContext(AuthContext);
-
   const [fullname, setFullName] = useState(user.fullname);
   const [username, setUsername] = useState(user.username);
   const [phone, setPhone] = useState(user.phone);
@@ -63,87 +59,83 @@ const UserEditForm = () => {
     <>
       <Navbar />
       <div className="update-form">
-        
+        <form onSubmit={handleSubmit}>
+          <label>Name :</label>
+          <input
+            name="fullname"
+            type="text"
+            placeholder="enter name"
+            value={fullname}
+            onChange={handleNameInput}
+          />
+          <label>User Name :</label>
+          <input
+            name="username"
+            type="text"
+            placeholder="user name"
+            value={username}
+            onChange={handleUsernameInput}
+          />
+          <label>Mobile number :</label>
+          <input
+            name="phone"
+            type="text"
+            placeholder="mobile number"
+            value={phone}
+            onChange={handlePhoneInput}
+          />
+          <label>Email :</label>
+          <input
+            name="email"
+            type="text"
+            placeholder="your email address"
+            value={email}
+            onChange={handleEmailInput}
+          />
+          <label>Password :</label>
+          <input
+            name="password"
+            type="text"
+            placeholder="current password"
+            value={password}
+            onChange={handlePasswordInput}
+          />
+          <label>New Password :</label>
+          <input
+            name="new password"
+            type="text"
+            placeholder="new password"
+            value={password}
+            onChange={handlePasswordHashInput}
+          />
 
-
-      <form onSubmit={handleSubmit}>
-        <label>Name :</label>
-        <input
-          name="fullname"
-          type="text"
-          placeholder="enter name"
-          value={fullname}
-          onChange={handleNameInput}
-        />
-        <label>User Name :</label>
-        <input
-          name="username"
-          type="text"
-          placeholder="user name"
-          value={username}
-          onChange={handleUsernameInput}
-        />
-        <label>Mobile number :</label>
-        <input
-          name="phone"
-          type="text"
-          placeholder="mobile number"
-          value={phone}
-          onChange={handlePhoneInput}
-        />
-        <label>Email :</label>
-        <input
-          name="email"
-          type="text"
-          placeholder="your email address"
-          value={email}
-          onChange={handleEmailInput}
-        />
-        <label>Password :</label>
-        <input
-          name="password"
-          type="text"
-          placeholder="current password"
-          value={password}
-          onChange={handlePasswordInput}
-        />
-        <label>New Password :</label>
-        <input
-          name="new password"
-          type="text"
-          placeholder="new password"
-          value={password}
-          onChange={handlePasswordHashInput}
-        />
-
-        <label>Street :</label>
-        <input
-          name="street"
-          type="text"
-          placeholder="street"
-          value={street}
-          onChange={handleStreetInput}
-        />
-        <label>City :</label>
-        <input
-          name="city"
-          type="text"
-          placeholder="city"
-          value={city}
-          onChange={handleCityInput}
-        />
-        <label>Country :</label>
-        <input
-          name="country"
-          type="text"
-          placeholder="country"
-          value={country}
-          onChange={handleCountryInput}
-        />
-        <button type="submit">Update your Profile</button>
-      </form>
-
-         
+          <label>Street :</label>
+          <input
+            name="street"
+            type="text"
+            placeholder="street"
+            value={street}
+            onChange={handleStreetInput}
+          />
+          <label>City :</label>
+          <input
+            name="city"
+            type="text"
+            placeholder="city"
+            value={city}
+            onChange={handleCityInput}
+          />
+          <label>Country :</label>
+          <input
+            name="country"
+            type="text"
+            placeholder="country"
+            value={country}
+            onChange={handleCountryInput}
+          />
+          <button type="submit">Update your Profile</button>
+        </form>
+      </div>
     </>
   );
 };
