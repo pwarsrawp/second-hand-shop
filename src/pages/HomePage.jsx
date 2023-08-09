@@ -94,8 +94,7 @@ function HomePage() {
                 </div>
               </Link>
             );
-          })}
-          <hr></hr>
+          })}          
         </div>
       </div>
       <Footer />

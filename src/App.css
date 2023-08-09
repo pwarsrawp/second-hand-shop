@@ -124,6 +124,7 @@ table {
   border-spacing: 0;
 }
 
+
 /* HOME PAGE */
 .logo {
   width: 100px;
@@ -195,6 +196,7 @@ table {
   font-size: 0.9rem;
 }
 
+
 /* LOGIN PAGE */
 .login-form h1 {
   text-align: center;
@@ -202,7 +204,6 @@ table {
   font-weight: 700;
   font-size: 1.5rem;
 }
-
 .login-form form {
   display: flex;
   flex-direction: column;
@@ -236,6 +237,7 @@ table {
 .login-form-bottom-text p {
   margin-bottom: 0.5rem;
 }
+
 
 /* SINGUP PAGE */
 .signup-form h1 {
@@ -278,10 +280,7 @@ table {
   margin-bottom: 0.5rem;
 }
 
-/* NEW PRODUCT PAGE */
-/* Style the dropdown container */
-
-/* Style the select element */
+/* UPLOAD PAGE */
 .upload-page-container select {
   border: 1px solid #ccc;
   border-radius: 15px;
@@ -292,7 +291,6 @@ table {
   margin: 0.5rem;
   text-align: center;
 }
-
 /* Style the dropdown arrow */
 .upload-page-container select::after {
   content: "\25BE"; /* Unicode character for the down arrow */
@@ -325,16 +323,51 @@ table {
   outline: none;
 }
 .upload-page-container textarea {
-    border-radius: 15px;
-    border: none;
-    padding: 1rem 0.3rem 0.5rem 2rem;
-    margin: 0.5rem;
-    height: 100px;
-    width: 250px;
-    background-color: #edf7fd;
-    outline: none;
-  }
+  border-radius: 15px;
+  border: none;
+  padding: 1rem 0.3rem 0.5rem 2rem;
+  margin: 0.5rem;
+  height: 100px;
+  width: 250px;
+  background-color: #edf7fd;
+  outline: none;
+}
 .upload-page-dropdown-container {
   display: inline-block;
   position: relative;
+}
+
+/* FOOTER */
+.footer-container {
+  background-color: #edf7fd;
+  padding: 1.5rem 1.5rem;
+}
+.footer-text-container {
+}
+.footer-text-container h3 {
+  font-weight: 500;
+}
+.footer-text-container p {
+  font-weight: 300;
+  font-style: italic;
+}
+.footer-text-item {
+  margin-bottom: 0.7rem;
+}
+.footer-contact-container {
+  margin: 1rem 0;
+}
+.footer-contact-container h3 {
+  font-weight: 600;
+}
+.footer-contact-container p {
+  font-weight: 300;
+}
+.footer-hours-container {
+}
+.footer-hours-container h3 {
+  font-weight: 600;
+}
+.footer-hours-container p {
+  font-weight: 300;
 }
