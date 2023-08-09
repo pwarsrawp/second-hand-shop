@@ -132,12 +132,17 @@ table {
   font-size: 2rem;
 }
 .nav-bar-top {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  background-color: #edf7fd;
+}
+.nav-bar-top-link-container {
+  padding: 1rem 2rem;
+  margin: auto auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
-  margin-bottom: 1.5rem;
-  background-color: #edf7fd;
+  max-width: 800px;
 }
 .body-container {
   display: flex;
@@ -146,7 +151,10 @@ table {
   justify-content: center;
 }
 .search-bar-container {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
 }
 .search-bar-container input {
   border-radius: 15px;
@@ -155,6 +163,7 @@ table {
   margin: 0.5rem;
   height: 30px;
   width: 80%;
+  max-width: 800px;
   background-color: #edf7fd;
   outline: none;
 }
@@ -169,7 +178,7 @@ table {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 98%;
+  max-width: 1200px;
   margin-top: 1rem;
 }
 .product-card {
@@ -434,19 +443,15 @@ table {
 /* FOOTER */
 .footer-container {
   background-color: #edf7fd;
-  padding: 1.5rem 1.5rem;
+  padding: 1.5rem 3rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
-.footer-text-container {
-}
-.footer-text-container h3 {
-  font-weight: 500;
-}
-.footer-text-container p {
-  font-weight: 300;
-  font-style: italic;
-}
-.footer-text-item {
-  margin-bottom: 0.7rem;
+.footer-links-container {
+  display: flex;
+  flex-direction: column;
 }
 .footer-contact-container {
   margin: 1rem 0;
@@ -455,49 +460,6 @@ table {
   font-weight: 600;
 }
 .footer-contact-container p {
-  font-weight: 300;
-}
-.footer-hours-container {
-}
-.footer-hours-container h3 {
-  font-weight: 600;
-}
-.footer-hours-container p {
-  font-weight: 300;
-}
-
-/* FOOTER */
-.footer-container {
-  background-color: #edf7fd;
-  padding: 1.5rem 1.5rem;
-}
-.footer-text-container {
-}
-.footer-text-container h3 {
-  font-weight: 500;
-}
-.footer-text-container p {
-  font-weight: 300;
-  font-style: italic;
-}
-.footer-text-item {
-  margin-bottom: 0.7rem;
-}
-.footer-contact-container {
-  margin: 1rem 0;
-}
-.footer-contact-container h3 {
-  font-weight: 600;
-}
-.footer-contact-container p {
-  font-weight: 300;
-}
-.footer-hours-container {
-}
-.footer-hours-container h3 {
-  font-weight: 600;
-}
-.footer-hours-container p {
   font-weight: 300;
 }
 
@@ -521,4 +483,13 @@ table {
   font-size: 2.8rem;
   font-weight: 600;
   margin: 30px;
+}
+
+@media (max-width: 600px) {
+  .footer-links-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: start;
+  }
 }

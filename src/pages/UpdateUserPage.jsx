@@ -26,8 +26,7 @@ const UpdateUserPage = () => {
     navigate(`/users/${parsed._id}`);
   };
   return (
-    <>
-      
+    <>      
       {user && <UserEditForm onSubmit={handleUpdateUser} user={user} />}
     </>
   );
