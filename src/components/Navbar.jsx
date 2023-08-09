@@ -14,23 +14,23 @@ function Navbar() {
     <nav className="nav-bar-top">
       <div className="nav-bar-top-link-container">
       <Link to={"/"}>
-        <PiHouseFill size={30} style={{ color: "#6BBAEC" }} />
+        <PiHouseFill size={30} style={{ color: "#1778b5" }} />
       </Link>
       {isLoggedIn && (
         <>
           <Link to={"/favorites"}>
-            <PiHeartFill size={30} style={{ color: "#6BBAEC" }} />
+            <PiHeartFill size={30} style={{ color: "#1778b5" }} />
           </Link>
           <Link to={"/upload"}>
-            <PiPlusCircleBold size={30} style={{ color: "#6BBAEC" }} />
+            <PiPlusCircleBold size={30} style={{ color: "#1778b5" }} />
           </Link>
           <Link to={"/purchases"}>
-            <PiHandshakeFill size={30} style={{ color: "#6BBAEC" }} />
+            <PiHandshakeFill size={30} style={{ color: "#1778b5" }} />
           </Link>
         </>
       )}
       <Link to={"/profile"}>
-        <PiUserFill size={30} style={{ color: "#6BBAEC" }} />
+        <PiUserFill size={30} style={{ color: "#1778b5" }} />
       </Link>
       </div>
     </nav>

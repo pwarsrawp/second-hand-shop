@@ -62,6 +62,7 @@ function HomePage() {
             <input
               name="query"
               value={query}
+              placeholder="What are you looking for today?"
               onChange={(event) => setQuery(event.target.value)}
             />          
         </div>
@@ -89,7 +90,7 @@ function HomePage() {
                     }`}
                     onClick={() => handleFavorite(product._id)}
                   >
-                    <AiOutlineHeart size={20} style={{ color: "#6BBAEC" }} />
+                    <AiOutlineHeart size={20} style={{ color: "#E27688" }} />
                   </button>
                 </div>
                 <div className="product-card-title-container">
