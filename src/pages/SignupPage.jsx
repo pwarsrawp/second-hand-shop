@@ -34,7 +34,7 @@ function SignupPage() {
       });
       navigate("/login");
     } catch (error) {
-      console.log(error);
+      console.log("Issue with the sign up: ", error);
     }
   };
 

@@ -7,7 +7,7 @@ import axios from "axios";
       const { data } = await axios.get(url);
       return data;
     } catch (error) {
-      console.log(error);
+      console.log("Could not fetch all data: ",error);
     }
   };
 
@@ -20,7 +20,7 @@ import axios from "axios";
       console.log("Could not fetch specific data: ", error);
     }
   };
-
+  
   /* PUT one */ 
   const updateOne = async (url, body) => {
     try {
@@ -29,7 +29,7 @@ import axios from "axios";
       console.log("Could not update specific entry: ", error);
     }
   };
-
+  
   /* POST one */ 
   const postOne = async (url, body) => {
     try {
@@ -40,10 +40,20 @@ import axios from "axios";
       throw error
     }
   };
+  
+  /* DELETE one */
+  const deleteOne = async (url) => {
+    try {
+      await axios.delete(url);
+    } catch (error) {
+      console.log("Could not fetch specific data: ", error);
+    }
+  };
 
   export {
     fetchAll,
     fetchOne,
     updateOne,
     postOne,
+    deleteOne
   }
