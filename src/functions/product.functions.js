@@ -29,7 +29,7 @@ const updateFavoriteList = async (productId, user) => {
 
         return newFavArray
     } catch (error) {
-        console.log(error);
+        console.log("Issue updating favorite list: ", error);
     }
 };
 
