@@ -1,9 +1,8 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchUser, sendUser } from "../utils/usersAPICalls";
+import { sendUser } from "../utils/usersAPICalls";
 import { AuthContext } from "../context/auth.context";
 
-// eslint-disable-next-line react/prop-types
 const UserEditForm = () => {
   const { user, setUserUpdate } = useContext(AuthContext);
 
@@ -32,7 +31,6 @@ const UserEditForm = () => {
     event.preventDefault();
 
     const handleUpdateUser = async () => {
-      console.log("we are here:");
       const UpdatedUser = {
         fullname: fullname,
         username: username,
