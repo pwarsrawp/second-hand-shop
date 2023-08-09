@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const api_url = import.meta.env.VITE_API_URL;
 
 
-function LogoutButton() {
+function Delete() {
   const { user, logout } = useContext(AuthContext)
   const navigate = useNavigate()
 
@@ -24,6 +24,6 @@ function LogoutButton() {
   );
 }
 
-export default LogoutButton;
+export default Delete;
 
 
