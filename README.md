@@ -182,6 +182,15 @@ Step into a world of unparalleled value and sustainability with 3rd Feet, your g
 
 **Purchase Model**
 
+```javascript
+{
+  seller: {type: Schema.Types.ObjectId, ref:"User"}
+  buyer: {type: Schema.Types.ObjectId, ref:"User"}
+  product: {type: Schema.Types.ObjectId, ref: 'Product'}
+  timestamps: true
+}
+```
+
 ## Links
 
 - [Trello Link](https://trello.com)
