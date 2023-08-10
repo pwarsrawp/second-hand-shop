@@ -34,6 +34,7 @@ const updateFavoriteList = async (productId, user) => {
 };
 
 
+
 export {
     filterProducts,
     updateFavoriteList
