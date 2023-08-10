@@ -7,6 +7,7 @@ import { AuthContext } from "../context/auth.context";
 import { useParams, Link } from "react-router-dom";
 import { PiHeart } from "react-icons/pi";
 import { PiHeartFill } from "react-icons/pi";
+import { updateFavoriteList } from "../functions/product.functions";
 
 const api_url = import.meta.env.VITE_API_URL;
 
@@ -14,7 +15,7 @@ const ProductDetailPage = () => {
   const [product, setProduct] = useState(null);
   const [seller, setSeller] = useState(null);
   const { productId } = useParams();
-  const { user } = useContext(AuthContext);
+  const { user, setUserUpdate } = useContext(AuthContext);
 
   useEffect(() => {
     const getOneProduct = async () => {
@@ -44,6 +45,15 @@ const ProductDetailPage = () => {
     getSeller();
   }, [product]);
 
+  const handleFavorite = async (productId) => {
+    try {
+      const newFavorites = await updateFavoriteList(productId, user);
+      setUserUpdate(true);
+    } catch (error) {
+      console.log("Issue updating favorites: ", error);
+    }
+  };
+
   return !product || !seller ? (
     <>
       <Navbar />
@@ -61,10 +71,21 @@ const ProductDetailPage = () => {
         </div>
         <div className="product-details-price-favorite-line">
           <h2 className="product-details-price">{product.price} EUR</h2>
-          {user.favorites.includes(productId) ? (
-          <PiHeartFill size={45} style={{ color: "#E27688" }} />
+          {user ? (
+            user.favorites.includes(productId) ? (
+              <button onClick={() => handleFavorite(product._id)}>
+                <PiHeartFill size={45} style={{ color: "#E27688" }} />
+              </button>
+            ) : (
+              <button onClick={() => handleFavorite(product._id)}>
+                <PiHeart size={45} style={{ color: "#E27688" }} />
+              </button>
+            )
           ) : (
-          <PiHeart size={45} style={{ color: "#E27688" }} />)}
+            <Link to={"/login"}>
+              <PiHeart size={45} style={{ color: "#E27688" }} />
+            </Link>
+          )}
         </div>
         <h2 className="product-details-title">{product.title}</h2>
         <h2 className="product-details-item-condition">

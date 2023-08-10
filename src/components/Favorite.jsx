@@ -53,10 +53,7 @@ function Favorite() {
               </div>
               <div className="favorite-product-price">
                 <h2>{product.price} €</h2>
-                <button
-                  className={`heart-btn active`}
-                  onClick={() => handleFavorite(product._id)}
-                >
+                <button onClick={() => handleFavorite(product._id)}>
                   <PiHeartFill size={25} style={{ color: "#E27688" }} />
                 </button>
               </div>
