@@ -149,22 +149,37 @@ Step into a world of unparalleled value and sustainability with 3rd Feet, your g
 ## Models
 
 **User Model**
-**Product Model**
+
 ```javascript
-{  
-  title: {type: String,trim: true,required: true}  
-  description: {type: String,trim: true,required: true}  
-  category: {type: String,trim: true,required: true, enum: ["Arts and Crafts","Musical Instruments","Literature", "Bycicles", "Fashion and Accesories", "Electronics", "Automotive", "Miscellaneous"]}  
-  price: {type: Number,min: 0,trim: true,required: true}  
-  item_condition: {type: String,enum: ["available", "new", "as good as new", "good", "fair", "has given it all"]}  
-  imageUrl: {type: String,default: String}  
-  state: {type: String,enum: ["available", "reserved", "sold"]}  
-  sold: {type: Boolean}  
-  wishlist: {type: Boolean}  
-  seller: {type: Schema.Types.ObjectId,ref:"User"}  
-  timestamps: true  
+{
+  username: { type: String, required: true, trim: true}
+  fullname: {type: String, required: true}
+  email: {type: String, required: true, trim: true}
+  phone: {type: String, required: true}
+  address: {street: {type: String, required: true}, city: {type: String, required: true}, country: {type: String, required: true}}
+  password: {type: String, required: true}
+  favorites: {type: Array, default: []}
 }
 ```
+
+**Product Model**
+
+```javascript
+{
+  title: {type: String,trim: true,required: true}
+  description: {type: String,trim: true,required: true}
+  category: {type: String,trim: true,required: true, enum: ["Arts and Crafts","Musical Instruments","Literature", "Bycicles", "Fashion and Accesories", "Electronics", "Automotive", "Miscellaneous"]}
+  price: {type: Number,min: 0,trim: true,required: true}
+  item_condition: {type: String,enum: ["available", "new", "as good as new", "good", "fair", "has given it all"]}
+  imageUrl: {type: String,default: String}
+  state: {type: String,enum: ["available", "reserved", "sold"]}
+  sold: {type: Boolean}
+  wishlist: {type: Boolean}
+  seller: {type: Schema.Types.ObjectId,ref:"User"}
+  timestamps: true
+}
+```
+
 **Purchase Model**
 
 ## Links
