@@ -95,10 +95,11 @@ Step into a world of unparalleled value and sustainability with 3rd Feet, your g
 | `/`                       | HomePage                       | public `<Route>`            | Home page, display all products, search-bar                   |
 | `/signup`                 | SignupPage                     | public `<Route>`            | Signup form, link to login, navigate to homepage after signup |
 | `/login`                  | LoginPage                      | public `<Route>`            | Login form, link to signup, navigate to homepage after login  |
-| `/product`                | ProductDetailPage              | public `<Route>`            | Display product details, add to favorites, buy                |
+| `/products/:productId`    | ProductDetailPage              | public `<Route>`            | Display product details, add to favorites, request to purchase          |
 | `/profile`                | ProfilePage, Logout, Delete    | user only `<PrivateRoute>`  | Display profile data, logout button, delete account button    |
 | `/editProfile`            | UpdateUserPage, UserEditForm   | user only `<PrivateRoute>`  | Display profile data, change data or password                 |
-| `/purchases`              | PurchaseDetailPage             | user only `<PrivateRoute>`  | Shows all purchases: Sold items, bought items                 |
+| `/purchases`              | Purchasepage            | user only `<PrivateRoute>`  | Shows all purchases: Completed / Pending / Cancelled purchases                 |
+| `/purchases/:purchaseId/:productId`   | PurchaseDetailPage     | user only `<PrivateRoute>`  | Shows single purchase details, if seller: add. buttons to confirm or decline a purchase    |
 | `/favorites`              | FavouritesPage, Favorite       | user only  `<PrivateRoute>` | Display all prducts marked favorite by the user               |
 | `/upload`                 | UploadPage                     | user only `<PrivateRoute>`  | Add new product with description and picture                  |
 | `*`                       | Error Page                     | public  `<Route>`           | Error Page with return-home button                            |
@@ -113,15 +114,13 @@ Step into a world of unparalleled value and sustainability with 3rd Feet, your g
 | POST        | `/auth/login`                 | {email, password}         | 202            | 403          | Checks if user exists and if password matches, then sign jwt    |
 | GET        | `/users`                | (empty)                      |             |           | Fetch all user data                                           |
 | GET        | `/users/:userid`                 | userid  |                |           | Fetch particular user data                                               |
-| PUT         | `/users/:userid`             |       userid                       |                | 400          | Show series elements                                           |
-| GET         | `/backlog/films`              |                              |                |              | Show film elements                                           |
-| GET         | `/backlog/games`              |                              |                |              | Show games elements                                          |
-| GET         | `/media/:id`                        |                              | 201            | 400          | Show specific element                                        |
-| PUT         | `/media/:id`                 |                              | 200            | 400          | edit element                                                 |
-| DELETE      | `/media/:id`                 |                              | 201            | 400          | delete element                                               |
-| GET         | `/done/series`                |                              |                | 400          | Show series elements                                         |
-| GET         | `/done/films`                 |                              |                |              | Show film elements                                           |
-| GET         | `/done/games`                 |                              |                |              | Show games elements                                          |
+| PUT         | `/users/:userid`             |  {fullname, username, email, phone, address password}   |       202         | 400          | Update user profile / data / password elements                                           |
+| DELETE         | `/users/:userid`         |                              |      202          |              | Delete user account, clear localhost |
+| GET         | `/purchases`              |                              |                |              | Fetch all purchases |
+| GET         | `/purchases/:purchaseId`   |                         | 201            |           | Fetch particular purchase |
+| POST         | `/purchases`                 |    {productId, sellerId, buyerId}   | 201            |           | Create new purchase element                                                 |
+| PUT      | `/purchases/:purchaseId`                 |                              | 201            |           |  Update purchase state |
+| DELETE         | `purchases/:purchaseId`                |                              |   202             |           | Delete purchase request  elements                                         |
 
 
 
