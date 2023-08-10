@@ -8,7 +8,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { PiHeart } from "react-icons/pi";
 import { PiHeartFill } from "react-icons/pi";
 import { updateFavoriteList } from "../functions/product.functions";
-import { postOne } from "../functions/api.calls";
+import { postOne, updateOne } from "../functions/api.calls";
 
 const api_url = import.meta.env.VITE_API_URL;
 
@@ -17,7 +17,7 @@ const ProductDetailPage = () => {
   const [seller, setSeller] = useState(null);
   const [newPurchaseId, setNewPurchaseId] = useState(null);
   const { productId } = useParams();
-  const { user, setUserUpdate } = useContext(AuthContext);
+  const { user, setUserUpdate, isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -58,19 +58,36 @@ const ProductDetailPage = () => {
   };
 
   const handlePurchaseRequest = async () => {
-    if( seller && user && product){
+    /* Check Product Availability */
+    if(!isLoggedIn){
+      navigate("/login")
+    }
+
+    console.log("product state: ", product.state)
+    if( seller && user && product && product.state === "available"){
       try {
+        /* Create new Purchase Request */
         const {data} = await postOne( `${api_url}/purchases`, { seller: seller._id, buyer: user._id, product: product._id, state: "pending"})
         setNewPurchaseId(data._id)
+
+        /* Product State Update */
+        await updateOne( `${api_url}/products/${product._id}`, {state: "reserved"})
+
         if(newPurchaseId){
           navigate(`/purchases/${data._id}/${product._id}`)
         }
+     
       } catch (error) {
         console.log("Error updating purchase/product data: ", error)
       }
     }
+    
+    /* User Feedback */
+    if(product.state){
+      navigate(`/products/${product._id}/${product.state}`)
+    }
 }
-// console.log("seller", seller, "product", product, "user", user)
+
 
   return !product || !seller ? (
     <>

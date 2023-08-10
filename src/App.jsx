@@ -13,6 +13,7 @@ import "./App.css";
 import UserEditForm from "./components/UserEditForm";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import PurchasePage from "./pages/PurchasePage";
+import UnavailablePage from "./pages/UnavailablePage";
 
 function App() {
   return (
@@ -46,6 +47,14 @@ function App() {
           element={
             <IsPrivate>
               <PurchasePage />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/products/:productId/:productState"
+          element={
+            <IsPrivate>
+              <UnavailablePage />
             </IsPrivate>
           }
         />
