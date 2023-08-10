@@ -24,7 +24,7 @@ function Navbar() {
           <Link to={"/upload"}>
             <PiPlusCircleBold size={30} style={{ color: "#1778b5" }} />
           </Link>
-          <Link to={"/purchase"}>
+          <Link to={"/purchases"}>
             <PiHandshakeFill size={30} style={{ color: "#1778b5" }} />
           </Link>
         </>
