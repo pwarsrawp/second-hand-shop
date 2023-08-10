@@ -70,10 +70,12 @@ function PurchasePage() {
     const fetchBuyer = async () => {
       if (purchase) {
 
+
         try {
           // Fetch buyer information
           const buyerResponse = await axios.get(
             `${api_url}/users/${purchase.buyer}`
+
             );
           setBuyer(buyerResponse.data);
         } catch (error) {
@@ -86,6 +88,7 @@ function PurchasePage() {
   
 
   const handleConfirmation = async () => {
+
       try {
         await updateOne( `${api_url}/purchases/${purchaseId}`, { state : "completed"})
         await updateOne( `${api_url}/products/${productId}`, { state : "sold", sold : true})
@@ -114,31 +117,36 @@ function PurchasePage() {
       <Navbar />
       <h2>Purchase Page</h2>
       <img src={product.imageUrl} alt={product.name} />
+
         <h3>{product.title}</h3>
         <p>€ {product.price}</p>
         <p>{product.condition}</p>
 
-          {user._id === product.seller ? (
-            <>
+        {user._id === product.seller ? (
+          <>
             <p>Buyer: {buyer.fullname}</p>
+
             <button onClick={() => handleConfirmation()}>Confirm Purchase</button>
+
             <button onClick={() => handleCancel()}>Decline Purchase</button>
           </>
-          ) : (
+        ) : (
           <>
             <p>Seller: {seller.fullname}</p>
           </>
+
           )}
           <p>{product.description}</p>
     </div>
         ) : (
           <ErrorPage />
   )
+
   ) : (
     <div className="loading-spinner-container">
       <div className="loading-spinner"></div>
     </div>
-  )
+  );
 }
 
 export default PurchasePage;

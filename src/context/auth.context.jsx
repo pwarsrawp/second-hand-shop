@@ -53,24 +53,20 @@ function AuthContextWrapper({ children }) {
     userAuthentication();
   }, []);
 
-
   useEffect(() => {
-    if(userUpdate){
-      
-      const fetchUser = async() => {
+    if (userUpdate) {
+      const fetchUser = async () => {
         try {
-          const response = await fetchOne(`${api_url}/users/${user._id}`)
-          setUser(response)
-          setUserUpdate(false)
+          const response = await fetchOne(`${api_url}/users/${user._id}`);
+          setUser(response);
+          setUserUpdate(false);
         } catch (error) {
-          console.log("error updating user: ", error)
+          console.log("error updating user: ", error);
         }
-      }
-      fetchUser()
-    } 
-  }, [userUpdate])
-
-
+      };
+      fetchUser();
+    }
+  }, [userUpdate]);
 
   return (
     <AuthContext.Provider
