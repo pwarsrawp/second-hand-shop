@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import { postOne, updateOne } from "../functions/api.calls";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/auth.context";
+import Navbar  from "../components/Navbar";
 import axios from "axios";
+
 const api_url = import.meta.env.VITE_API_URL;
+
 
 function PurchasePage() {
   const [product, setProduct] = useState(null);
-  const [seller, setSeller] = useState("");
-  const [buyer, setBuyer] = useState("");
+  const [seller, setSeller] = useState(null);
+  const [buyer, setBuyer] = useState(null);
+  const { user } = useContext(AuthContext);
   const [sold, setSold] = useState("");
-  const [user] = useState("");
 
   const navigate = useNavigate();
   const { productId } = useParams();
@@ -18,9 +21,7 @@ function PurchasePage() {
   useEffect(() => {
     const getOneProduct = async () => {
       try {
-        const response = await axios.get(
-          `${api_url}/products/${productId}`
-        );
+        const response = await axios.get( `${api_url}/products/${productId}` );
         setProduct(response.data);
         console.log(response.data);
       } catch (error) {
@@ -29,6 +30,31 @@ function PurchasePage() {
     };
     getOneProduct();
   }, [productId]);
+
+  useEffect(() => {
+    const fetchSeller = async () => {
+      try {
+      
+      // Fetch seller's information using the product's seller ObjectId
+      const sellerResponse = await axios.get(`${api_url}/users/${product.seller}`);
+      if (user._id === product.seller) {
+        setSeller(sellerResponse.data);
+        
+      } else {
+        setBuyer(sellerResponse.data);
+       
+      }  
+      
+        console.log("seller",seller)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchSeller();
+  }, [productId]);
+
+
 
   const handlePurchase = async (e) => {
     e.preventDefault();
@@ -49,7 +75,6 @@ function PurchasePage() {
           seller: product.seller,
           buyer: user._id,
           product: product._id,
-          sold: false, // This may depend on your business logic
         });
         navigate("/profile");
       } catch (error) {
@@ -62,6 +87,8 @@ function PurchasePage() {
 
 
 console.log(product)
+console.log(buyer)
+console.log(seller)
   return product === null ? (
     <div className="loading-spinner-container">
       <div className="loading-spinner"></div>
@@ -70,7 +97,7 @@ console.log(product)
 
     <div className="signup-form">
       <Navbar />
-      <h2>Product Purchase Page</h2>
+      <h2>Purchase Page</h2>
       <img src={product.imageUrl} alt={product.name} />
       <form onSubmit={handlePurchase}>
         <h3>{product.title}</h3>
@@ -79,10 +106,17 @@ console.log(product)
 
       
         {user._id === product.seller ? (
-
-          <button type="submit">Confirm Sell</button>
+          <>
+            <p>Buyer: {user.fullname}</p>
+            <button type="submit">Confirm Purchase</button>
+           
+          </>
           ) : (
-          <button type="submit">Confirm Purchase</button>
+            <>  
+            <p>Seller: {user.fullname}</p>
+            <button type="submit">Confirm Sell</button>
+           
+          </>
         )}
       </form>
     </div>
