@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { postOne, updateOne } from "../functions/api.calls";
+import { deleteOne, postOne, updateOne } from "../functions/api.calls";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import Navbar from "../components/Navbar";
@@ -67,21 +67,14 @@ function PurchasePage() {
   }, [seller]);
 
   useEffect(() => {
-    console.log("purchase: ", purchase);
     const fetchBuyer = async () => {
       if (purchase) {
-        console.log(
-          "let's get the buyer's data with the buyers id : ",
-          purchase.buyer
-        );
+
         try {
           // Fetch buyer information
           const buyerResponse = await axios.get(
             `${api_url}/users/${purchase.buyer}`
             );
-            console.log('user._id: ', user._id)
-            console.log('product.seller: ', product.seller);
-            console.log('product.buyer : ', purchase.buyer );
           setBuyer(buyerResponse.data);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -90,33 +83,30 @@ function PurchasePage() {
     };
     fetchBuyer();
   }, [purchase]);
-
-  console.log(buyer);
-  const handlePurchase = async (e) => {
-    e.preventDefault();
-
-    if (user._id === product.seller) {
-      try {
-        await updateOne(`/products/${product._id}`, { sold: true });
-        navigate("/profile");
-      } catch (error) {
-        console.error("Error updating product:", error);
-      }
-    } else {
-      // Handle buyer action (e.g., create purchase record)
-      try {
-        await postOne("/purchases", {
-          seller: product.seller,
-          buyer: user._id,
-          product: product._id,
-        });
-        navigate("/profile");
-      } catch (error) {
-        console.error("Error creating purchase:", error);
-      }
-    }
-  };
   
+
+  const handleConfirmation = async () => {
+      try {
+        await updateOne( `${api_url}/purchases/${purchaseId}`, { state : "completed"})
+        await updateOne( `${api_url}/products/${productId}`, { state : "sold", sold : true})
+      } catch (error) {
+        console.log("Error updating purchase/product data: ", error)
+      }
+  }
+  const handleCancel = async () => {
+      try {
+        await updateOne( `${api_url}/purchases/${purchaseId}`, { state : "cancelled"})
+        await updateOne( `${api_url}/products/${productId}`, { state : "available", sold : false})
+
+        if(window.confirm("Do you want to delete this purchase request?")){
+          await deleteOne(`${api_url}/purchases/${purchaseId}`) 
+          navigate("/purchase")
+        }
+
+      } catch (error) {
+        console.log("Error updating purchase/product data on cancellation: ", error)
+      }
+  }
 
   return product && buyer && seller ? (
         user._id === product.seller || user._id === purchase.buyer  ? (
@@ -124,22 +114,22 @@ function PurchasePage() {
       <Navbar />
       <h2>Purchase Page</h2>
       <img src={product.imageUrl} alt={product.name} />
-      <form onSubmit={handlePurchase}>
         <h3>{product.title}</h3>
         <p>€ {product.price}</p>
+        <p>{product.condition}</p>
 
           {user._id === product.seller ? (
             <>
             <p>Buyer: {buyer.fullname}</p>
-            <button type="submit">Confirm Purchase</button>
+            <button onClick={() => handleConfirmation()}>Confirm Purchase</button>
+            <button onClick={() => handleCancel()}>Decline Purchase</button>
           </>
           ) : (
           <>
             <p>Seller: {seller.fullname}</p>
-            <button type="submit">Confirm Sell</button>
           </>
           )}
-      </form>
+          <p>{product.description}</p>
     </div>
         ) : (
           <ErrorPage />
