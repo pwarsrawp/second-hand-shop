@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import Spinner from "../components/Spinner";
 import { useParams, Link } from "react-router-dom";
 import { PiHandshakeFill } from "react-icons/pi";
@@ -38,22 +39,12 @@ const ProductDetailPage = () => {
         <div className="product-details-image-container">
           <img src={product.imageUrl} alt={product.name} />
         </div>
-        <div className="product-details-first-line">
-          <h2>{product.price} €</h2>
-          <p>({product.category})</p>
-        </div>
-        <div className="product-details-second-line">
-          <h2>{product.title}</h2>
-        </div>
-        <div className="product-details-third-line">
-          <p>{product.description}</p>
-        </div>
-        <div className="product-details-fourth-line">
-          <p>
-            <span>Condition: </span>
-            {product.item_condition}
-          </p>
-        </div>
+        <h2 className="product-details-price">{product.price} EUR</h2>
+        <h2 className="product-details-title">{product.title}</h2>
+        <h2 className="product-details-item-condition">{product.item_condition}</h2>
+        <h2 className="product-details-category">{product.category}</h2>
+        <hr className="product-details-divider"/>
+        <p className="product-details-description">{product.description}</p>        
         {/* <p>{product.state}</p>
         <p>{product.seller}</p> */}
         <div className="product-details-button-container">
@@ -64,6 +55,7 @@ const ProductDetailPage = () => {
           <PiHandshakeFill size={30} style={{ color: "#1778b5" }} />
         </Link>
       </div>
+      <Footer />
     </>
   );
 };
