@@ -114,13 +114,18 @@ Step into a world of unparalleled value and sustainability with 3rd Feet, your g
 | POST        | `/auth/login`                 | {email, password}         | 202            | 403          | Checks if user exists and if password matches, then sign jwt    |
 | GET        | `/users`                | (empty)                      |             |           | Fetch all user data                                           |
 | GET        | `/users/:userid`                 | userid  |                |           | Fetch particular user data                                               |
-| PUT         | `/users/:userid`             |  {fullname, username, email, phone, address password}   |       202         | 400          | Update user profile / data / password elements                                           |
+| PUT         | `/users/:userid`             |  {fullname, username, email, phone, address password}   |       202         | 400          | Update user profile / data / password                         |
 | DELETE         | `/users/:userid`         |                              |      202          |              | Delete user account, clear localhost |
 | GET         | `/purchases`              |                              |                |              | Fetch all purchases |
 | GET         | `/purchases/:purchaseId`   |                         | 201            |           | Fetch particular purchase |
-| POST         | `/purchases`                 |    {productId, sellerId, buyerId}   | 201            |           | Create new purchase element                                                 |
+| POST         | `/purchases`                 |    {productId, sellerId, buyerId}   | 201            |           | Create new purchase              |
 | PUT      | `/purchases/:purchaseId`                 |                              | 201            |           |  Update purchase state |
-| DELETE         | `purchases/:purchaseId`                |                              |   202             |           | Delete purchase request  elements                                         |
+| DELETE         | `purchases/:purchaseId`                |                              |   202             |           | Delete purchase request            |
+| GET         | `/products`              |                              |                |              | Fetch all products |
+| GET         | `/products/:productId`   |                         | 201            |           | Fetch particular product |
+| POST         | `/products`                 |    {title, price, description, condition, category, image}   | 201            |  500         | Create new product and save image to cloudinary  |
+| PUT      | `/products/:productId`                 |                              |          |           |  Update product, product state or mark as sold |
+| DELETE         | `products/:productId`                |                              |   202             |           | Delete product            |
 
 
 
