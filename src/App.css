@@ -127,6 +127,7 @@ table {
   --clr-primary-600: #1778b5;
   --clr-primary-400: #6bbaec;
   --clr-primary-200: #edf7fd;
+  --clr-grey: #d6d6d6;
   --clr-allgood: #9bc53d;
   --clr-error: #c3423f;
   --clr-liked: #e27688;
@@ -383,13 +384,16 @@ table {
 
 /* PRODUCT DETAILS PAGE */
 .product-details-container {
-  width: 400px;
-  margin: 0 auto;
+  width: 600px;
+  margin: 3rem auto 3rem auto;
+  background-color: var(--clr-primary-200);
+  padding: 2rem;
+  border-radius: 15px;
 
 }
 .product-details-image-container {
-  width: 400px;
-  height: 400px;
+  width: 600px;
+  height: 480px;
   margin-bottom: 1.5rem;
 }
 .product-details-image-container img {
@@ -398,42 +402,31 @@ table {
   object-fit: cover;
   border-radius: 14px;
 }
-.product-details-first-line {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.product-details-price {
   margin-bottom: 1rem;
-}
-.product-details-first-line h2 {
-  font-size: 1.5rem;
-  font-weight: 800;
-}
-.product-details-first-line p {
-  font-size: 1rem;
-  font-style: italic;
+  font-size: 2rem;
   font-weight: 600;
 }
-.product-details-second-line {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.product-details-title {
+  margin-bottom: 1.3rem;
+  font-size: 2rem;
+}
+.product-details-item-condition {
+  margin-bottom: 1.3rem;
+  font-size: 0.9rem;
+}
+.product-details-category {
   margin-bottom: 1rem;
+  background-color: var(--clr-grey);
+  display: inline-block;
+  border-radius: 15px;
+  padding: 0.5rem 1.5rem;
 }
-.product-details-second-line h2 {
-  font-size: 1.2rem;
+.product-details-divider {
+  margin-bottom: 1.2rem;
 }
-.product-details-third-line {
-  margin-bottom: 1rem;
-}
-.product-details-third-line p {
-  font-size: 1rem;
-}
-.product-details-fourth-line p {
-  font-size: 1rem;
-}
-.product-details-fourth-line span {
-  font-size: 1rem;
-  font-weight: 600;
+.product-details-description {
+  margin-bottom: 1.3rem;
 }
 .product-details-button-container {
   display: flex;
@@ -443,10 +436,9 @@ table {
 }
 .product-details-button-container button {
   border-radius: 15px;
-  border: none;
+  border: 1px solid var(--clr-primary-400);
   height: 30px;
   width: 100px;
-  background-color: var(--clr-primary-400);
   margin-top: 1rem;
   font-weight: 600;
   font-size: 0.9rem;
@@ -608,6 +600,10 @@ table {
   font-weight: 600;
   font-size: 0.9rem;
 }
+.success-message {
+  text-align: center;
+  color: var(--clr-allgood);
+}
 
 /* FOOTER */
 .footer-container {
@@ -617,6 +613,7 @@ table {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  
 }
 .footer-links-container {
   display: flex;

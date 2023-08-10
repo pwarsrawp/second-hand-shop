@@ -134,13 +134,13 @@ function UploadPage() {
             />            
           </div>
           <div>
-              <button className="btn-green">
+              <button>
                 {loading ? "posting..." : "Post"}
               </button>
             </div>
         </form>
         {uploadDone ? (
-          <p>Upload done!</p>
+          <p className="success-message">Upload done!</p>
         ) : (
           <code>
             {Object.keys(res).length > 0
