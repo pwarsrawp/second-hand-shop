@@ -1,12 +1,11 @@
 import Navbar from "../components/Navbar";
 import { useState } from "react";
-import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { postOne } from "../functions/api.calls";
 
 function UploadPage() {
-  const [file, setFile] = useState(null);
+  const [file] = useState(null);
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState({});
   const [title, setTitle] = useState("");
@@ -71,7 +70,7 @@ function UploadPage() {
           <label>
             Price:{" "}
             <span style={{ fontStyle: "italic", fontSize: "0.7rem" }}>
-              (Don't go too crazy)
+              (Don&apos;t go too crazy)
             </span>
           </label>
           <input
