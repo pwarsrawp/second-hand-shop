@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer"
 import Favorite from "../components/Favorite";
 
 function FavouritesPage() {
@@ -6,6 +7,7 @@ function FavouritesPage() {
     <>
       <Navbar />
       <Favorite />
+      <Footer/>
     </>
   );
 }

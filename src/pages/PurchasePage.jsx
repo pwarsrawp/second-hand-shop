@@ -48,82 +48,91 @@ function PurchasePage() {
       allPurchases.length > 0 &&
       allProducts.length > 0
     ) {
-      setAllCompleted(sortPurchases(allPurchases, user, allProducts, "completed"));
+      setAllCompleted(
+        sortPurchases(allPurchases, user, allProducts, "completed")
+      );
       setAllPending(sortPurchases(allPurchases, user, allProducts, "pending"));
-      setAllCancelled(sortPurchases(allPurchases, user, allProducts, "cancelled"));
+      setAllCancelled(
+        sortPurchases(allPurchases, user, allProducts, "cancelled")
+      );
       setAllFetched(true);
     }
   }, [allPurchases, allProducts, user]);
 
   return allFetched ? (
     <>
-    <Navbar />
-    <div>
-      <h1>Sales & Purchases</h1>
+      <Navbar />
+      <div className="purchases-main-container">
+        <h1 className="purchases-title-h1">Sales & Purchases</h1>
+        <div className="purchases-container">
+          <h2>Completed</h2>
+          {completed.length > 0 ? (
+            completed.map((purchaseArray, index) => (
+              <div key={index}>
+                {purchaseArray.map((purchase) => (
+                  <div key={purchase._id} className="purchase-card">
+                    <Link
+                      to={`/purchases/${purchase.purchaseId}/${purchase._id}`}
+                    >
+                      <h5>{purchase.title}</h5>
+                    </Link>
+                    <h5>{purchase.price}$</h5>
+                    <h5>{purchase.state}</h5>
+                  </div>
+                ))}
+              </div>
+            ))
+          ) : (
+            <p>No pending purchases to show</p>
+          )}
+        </div>
 
-      <div>
-      <h2>Completed</h2>
-      {completed.length > 0 ? (
-    completed.map((purchaseArray, index) => (
-      <div key={index}>
-        {purchaseArray.map((purchase) => (
-          <div key={purchase._id}>
-            <Link to={`/purchase/${purchase.purchaseId}/${purchase._id}`}>
-            <h5>{purchase.title}</h5>
-            </Link>
-            <h5>{purchase.price}$</h5>
-            <h5>{purchase.state}</h5>
-          </div>
-        ))}
-      </div>
-    ))
-  ) : (
-    <p>No pending purchases to show</p>
-  )}
-    </div>
+        <div className="purchases-container">
+          <h2>Pending</h2>
+          {pending.length > 0 ? (
+            pending.map((purchaseArray, index) => (
+              <div key={index}>
+                {purchaseArray.map((purchase) => (
+                  <div key={purchase._id} className="purchase-card">
+                    <Link
+                      to={`/purchases/${purchase.purchaseId}/${purchase._id}`}
+                    >
+                      <h5>{purchase.title}</h5>
+                    </Link>
+                    <h5>{purchase.price}$</h5>
+                    <h5>{purchase.state}</h5>
+                  </div>
+                ))}
+              </div>
+            ))
+          ) : (
+            <p>No pending purchases to show</p>
+          )}
+        </div>
 
-    <div>
-      <h2>Pending</h2>
-      {pending.length > 0 ? (
-    pending.map((purchaseArray, index) => (
-      <div key={index}>
-        {purchaseArray.map((purchase) => (
-          <div key={purchase._id}>
-            <Link to={`/purchase/${purchase.purchaseId}/${purchase._id}`}>
-            <h5>{purchase.title}</h5>
-            </Link>
-            <h5>{purchase.price}$</h5>
-            <h5>{purchase.state}</h5>
-          </div>
-        ))}
+        <div className="purchases-container">
+          <h2>Cancelled</h2>
+          {cancelled.length > 0 ? (
+            cancelled.map((purchaseArray, index) => (
+              <div key={index}>
+                {purchaseArray.map((purchase) => (
+                  <div key={purchase._id} className="purchase-card">
+                    <Link
+                      to={`/purchases/${purchase.purchaseId}/${purchase._id}`}
+                    >
+                      <h5>{purchase.title}</h5>
+                    </Link>
+                    <h5>{purchase.price}$</h5>
+                    <h5>{purchase.state}</h5>
+                  </div>
+                ))}
+              </div>
+            ))
+          ) : (
+            <p>No pending purchases to show</p>
+          )}
+        </div>
       </div>
-    ))
-  ) : (
-    <p>No pending purchases to show</p>
-  )}
-    </div>
-
-    <div>
-      <h2>Cancelled</h2>
-      {cancelled.length > 0 ? (
-    cancelled.map((purchaseArray, index) => (
-      <div key={index}>
-        {purchaseArray.map((purchase) => (
-          <div key={purchase._id}>
-            <Link to={`/purchase/${purchase.purchaseId}/${purchase._id}`}>
-            <h5>{purchase.title}</h5>
-            </Link>
-            <h5>{purchase.price}$</h5>
-            <h5>{purchase.state}</h5>
-          </div>
-        ))}
-      </div>
-    ))
-  ) : (
-    <p>No pending purchases to show</p>
-  )}
-    </div>
-    </div>
     </>
   ) : (
     <>

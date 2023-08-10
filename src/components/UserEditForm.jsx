@@ -142,7 +142,7 @@ const UserEditForm = () => {
           onChange={handleCountryInput}
           required
         />
-        <button type="submit">Update your Profile</button>
+        <button type="submit">Submit</button>
       </form>
       </div>
 

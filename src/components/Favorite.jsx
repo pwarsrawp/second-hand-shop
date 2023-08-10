@@ -41,35 +41,36 @@ function Favorite() {
   };
 
   return allProducts ? (
-    <div className="favorites-container">
-      <h1>Wishlist</h1>
-      {allProducts
-        .filter((product) => favoriteProductIds.includes(product._id))
-        .map((product) => {
-          return (
-            <div key={product._id} className="favorite-product-container">
-              <div className="favorite-product-image-container">
-                <img src={product.imageUrl} alt={product.title} />
+    <>
+      <h1 className="favorites-container-title">Wishlist</h1>
+      <div className="favorites-container">
+        {allProducts
+          .filter((product) => favoriteProductIds.includes(product._id))
+          .map((product) => {
+            return (
+              <div key={product._id} className="favorite-product-container">
+                <div className="favorite-product-image-container">
+                  <img src={product.imageUrl} alt={product.title} />
+                </div>
+                <div className="favorite-product-price">
+                  <h2>{product.price} €</h2>
+                  <button onClick={() => handleFavorite(product._id)}>
+                    <PiHeartFill size={25} style={{ color: "#E27688" }} />
+                  </button>
+                </div>
+                <h3>{product.title}</h3>
               </div>
-              <div className="favorite-product-price">
-                <h2>{product.price} €</h2>
-                <button onClick={() => handleFavorite(product._id)}>
-                  <PiHeartFill size={25} style={{ color: "#E27688" }} />
-                </button>
-              </div>
-              <h3>{product.title}</h3>
-              <p>{product.description}</p>
-            </div>
-          );
-        })}
-    </div>
+            );
+          })}
+      </div>
+    </>
   ) : (
     <>
       <Navbar />
       <div className="loading-spinner-container">
         <h1>Bare with me...</h1>
         <Spinner />
-      </div>      
+      </div>
     </>
   );
 }
