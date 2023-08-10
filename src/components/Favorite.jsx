@@ -67,7 +67,13 @@ function Favorite() {
         })}
     </div>
   ) : (
-    <h1>Loading...</h1>
+    <>
+      <Navbar />
+      <div className="loading-spinner-container">
+        <h1>Bare with me...</h1>
+        <Spinner />
+      </div>      
+    </>
   );
 }
 

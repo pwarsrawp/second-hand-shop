@@ -127,15 +127,14 @@ table {
   --clr-primary-600: #1778b5;
   --clr-primary-400: #6bbaec;
   --clr-primary-200: #edf7fd;
+  --clr-allgood: #9bc53d;
+  --clr-error: #c3423f;
   --clr-liked: #e27688;
 }
 
 /* HOME PAGE */
 .logo {
   width: 100px;
-}
-.loading-h1 {
-  font-size: 2rem;
 }
 .nav-bar-top {
   width: 100%;
@@ -317,22 +316,28 @@ table {
 .profile-page-container p {
   margin-bottom: 1rem;
 }
-.profile-page-container button {
+.profile-page-container-button {
   border-radius: 15px;
   border: none;
-  height: 35px;
-  width: 35px;
+  padding: 0.6rem 1.1rem;
   background-color: var(--clr-primary-400);
-}
-.logout button {
-  border-radius: 15px;
-  border: none;
-  height: 30px;
-  width: 100px;
-  background-color: #6bbaec;
   margin-top: 1rem;
   font-weight: 600;
   font-size: 0.9rem;
+}
+.profile-page-container-delete-button {
+  border-radius: 15px;
+  border: none;
+  padding: 0.6rem 1.1rem;
+  color: white;
+  background-color: var(--clr-error);
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.profile-page-container-logout-delete {
+  display: flex;
+  gap: 2rem;
 }
 
 /* UPDATE USER PAGE */
@@ -374,6 +379,77 @@ table {
 }
 .update-form-bottom-text p {
   margin-bottom: 0.5rem;
+}
+
+/* PRODUCT DETAILS PAGE */
+.product-details-container {
+  width: 400px;
+  margin: 0 auto;
+
+}
+.product-details-image-container {
+  width: 400px;
+  height: 400px;
+  margin-bottom: 1.5rem;
+}
+.product-details-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.product-details-first-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.product-details-first-line h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+.product-details-first-line p {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 600;
+}
+.product-details-second-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.product-details-second-line h2 {
+  font-size: 1.2rem;
+}
+.product-details-third-line {
+  margin-bottom: 1rem;
+}
+.product-details-third-line p {
+  font-size: 1rem;
+}
+.product-details-fourth-line p {
+  font-size: 1rem;
+}
+.product-details-fourth-line span {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.product-details-button-container {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin: 1.6rem 0;
+}
+.product-details-button-container button {
+  border-radius: 15px;
+  border: none;
+  height: 30px;
+  width: 100px;
+  background-color: var(--clr-primary-400);
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 /* FAVORITE PAGE */
@@ -493,6 +569,35 @@ table {
 .upload-page-upload-file-container input {
   background: transparent;
 }
+.upload-page-upload-file-input {
+  color: transparent;
+}
+.upload-page-upload-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.upload-page-upload-file-input::before {
+  content: 'Browse';
+  color: black;
+  /* display: inline-block; */
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  /* outline: none; */
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-size: 0.8rem;
+}
+.upload-page-upload-file-input:hover::before {
+  border-color: black;
+}
+.upload-page-upload-file-input:active {
+  outline: 0;
+}
+.upload-page-upload-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+}
+
 .upload-page-container button {
   border-radius: 15px;
   border: none;
@@ -560,6 +665,36 @@ table {
   font-size: 0.9rem;
 }
 
+
+/* LOADING SPINNER */
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.loading-spinner-container h1 {
+  margin-bottom: 1rem;
+}
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #383636;
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+
+/* MEDIA QUERIES */
 @media (max-width: 600px) {
   .footer-links-container {
     display: flex;
