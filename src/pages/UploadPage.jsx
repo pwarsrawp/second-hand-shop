@@ -109,11 +109,11 @@ function UploadPage() {
               required
               onChange={(event) => setCondition(event.target.value)}
             >
-              <option value="new">new</option>
-              <option value="as good as new">as good as new</option>
-              <option value="good">good</option>
-              <option value="fair">fair</option>
-              <option value="has given it all">has given it all</option>
+              <option value="New">new</option>
+              <option value="As good as new">as good as new</option>
+              <option value="Good">good</option>
+              <option value="Fair">fair</option>
+              <option value="Has given it all">has given it all</option>
             </select>
           </div>
 
