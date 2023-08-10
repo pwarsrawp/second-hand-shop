@@ -71,13 +71,15 @@ console.log(product)
     <div className="signup-form">
       <Navbar />
       <h2>Product Purchase Page</h2>
+      <img src={product.imageUrl} alt={product.name} />
       <form onSubmit={handlePurchase}>
         <h3>{product.title}</h3>
-        <p>{product.price}</p>   
-        <p>{product.seller}</p>     {/*this is an ObjectId!*/}
+        <p>€ {product.price}</p>   
+       
 
       
         {user._id === product.seller ? (
+
           <button type="submit">Confirm Sell</button>
           ) : (
           <button type="submit">Confirm Purchase</button>
