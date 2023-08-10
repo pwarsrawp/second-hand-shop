@@ -10,7 +10,7 @@ function LogoutButton() {
 
   return (
   <div>
-    <button onClick={logout} className="profile-page-container-button">Logout</button>
+    <button onClick={logout} className="profile-page-logout-button">Logout</button>
   </div>
   );
 }

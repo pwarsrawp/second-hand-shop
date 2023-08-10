@@ -8,7 +8,9 @@ import {
 import { fetchAll } from "../functions/api.calls";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { AiOutlineHeart } from "react-icons/ai";
+import { PiHeart } from "react-icons/pi";
+import { PiHeartFill } from "react-icons/pi";
+
 import Spinner from "../components/Spinner";
 const api_url = import.meta.env.VITE_API_URL;
 
@@ -67,6 +69,16 @@ function HomePage() {
             onChange={(event) => setQuery(event.target.value)}
           />
         </div>
+        {/* <div className="filter-buttons-container">
+          <button>Arts and Crafts</button>
+          <button>Musical Instruments</button>
+          <button>Literature</button>
+          <button>Bicycles</button>
+          <button>Fashion and Accesories</button>
+          <button>Electronics</button>
+          <button>Automotive</button>
+          <button>Miscellaneous</button>
+        </div> */}
         <div className="products-container">
           {filteredProducts.map((product) => {
             return (
@@ -91,7 +103,11 @@ function HomePage() {
                     }`}
                     onClick={() => handleFavorite(product._id)}
                   >
-                    <AiOutlineHeart size={20} style={{ color: "#E27688" }} />
+                    {user.favorites.includes(product._id) ? (
+                      <PiHeartFill size={25} style={{ color: "#E27688" }} />
+                    ) : (
+                      <PiHeart size={25} style={{ color: "#E27688" }} />
+                    )}
                   </button>
                 </div>
                 <div className="product-card-title-container">
@@ -110,7 +126,7 @@ function HomePage() {
       <div className="loading-spinner-container">
         <h1>Bare with me...</h1>
         <Spinner />
-      </div>      
+      </div>
     </>
   );
 }

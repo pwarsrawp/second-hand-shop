@@ -23,22 +23,12 @@ const Profile = () => {
         <p>{user.email}</p>
         <p>{user.street}</p>
         <p>{user.country}</p>
-        <Link to="/editProfile">
-          <button className="profile-page-container-button">
-            Edit profile
-          </button>
+        <Link to="/editProfile" className="profile-page-edit-button">
+          Edit profile
         </Link>
-        <div className="profile-page-container-logout-delete">
-          <Link to="/login">
-            <div>
-              <LogoutButton />
-            </div>
-          </Link>
-          <Link to="/">
-            <div>
-              <DeleteButton />
-            </div>
-          </Link>
+        <div className="profile-page-logout-delete-button-container">
+          <LogoutButton />
+          <DeleteButton />          
         </div>
       </div>
     </>

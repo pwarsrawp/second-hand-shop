@@ -10,7 +10,6 @@ import UploadPage from "./pages/UploadPage";
 import Error from "./pages/ErrorPage";
 import IsPrivate from "./context/auth.private";
 import "./App.css";
-
 import UserEditForm from "./components/UserEditForm";
 import ProductDetailPage from "./pages/ProductDetailPage";
 

@@ -139,7 +139,7 @@ table {
 }
 .nav-bar-top {
   width: 100%;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   background-color: var(--clr-primary-200);
 }
 .nav-bar-top-link-container {
@@ -161,6 +161,7 @@ table {
   flex-direction: column;
   align-items: center;
   width: 80%;
+  margin-bottom: 1rem;
 }
 .search-bar-container input {
   border-radius: 15px;
@@ -180,11 +181,27 @@ table {
 .search-input-container {
   border-radius: 15px;
 }
+.filter-buttons-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+.filter-buttons-container button {
+  padding: 0.4rem 1rem;
+  gap: 10px;
+  background: transparent;
+  border-radius: 15px;
+  border: 1px solid var(--clr-primary-400);
+}
+.filter-buttons-container button:hover {
+  background-color: var(--clr-primary-200);
+  cursor: pointer;
+}
 .products-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  max-width: 1200px;
+  max-width: 1000px;
   margin-top: 1rem;
 }
 .product-card {
@@ -256,6 +273,11 @@ table {
 .login-form-bottom-text p {
   margin-bottom: 0.5rem;
 }
+.error-message {
+  text-align: center;
+  color: var(--clr-error);
+  margin-bottom: 1rem;
+}
 
 /* SINGUP PAGE */
 .signup-form h1 {
@@ -317,28 +339,49 @@ table {
 .profile-page-container p {
   margin-bottom: 1rem;
 }
-.profile-page-container-button {
+.profile-page-edit-button {
   border-radius: 15px;
-  border: none;
-  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--clr-primary-400);
   background-color: var(--clr-primary-400);
-  margin-top: 1rem;
+  padding: 0.5rem 2rem;  
   font-weight: 600;
-  font-size: 0.9rem;
+  text-decoration: none;
+  color: #383636;
 }
-.profile-page-container-delete-button {
+.profile-page-edit-button:hover {
+  background-color: transparent;
+}
+.profile-page-logout-button {
   border-radius: 15px;
-  border: none;
-  padding: 0.6rem 1.1rem;
-  color: white;
-  background-color: var(--clr-error);
-  margin-top: 1rem;
+  border: 1px solid var(--clr-primary-400);
+  background-color: var(--clr-primary-400);
+  padding: 0.5rem 2rem;
+  color: #383636;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
-.profile-page-container-logout-delete {
+.profile-page-logout-button:hover {
+  cursor: pointer;
+  background-color: transparent;
+}
+.profile-page-delete-button {
+  border-radius: 15px;
+  border: 1px solid var(--clr-error);
+  background-color: var(--clr-error);
+  padding: 0.5rem 2rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.profile-page-delete-button:hover {
+  cursor: pointer;
+  background-color: transparent;
+  color: #383636;
+}
+.profile-page-logout-delete-button-container {
   display: flex;
-  gap: 2rem;
+  margin-top: 1rem;
+  gap: 20px;
 }
 
 /* UPDATE USER PAGE */
@@ -401,6 +444,10 @@ table {
   object-fit: cover;
   border-radius: 14px;
 }
+.product-details-price-favorite-line {
+  display: flex;
+  justify-content: space-between;
+}
 .product-details-price {
   margin-bottom: 1rem;
   font-size: 2rem;
@@ -449,6 +496,7 @@ table {
   margin-bottom: 0.5rem;
 }
 .product-details-bottom-container-right h3 {
+  font-size: 0.9rem;
   font-style: italic;
 }
 .product-details-bottom-container-right span {
@@ -457,11 +505,14 @@ table {
 .product-details-bottom-container-left button {
   border-radius: 15px;
   border: 1px solid var(--clr-primary-400);
-  height: 30px;
-  width: 100px;
-  margin-top: 1rem;
+  background-color: var(--clr-primary-400);  
+  padding: 0.5rem 2rem;
   font-weight: 600;
   font-size: 0.9rem;
+}
+.product-details-bottom-container-left button:hover {
+  cursor: pointer;
+  background-color: transparent;
 }
 
 /* FAVORITE PAGE */
@@ -521,15 +572,6 @@ table {
   text-align: center;
   margin-bottom: 0.5rem;
 }
-/* Style the dropdown arrow */
-.upload-page-container select::after {
-  content: "\25BE"; /* Unicode character for the down arrow */
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  font-size: 18px;
-}
 .upload-page-container h1 {
   text-align: center;
   margin-bottom: 1rem;
@@ -548,7 +590,7 @@ table {
 .upload-page-container input {
   border-radius: 15px;
   border: none;
-  padding: 0.3rem 0.3rem 0.3rem 2rem;
+  padding: 0.4rem 1rem;
   margin-bottom: 1rem;
   height: 30px;
   width: 250px;
@@ -557,21 +599,24 @@ table {
 }
 .upload-page-container input::placeholder {
   font-family: "Poppins", sans-serif;
+  text-align: center;
 }
 .upload-page-container textarea {
   border-radius: 15px;
   border: none;
-  padding: 1rem 0.3rem 0.5rem 2rem;
+  padding: 1rem 1rem;
   margin-bottom: 1rem;
   height: 100px;
   width: 250px;
   background-color: var(--clr-primary-200);
   outline: none;
+  font-family: "Poppins", sans-serif;
 }
-.upload-page-dropdown-container {
+.upload-page-select-container {
   display: inline-block;
   position: relative;
-  margin-bottom: 0.7rem;
+  font-family: "Poppins", sans-serif;
+  outline: none;
 }
 .upload-page-upload-file-container {
   display: flex;
@@ -581,44 +626,20 @@ table {
 .upload-page-upload-file-container input {
   background: transparent;
 }
-.upload-page-upload-file-input {
-  color: transparent;
-}
-.upload-page-upload-file-input::-webkit-file-upload-button {
-  visibility: hidden;
-}
-.upload-page-upload-file-input::before {
-  content: 'Browse';
-  color: black;
-  /* display: inline-block; */
-  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-  border: 1px solid #999;
-  border-radius: 3px;
-  padding: 5px 8px;
-  /* outline: none; */
-  cursor: pointer;
-  text-shadow: 1px 1px #fff;
-  font-size: 0.8rem;
-}
-.upload-page-upload-file-input:hover::before {
-  border-color: black;
-}
-.upload-page-upload-file-input:active {
-  outline: 0;
-}
-.upload-page-upload-file-input:active::before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
-}
-
 .upload-page-container button {
   border-radius: 15px;
   border: none;
-  height: 30px;
-  width: 100px;
+  border: 1px solid var(--clr-primary-400);
   background-color: var(--clr-primary-400);
+  padding: 0.5rem 2rem;
   margin-top: 1rem;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1.0rem;
+}
+.upload-page-container button:hover {
+  border: 1px solid var(--clr-primary-400);
+  background-color: transparent;
+  cursor: pointer;
 }
 .success-message {
   text-align: center;
@@ -633,7 +654,6 @@ table {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-evenly;
-
 }
 .footer-links-container {
   display: flex;
@@ -660,7 +680,6 @@ table {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .error-h1 {
   font-size: 7rem;
   font-weight: 700;
@@ -670,16 +689,18 @@ table {
   font-weight: 600;
   margin: 30px;
 }
-
 .error-page-button {
   border-radius: 15px;
-  border: none;
-  height: 30px;
-  width: 100px;
+  border: 1px solid var(--clr-primary-400);
   background-color: var(--clr-primary-400);
+  padding: 0.5rem 2rem;  
   margin-top: 1rem;
   font-weight: 600;
   font-size: 0.9rem;
+}
+.error-page-button:hover {
+  cursor: pointer;
+  background-color: transparent;
 }
 
 

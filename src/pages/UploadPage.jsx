@@ -83,39 +83,37 @@ function UploadPage() {
           />
 
           <label>Select a Category:</label>
-          <div className="upload-page-dropdown-container">
-            <select
-              name="category"
-              required
-              onChange={(event) => setCategory(event.target.value)}
-            >
-              <option value="Arts and Crafts">Arts and Crafts</option>
-              <option value="Musical Instruments">Musical Instruments</option>
-              <option value="Literature">Literature</option>
-              <option value="Bycicles">Bycicles</option>
-              <option value="Fashion and Accesories">
-                Fashion and Accesories
-              </option>
-              <option value="Electronics">Electronics</option>
-              <option value="Automotive">Automotive</option>
-              <option value="Miscellaneous">Miscellaneous</option>
-            </select>
-          </div>
+          <select
+            name="category"
+            required
+            onChange={(event) => setCategory(event.target.value)}
+            className="upload-page-select-container"
+          >
+            <option value="Arts and Crafts">Arts and Crafts</option>
+            <option value="Musical Instruments">Musical Instruments</option>
+            <option value="Literature">Literature</option>
+            <option value="Bicycles">Bicycles</option>
+            <option value="Fashion and Accesories">
+              Fashion and Accesories
+            </option>
+            <option value="Electronics">Electronics</option>
+            <option value="Automotive">Automotive</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+          </select>
 
           <label>Select a Condition:</label>
-          <div className="upload-page-dropdown-container">
-            <select
-              name="state"
-              required
-              onChange={(event) => setCondition(event.target.value)}
-            >
-              <option value="New">New</option>
-              <option value="As good as new">As good as new</option>
-              <option value="Good">Good</option>
-              <option value="Fair">Fair</option>
-              <option value="Has given it all">Has given it all</option>
-            </select>
-          </div>
+          <select
+            name="state"
+            required
+            onChange={(event) => setCondition(event.target.value)}
+            className="upload-page-select-container"
+          >
+            <option value="New">New</option>
+            <option value="As good as new">As good as new</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Has given it all">Has given it all</option>
+          </select>
 
           {/* CLOUDINARY */}
           <div className="upload-page-upload-file-container">
@@ -130,14 +128,11 @@ function UploadPage() {
               type="file"
               // multiple={false}
               accept="image/jpg, image/png"
-              className="upload-page-upload-file-input"
-            />            
+            />
           </div>
           <div>
-              <button>
-                {loading ? "posting..." : "Post"}
-              </button>
-            </div>
+            <button>{loading ? "posting..." : "Post"}</button>
+          </div>
         </form>
         {uploadDone ? (
           <p className="success-message">Upload done!</p>

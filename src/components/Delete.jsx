@@ -19,7 +19,7 @@ function Delete() {
  
   return (
   <div>
-    <button onClick={handleDelete} className="profile-page-container-delete-button">Delete</button>
+    <button onClick={handleDelete} className="profile-page-delete-button">Delete</button>
   </div>
   );
 }
