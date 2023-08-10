@@ -193,7 +193,7 @@ Step into a world of unparalleled value and sustainability with 3rd Feet, your g
 
 ## Links
 
-- [Trello Link](https://trello.com)
-- [Slides Link](http://slides.com)
-- [Github repository Link](http://github.com)
-- [Deployment Link](http://github.com)
+- [Github Backend Repository Link](https://github.com/pwarsrawp/second-hand-shop-BACK)
+- [Github Frontend Repository Link](https://github.com/pwarsrawp/second-hand-shop-FRONT)
+- [Deployment Backend Link](https://the-third-foot.adaptable.app)
+- [Deployment Frontend Link](https://poetic-conkies-880cc5.netlify.app/)
