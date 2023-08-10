@@ -68,7 +68,7 @@ function PurchasePage() {
       <div key={index}>
         {purchaseArray.map((purchase) => (
           <div key={purchase._id}>
-            <Link to={`/purchase/${purchase.purchaseId}/${purchase._id}`}>
+            <Link to={`/purchases/${purchase.purchaseId}/${purchase._id}`}>
             <h5>{purchase.title}</h5>
             </Link>
             <h5>{purchase.price}$</h5>
@@ -89,7 +89,7 @@ function PurchasePage() {
       <div key={index}>
         {purchaseArray.map((purchase) => (
           <div key={purchase._id}>
-            <Link to={`/purchase/${purchase.purchaseId}/${purchase._id}`}>
+            <Link to={`/purchases/${purchase.purchaseId}/${purchase._id}`}>
             <h5>{purchase.title}</h5>
             </Link>
             <h5>{purchase.price}$</h5>
@@ -110,7 +110,7 @@ function PurchasePage() {
       <div key={index}>
         {purchaseArray.map((purchase) => (
           <div key={purchase._id}>
-            <Link to={`/purchase/${purchase.purchaseId}/${purchase._id}`}>
+            <Link to={`/purchases/${purchase.purchaseId}/${purchase._id}`}>
             <h5>{purchase.title}</h5>
             </Link>
             <h5>{purchase.price}$</h5>

@@ -96,7 +96,7 @@ const ProductDetailPage = () => {
         <p className="product-details-description">{product.description}</p>
         <div className="product-details-bottom-container">
           <div className="product-details-bottom-container-left">
-            <Link to={`/purchase/${productId}`}>
+            <Link to={`/purchases/${productId}`}>
               <button>Buy</button>
             </Link>
 

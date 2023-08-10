@@ -42,7 +42,7 @@ function App() {
           }
         />
         <Route
-          path="/purchase"
+          path="/purchases"
           element={
             <IsPrivate>
               <PurchasePage />
@@ -50,7 +50,7 @@ function App() {
           }
         />
         <Route
-          path="/purchase/:purchaseId/:productId"
+          path="/purchases/:purchaseId/:productId"
           element={
             <IsPrivate>
               <Purchases />

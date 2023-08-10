@@ -100,7 +100,7 @@ function PurchasePage() {
 
         if(window.confirm("Do you want to delete this purchase request?")){
           await deleteOne(`${api_url}/purchases/${purchaseId}`) 
-          navigate("/purchase")
+          navigate("/purchases")
         }
 
       } catch (error) {
