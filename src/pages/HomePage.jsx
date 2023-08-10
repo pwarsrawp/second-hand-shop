@@ -85,7 +85,7 @@ function HomePage() {
               <div key={product._id} className="product-card">
                 <Link to={`/products/${product._id}`} style={linkStyle}>
                   <div className="product-card-img-container">
-                    <img src={product.imageUrl} alt="" />
+                    <img src={product.imageUrl} alt={product.title} />
                   </div>
                 </Link>
                 <div className="product-card-price-container">
