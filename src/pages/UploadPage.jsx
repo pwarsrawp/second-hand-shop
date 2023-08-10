@@ -1,18 +1,17 @@
 import Navbar from "../components/Navbar";
 import { useState } from "react";
-import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { postOne } from "../functions/api.calls";
 
 function UploadPage() {
-  const [file, setFile] = useState(null);
+  const [file] = useState(null);
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Arts and Crafts");
-  const [condition, setCondition] = useState("new");
+  const [condition, setCondition] = useState("New");
   const [price, setPrice] = useState(0);
   const [sold, setSold] = useState("false");
   const [uploadDone, setUploadDone] = useState(false);
@@ -71,7 +70,7 @@ function UploadPage() {
           <label>
             Price:{" "}
             <span style={{ fontStyle: "italic", fontSize: "0.7rem" }}>
-              (Don't go too crazy)
+              (Don&apos;t go too crazy)
             </span>
           </label>
           <input
@@ -83,45 +82,43 @@ function UploadPage() {
           />
 
           <label>Select a Category:</label>
-          <div className="upload-page-dropdown-container">
-            <select
-              name="category"
-              required
-              onChange={(event) => setCategory(event.target.value)}
-            >
-              <option value="Arts and Crafts">Arts and Crafts</option>
-              <option value="Musical Instruments">Musical Instruments</option>
-              <option value="Literature">Literature</option>
-              <option value="Bycicles">Bycicles</option>
-              <option value="Fashion and Accesories">
-                Fashion and Accesories
-              </option>
-              <option value="Electronics">Electronics</option>
-              <option value="Automotive">Automotive</option>
-              <option value="Miscellaneous">Miscellaneous</option>
-            </select>
-          </div>
+          <select
+            name="category"
+            required
+            onChange={(event) => setCategory(event.target.value)}
+            className="upload-page-select-container"
+          >
+            <option value="Arts and Crafts">Arts and Crafts</option>
+            <option value="Musical Instruments">Musical Instruments</option>
+            <option value="Literature">Literature</option>
+            <option value="Bicycles">Bicycles</option>
+            <option value="Fashion and Accesories">
+              Fashion and Accesories
+            </option>
+            <option value="Electronics">Electronics</option>
+            <option value="Automotive">Automotive</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+          </select>
 
           <label>Select a Condition:</label>
-          <div className="upload-page-dropdown-container">
-            <select
-              name="state"
-              required
-              onChange={(event) => setCondition(event.target.value)}
-            >
-              <option value="new">new</option>
-              <option value="as good as new">as good as new</option>
-              <option value="good">good</option>
-              <option value="fair">fair</option>
-              <option value="has given it all">has given it all</option>
-            </select>
-          </div>
+          <select
+            name="state"
+            required
+            onChange={(event) => setCondition(event.target.value)}
+            className="upload-page-select-container"
+          >
+            <option value="New">New</option>
+            <option value="As good as new">As good as new</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Has given it all">Has given it all</option>
+          </select>
 
           {/* CLOUDINARY */}
           <div className="upload-page-upload-file-container">
             <label htmlFor="file" className="btn-grey">
               {" "}
-              Select file:
+              Image:
             </label>
             {file && <center> {file.name}</center>}
             <input
@@ -131,16 +128,13 @@ function UploadPage() {
               // multiple={false}
               accept="image/jpg, image/png"
             />
-
-            <div>
-              <button className="btn-green">
-                {loading ? "uploading..." : "Upload"}
-              </button>
-            </div>
+          </div>
+          <div>
+            <button>{loading ? "posting..." : "Post"}</button>
           </div>
         </form>
         {uploadDone ? (
-          <p>Upload done!</p>
+          <p className="success-message">Upload done!</p>
         ) : (
           <code>
             {Object.keys(res).length > 0
