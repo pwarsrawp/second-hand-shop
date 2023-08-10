@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Navbar from "../components/Navbar";
 import { postOne } from "../functions/api.calls";
+import Spinner from "../components/Spinner";
 const api_url = import.meta.env.VITE_API_URL;
 
 function LoginPage() {
@@ -11,6 +12,7 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
   const { userAuthentication } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -18,6 +20,7 @@ function LoginPage() {
     event.preventDefault();
 
     try {
+      setIsLoading(true); 
       const { data } = await postOne(`${api_url}/auth/login`, {
         email: email,
         password: password
@@ -62,7 +65,7 @@ function LoginPage() {
         <label>Password:</label>
         <input
           type="password"
-          name="password"
+          name="current-password"
           value={password}
           onChange={(event) => {
             setPassword(event.target.value);
@@ -71,7 +74,13 @@ function LoginPage() {
 
         <button type="submit">Login</button>
       </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {isLoading ? ( 
+        <div className="loading-spinner-container">
+          <Spinner />
+        </div>
+      ) : (
+        errorMessage && <p className="error-message">{errorMessage}</p>
+      )}
 
       <div className="login-form-bottom-text">
         <p>Not yet a member?</p>

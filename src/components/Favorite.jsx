@@ -3,12 +3,16 @@ import { AuthContext } from "../context/auth.context";
 import { fetchAll } from "../functions/api.calls";
 import { updateFavoriteList } from "../functions/product.functions";
 import { PiHeartFill } from "react-icons/pi";
+import Spinner from "../components/Spinner";
+import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 const api_url = import.meta.env.VITE_API_URL;
 
 function Favorite() {
   const { user, setUserUpdate, isLoggedIn } = useContext(AuthContext);
   const [favoriteProductIds, setFavoriteProductIds] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const linkStyle = { textDecoration: "none", color: "black" };
 
   /* ALL PRODUCTS */
   useEffect(() => {
@@ -48,20 +52,21 @@ function Favorite() {
         .map((product) => {
           return (
             <div key={product._id} className="favorite-product-container">
-              <div className="favorite-product-image-container">
-                <img src={product.imageUrl} alt={product.title} />
-              </div>
+              <Link to={`/products/${product._id}`} style={linkStyle}>
+                <div className="favorite-product-image-container">
+                  <img src={product.imageUrl} alt={product.title} />
+                </div>
+              </Link>
               <div className="favorite-product-price">
                 <h2>{product.price} €</h2>
-                <button
-                  className={`heart-btn active`}
-                  onClick={() => handleFavorite(product._id)}
-                >
+                <button onClick={() => handleFavorite(product._id)}>
                   <PiHeartFill size={25} style={{ color: "#E27688" }} />
                 </button>
               </div>
-              <h3>{product.title}</h3>
-              <p>{product.description}</p>
+              <Link to={`/products/${product._id}`} style={linkStyle}>
+                <h3>{product.title}</h3>
+                <p>{product.description}</p>
+              </Link>
             </div>
           );
         })}
@@ -72,7 +77,7 @@ function Favorite() {
       <div className="loading-spinner-container">
         <h1>Bare with me...</h1>
         <Spinner />
-      </div>      
+      </div>
     </>
   );
 }

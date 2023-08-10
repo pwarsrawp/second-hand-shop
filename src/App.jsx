@@ -10,9 +10,9 @@ import UploadPage from "./pages/UploadPage";
 import Error from "./pages/ErrorPage";
 import IsPrivate from "./context/auth.private";
 import "./App.css";
-
 import UserEditForm from "./components/UserEditForm";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import PurchasePage from "./pages/PurchasePage";
 
 function App() {
   return (
@@ -41,16 +41,16 @@ function App() {
             </IsPrivate>
           }
         />
-        {/* <Route
-          path="/purchase"
+        <Route
+          path="/purchases"
           element={
             <IsPrivate>
-              <Purchases />
+              <PurchasePage />
             </IsPrivate>
           }
-        /> */}
+        />
         <Route
-          path="/purchase/:purchaseId/:productId"
+          path="/purchases/:purchaseId/:productId"
           element={
             <IsPrivate>
               <Purchases />

@@ -8,7 +8,9 @@ import {
 import { fetchAll } from "../functions/api.calls";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { AiOutlineHeart } from "react-icons/ai";
+import { PiHeart } from "react-icons/pi";
+import { PiHeartFill } from "react-icons/pi";
+
 import Spinner from "../components/Spinner";
 const api_url = import.meta.env.VITE_API_URL;
 
@@ -67,37 +69,49 @@ function HomePage() {
             onChange={(event) => setQuery(event.target.value)}
           />
         </div>
+        {/* <div className="filter-buttons-container">
+          <button>Arts and Crafts</button>
+          <button>Musical Instruments</button>
+          <button>Literature</button>
+          <button>Bicycles</button>
+          <button>Fashion and Accesories</button>
+          <button>Electronics</button>
+          <button>Automotive</button>
+          <button>Miscellaneous</button>
+        </div> */}
         <div className="products-container">
           {filteredProducts.map((product) => {
             return (
-              <Link
-                key={product._id}
-                to={`/products/${product._id}`}
-                className="product-card"
-                style={linkStyle}
-              >
-                <div className="product-card-img-container">
-                  <img src={product.imageUrl} alt="" />
-                </div>
+              <div key={product._id} className="product-card">
+                <Link to={`/products/${product._id}`} style={linkStyle}>
+                  <div className="product-card-img-container">
+                    <img src={product.imageUrl} alt={product.title} />
+                  </div>
+                </Link>
                 <div className="product-card-price-container">
                   <h5>{product.price} EUR</h5>
-                  <button
-                    className={`heart-btn ${
-                      favorite
-                        ? favorite.includes(product._id)
-                          ? "active"
-                          : "not-active"
-                        : "not active"
-                    }`}
-                    onClick={() => handleFavorite(product._id)}
-                  >
-                    <AiOutlineHeart size={20} style={{ color: "#E27688" }} />
-                  </button>
+                  {user ? (
+                    user.favorites.includes(product._id) ? (
+                      <button onClick={() => handleFavorite(product._id)}>
+                        <PiHeartFill size={25} style={{ color: "#E27688" }} />
+                      </button>
+                    ) : (
+                      <button onClick={() => handleFavorite(product._id)}>
+                        <PiHeart size={25} style={{ color: "#E27688" }} />
+                      </button>
+                    )
+                  ) : (
+                    <Link to={"/login"}>
+                        <PiHeart size={25} style={{ color: "#E27688" }} />
+                      </Link>
+                  )}
                 </div>
                 <div className="product-card-title-container">
-                  <h2>{product.title}</h2>
+                  <Link to={`/products/${product._id}`} style={linkStyle}>
+                    <h2>{product.title}</h2>
+                  </Link>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>
@@ -110,7 +124,7 @@ function HomePage() {
       <div className="loading-spinner-container">
         <h1>Bare with me...</h1>
         <Spinner />
-      </div>      
+      </div>
     </>
   );
 }
