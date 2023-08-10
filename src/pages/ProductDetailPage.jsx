@@ -4,18 +4,21 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Spinner from "../components/Spinner";
 import { AuthContext } from "../context/auth.context";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { PiHeart } from "react-icons/pi";
 import { PiHeartFill } from "react-icons/pi";
 import { updateFavoriteList } from "../functions/product.functions";
+import { postOne, updateOne } from "../functions/api.calls";
 
 const api_url = import.meta.env.VITE_API_URL;
 
 const ProductDetailPage = () => {
   const [product, setProduct] = useState(null);
   const [seller, setSeller] = useState(null);
+  const [newPurchaseId, setNewPurchaseId] = useState(null);
   const { productId } = useParams();
-  const { user, setUserUpdate } = useContext(AuthContext);
+  const { user, setUserUpdate, isLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getOneProduct = async () => {
@@ -53,6 +56,38 @@ const ProductDetailPage = () => {
       console.log("Issue updating favorites: ", error);
     }
   };
+
+  const handlePurchaseRequest = async () => {
+    /* Check Product Availability */
+    if(!isLoggedIn){
+      navigate("/login")
+    }
+
+    console.log("product state: ", product.state)
+    if( seller && user && product && product.state === "available"){
+      try {
+        /* Create new Purchase Request */
+        const {data} = await postOne( `${api_url}/purchases`, { seller: seller._id, buyer: user._id, product: product._id, state: "pending"})
+        setNewPurchaseId(data._id)
+
+        /* Product State Update */
+        await updateOne( `${api_url}/products/${product._id}`, {state: "reserved"})
+
+        if(newPurchaseId){
+          navigate(`/purchases/${data._id}/${product._id}`)
+        }
+     
+      } catch (error) {
+        console.log("Error updating purchase/product data: ", error)
+      }
+    }
+    
+    /* User Feedback */
+    if(product.state){
+      navigate(`/products/${product._id}/${product.state}`)
+    }
+}
+
 
   return !product || !seller ? (
     <>
@@ -96,9 +131,7 @@ const ProductDetailPage = () => {
         <p className="product-details-description">{product.description}</p>
         <div className="product-details-bottom-container">
           <div className="product-details-bottom-container-left">
-            <Link to={`/purchase/${productId}`}>
-              <button>Buy</button>
-            </Link>
+              <button onClick={() => handlePurchaseRequest()}>Buy</button>
 
             <button>Chat</button>
           </div>

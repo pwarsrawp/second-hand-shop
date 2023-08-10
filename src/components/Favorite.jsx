@@ -3,12 +3,16 @@ import { AuthContext } from "../context/auth.context";
 import { fetchAll } from "../functions/api.calls";
 import { updateFavoriteList } from "../functions/product.functions";
 import { PiHeartFill } from "react-icons/pi";
+import Spinner from "../components/Spinner";
+import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 const api_url = import.meta.env.VITE_API_URL;
 
 function Favorite() {
   const { user, setUserUpdate, isLoggedIn } = useContext(AuthContext);
   const [favoriteProductIds, setFavoriteProductIds] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const linkStyle = { textDecoration: "none", color: "black" };
 
   /* ALL PRODUCTS */
   useEffect(() => {
