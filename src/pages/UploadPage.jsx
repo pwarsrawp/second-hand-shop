@@ -12,7 +12,7 @@ function UploadPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Arts and Crafts");
-  const [condition, setCondition] = useState("new");
+  const [condition, setCondition] = useState("New");
   const [price, setPrice] = useState(0);
   const [sold, setSold] = useState("false");
   const [uploadDone, setUploadDone] = useState(false);
