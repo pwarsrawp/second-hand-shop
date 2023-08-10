@@ -10,9 +10,7 @@ import DeleteButton from "../components/Delete";
 const Profile = () => {
   const { user } = useContext(AuthContext);
 
-  const handleDelete = async () => {
-
-  }
+  const handleDelete = async () => {};
 
   return (
     <>
@@ -26,20 +24,22 @@ const Profile = () => {
         <p>{user.street}</p>
         <p>{user.country}</p>
         <Link to="/editProfile">
-          <button>
-            <PiPenFill size={15} />
+          <button className="profile-page-container-button">
+            Edit profile
           </button>
         </Link>
-        <Link to="/login">
-          <div className="logout button">
-            <LogoutButton />
-          </div>
-        </Link>
-        <Link to="/">
-          <div className="logout button">
-            <DeleteButton />
-          </div>
-        </Link>
+        <div className="profile-page-container-logout-delete">
+          <Link to="/login">
+            <div>
+              <LogoutButton />
+            </div>
+          </Link>
+          <Link to="/">
+            <div>
+              <DeleteButton />
+            </div>
+          </Link>
+        </div>
       </div>
     </>
   );

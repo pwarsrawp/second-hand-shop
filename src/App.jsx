@@ -41,8 +41,16 @@ function App() {
             </IsPrivate>
           }
         />
-        <Route
+        {/* <Route
           path="/purchase"
+          element={
+            <IsPrivate>
+              <Purchases />
+            </IsPrivate>
+          }
+        /> */}
+        <Route
+          path="/purchase/:purchaseId/:productId"
           element={
             <IsPrivate>
               <Purchases />
