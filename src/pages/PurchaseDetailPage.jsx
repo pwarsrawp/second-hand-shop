@@ -3,6 +3,7 @@ import { deleteOne, postOne, updateOne } from "../functions/api.calls";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import axios from "axios";
 import ErrorPage from "./ErrorPage";
 
@@ -69,14 +70,11 @@ function PurchasePage() {
   useEffect(() => {
     const fetchBuyer = async () => {
       if (purchase) {
-
-
         try {
           // Fetch buyer information
           const buyerResponse = await axios.get(
             `${api_url}/users/${purchase.buyer}`
-
-            );
+          );
           setBuyer(buyerResponse.data);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -85,63 +83,82 @@ function PurchasePage() {
     };
     fetchBuyer();
   }, [purchase]);
-  
 
   const handleConfirmation = async () => {
-
-      try {
-        await updateOne( `${api_url}/purchases/${purchaseId}`, { state : "completed"})
-        await updateOne( `${api_url}/products/${productId}`, { state : "sold", sold : true})
-      } catch (error) {
-        console.log("Error updating purchase/product data: ", error)
-      }
-  }
+    try {
+      await updateOne(`${api_url}/purchases/${purchaseId}`, {
+        state: "completed",
+      });
+      await updateOne(`${api_url}/products/${productId}`, {
+        state: "sold",
+        sold: true,
+      });
+    } catch (error) {
+      console.log("Error updating purchase/product data: ", error);
+    }
+  };
   const handleCancel = async () => {
-      try {
-        await updateOne( `${api_url}/purchases/${purchaseId}`, { state : "cancelled"})
-        await updateOne( `${api_url}/products/${productId}`, { state : "available", sold : false})
+    try {
+      await updateOne(`${api_url}/purchases/${purchaseId}`, {
+        state: "cancelled",
+      });
+      await updateOne(`${api_url}/products/${productId}`, {
+        state: "available",
+        sold: false,
+      });
 
-        if(window.confirm("Do you want to delete this purchase request?")){
-          await deleteOne(`${api_url}/purchases/${purchaseId}`) 
-          navigate("/purchases")
-        }
-
-      } catch (error) {
-        console.log("Error updating purchase/product data on cancellation: ", error)
+      if (window.confirm("Do you want to delete this purchase request?")) {
+        await deleteOne(`${api_url}/purchases/${purchaseId}`);
+        navigate("/purchases");
       }
-  }
+    } catch (error) {
+      console.log(
+        "Error updating purchase/product data on cancellation: ",
+        error
+      );
+    }
+  };
 
   return product && buyer && seller ? (
-        user._id === product.seller || user._id === purchase.buyer  ? (
-    <div className="signup-form">
-      <Navbar />
-      <h2>Purchase Page</h2>
-      <img src={product.imageUrl} alt={product.name} />
+    user._id === product.seller || user._id === purchase.buyer ? (
+      <>
+        <Navbar />
+        <div className="purchase-details-container">
+          <div className="purchase-details-image-container">
+            <img src={product.imageUrl} alt={product.name} />
+          </div>
+          <h3 className="purchase-details-price">€ {product.price}</h3>
+          <h3 className="purchase-details-title">{product.title}</h3>
+          <p className="purchase-details-description">{product.description}</p>
 
-        <h3>{product.title}</h3>
-        <p>€ {product.price}</p>
-        <p>{product.condition}</p>
+          <p>{product.condition}</p>
+          <hr />
 
-        {user._id === product.seller ? (
-          <>
-            <p>Buyer: {buyer.fullname}</p>
+          {user._id === product.seller ? (
+            <>
+              <p className="purchase-details-buyer">
+                <span>{buyer.fullname}</span> wants to buy this article.
+              </p>
 
-            <button onClick={() => handleConfirmation()}>Confirm Purchase</button>
+              <div className="purchase-details-buttons">
+                <button onClick={() => handleConfirmation()}>
+                  Accept
+                </button>
 
-            <button onClick={() => handleCancel()}>Decline Purchase</button>
-          </>
-        ) : (
-          <>
-            <p>Seller: {seller.fullname}</p>
-          </>
-
-          )}
-          <p>{product.description}</p>
-    </div>
-        ) : (
-          <ErrorPage />
-  )
-
+                <button onClick={() => handleCancel()}>Decline</button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>Seller: {seller.fullname}</p>
+            </>
+          )}          
+        </div>
+        <Footer/>
+      </>
+    ) : (
+      <ErrorPage />
+    )
   ) : (
     <div className="loading-spinner-container">
       <div className="loading-spinner"></div>
