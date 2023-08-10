@@ -36,6 +36,7 @@ const Profile = () => {
             Edit profile
           </button>
         </Link>
+        <br/>
         <div className="profile-page-container-logout-delete">
           <Link to="/login">
             <div>
