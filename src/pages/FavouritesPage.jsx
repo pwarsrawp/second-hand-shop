@@ -9,8 +9,7 @@ function FavouritesPage() {
       <div className="favorites-test">
       <Favorite />
       </div>   
-      <Footer />
-      
+      <Footer />      
     </div>
   );
 }

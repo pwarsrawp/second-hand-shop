@@ -455,13 +455,21 @@ table {
 }
 
 /* PRODUCT DETAILS PAGE */
+.product-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+}
 .product-details-container {
   width: 95%;
+  height: 100%;
   max-width: 600px;
   margin: 0 auto;
 }
 .product-details-image-container {
-  margin-bottom: 1rem;  
+  margin-bottom: 1rem;
+  height: 40%;
 }
 .product-details-image-container img {
   width: 100%;

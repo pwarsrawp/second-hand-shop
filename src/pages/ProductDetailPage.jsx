@@ -97,7 +97,7 @@ const ProductDetailPage = () => {
       </div>
     </>
   ) : (
-    <>
+    <div className="product-details-wrapper">
       <Navbar />
       <div className="product-details-container">
         <div className="product-details-image-container">
@@ -143,7 +143,7 @@ const ProductDetailPage = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
