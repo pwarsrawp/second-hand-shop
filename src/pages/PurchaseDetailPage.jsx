@@ -1,5 +1,5 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { deleteOne, postOne, updateOne } from "../functions/api.calls";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateOne } from "../functions/api.calls";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import Navbar from "../components/Navbar";
@@ -131,7 +131,6 @@ function PurchasePage() {
     navigate("/purchases");
   };
 
-
   return product && buyer && seller ? (
     user._id === product.seller || user._id === purchase.buyer ? (
       <>
@@ -148,31 +147,37 @@ function PurchasePage() {
           <hr />
 
           {user._id === product.seller ? (
-            product.state === "pending" ? (
-              <>
-                <p className="purchase-details-buyer">
-                  <span>{buyer.fullname}</span> wants to buy this article.
-                </p>
+            <>
+              {product.state === "reserved" && (
+                <>
+                  <p className="purchase-details-buyer">
+                    <span>{buyer.fullname}</span> wants to buy this article.
+                  </p>
 
-                <div className="purchase-details-buttons">
-                  <button onClick={() => handleConfirmation()}>Accept</button>
+                  <div className="purchase-details-buttons">
+                    <button onClick={() => handleConfirmation()}>Accept</button>
 
-                  <button onClick={() => handleCancel()}>Decline</button>
-                </div>
-              </>
-            ) : product.state === "sold" ? (
-              <>
-                <p className="purchase-details-buyer">
-                  <span>{buyer.fullname}</span> bought this article.
-                </p>
-              </>
-            ) : (
-              <>
-                <p className="purchase-details-buyer">
-                  <span>{buyer.fullname}</span> wanted to buy this article.
-                </p>
-              </>
-            )
+                    <button onClick={() => handleCancel()}>Decline</button>
+                  </div>
+                </>
+              )}
+
+              {product.state === "sold" && (
+                <>
+                  <p className="purchase-details-buyer">
+                    <span>{buyer.fullname}</span> bought this article.
+                  </p>
+                </>
+              )}
+
+              {product.state === "cancelled" && (
+                <>
+                  <p className="purchase-details-buyer">
+                    <span>{buyer.fullname}</span> wanted to buy this article.
+                  </p>
+                </>
+              )}
+            </>
           ) : (
             <>
               <p>Seller: {seller.fullname}</p>
