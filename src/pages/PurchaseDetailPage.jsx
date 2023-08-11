@@ -96,6 +96,7 @@ function PurchasePage() {
     } catch (error) {
       console.log("Error updating purchase/product data: ", error);
     }
+    navigate("/purchases");
   };
   const handleCancel = async () => {
     try {
@@ -112,6 +113,7 @@ function PurchasePage() {
         error
       );
     }
+    navigate("/purchases");
   };
   const handleCancelRequest = async () => {
     try {
