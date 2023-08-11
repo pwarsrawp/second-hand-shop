@@ -106,11 +106,6 @@ function PurchasePage() {
         state: "available",
         sold: false,
       });
-
-      if (window.confirm("Do you want to delete this purchase request?")) {
-        await deleteOne(`${api_url}/purchases/${purchaseId}`);
-        navigate("/purchases");
-      }
     } catch (error) {
       console.log(
         "Error updating purchase/product data on cancellation: ",
@@ -118,6 +113,24 @@ function PurchasePage() {
       );
     }
   };
+  const handleCancelRequest = async () => {
+    try {
+      await updateOne(`${api_url}/purchases/${purchaseId}`, {
+        state: "cancelled",
+      });
+      await updateOne(`${api_url}/products/${productId}`, {
+        state: "available",
+        sold: false,
+      });
+    } catch (error) {
+      console.log(
+        "Error updating purchase/product data on cancellation: ",
+        error
+      );
+    }
+    navigate("/purchases");
+  };
+
 
   return product && buyer && seller ? (
     user._id === product.seller || user._id === purchase.buyer ? (
@@ -135,26 +148,43 @@ function PurchasePage() {
           <hr />
 
           {user._id === product.seller ? (
-            <>
-              <p className="purchase-details-buyer">
-                <span>{buyer.fullname}</span> wants to buy this article.
-              </p>
+            product.state === "pending" ? (
+              <>
+                <p className="purchase-details-buyer">
+                  <span>{buyer.fullname}</span> wants to buy this article.
+                </p>
 
-              <div className="purchase-details-buttons">
-                <button onClick={() => handleConfirmation()}>
-                  Accept
-                </button>
+                <div className="purchase-details-buttons">
+                  <button onClick={() => handleConfirmation()}>Accept</button>
 
-                <button onClick={() => handleCancel()}>Decline</button>
-              </div>
-            </>
+                  <button onClick={() => handleCancel()}>Decline</button>
+                </div>
+              </>
+            ) : product.state === "sold" ? (
+              <>
+                <p className="purchase-details-buyer">
+                  <span>{buyer.fullname}</span> bought this article.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="purchase-details-buyer">
+                  <span>{buyer.fullname}</span> wanted to buy this article.
+                </p>
+              </>
+            )
           ) : (
             <>
               <p>Seller: {seller.fullname}</p>
+              <div className="purchase-details-buttons">
+                <button onClick={() => handleCancelRequest()}>
+                  Cancel Request
+                </button>
+              </div>
             </>
-          )}          
+          )}
         </div>
-        <Footer/>
+        <Footer />
       </>
     ) : (
       <ErrorPage />

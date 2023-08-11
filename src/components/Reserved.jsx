@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 
 function Reserved({productId}) {
-    console.log('productId: ', productId);
 
   return (
     <div className="error-background">

@@ -108,7 +108,7 @@ function PurchasePage() {
                 <h5>{purchase.price}$</h5>
                 <Link to={`/purchases/${purchase.purchaseId}/${purchase._id}`}>
                   <div>
-                    <h5>Approve</h5>
+                    <h5>Reply</h5>
                   </div>
                 </Link>
               </>
