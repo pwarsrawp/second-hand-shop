@@ -63,7 +63,6 @@ const ProductDetailPage = () => {
       navigate("/login")
     }
 
-    console.log("product state: ", product.state)
     if( seller && user && product && product.state === "available"){
       try {
         /* Create new Purchase Request */

@@ -53,16 +53,22 @@ function Favorite() {
           .map((product) => {
             return (
               <div key={product._id} className="favorite-product-container">
-                <div className="favorite-product-image-container">
-                  <img src={product.imageUrl} alt={product.title} />
-                </div>
+                <Link to={`/products/${product._id}`} style={linkStyle}>
+                  <div className="favorite-product-image-container">
+                    <img src={product.imageUrl} alt={product.title} />
+                  </div>
+                </Link>
                 <div className="favorite-product-price">
-                  <h2>{product.price} €</h2>
+                  <Link to={`/products/${product._id}`} style={linkStyle}>
+                    <h2>{product.price} €</h2>
+                  </Link>
                   <button onClick={() => handleFavorite(product._id)}>
                     <PiHeartFill size={25} style={{ color: "#E27688" }} />
                   </button>
                 </div>
-                <h3>{product.title}</h3>
+                <Link to={`/products/${product._id}`} style={linkStyle}>
+                  <h3>{product.title}</h3>
+                </Link>
               </div>
             );
           })}

@@ -10,8 +10,6 @@ import DeleteButton from "../components/Delete";
 const Profile = () => {
   const { user } = useContext(AuthContext);
 
-  const handleDelete = async () => {};
-
   return !user ? (
     <>
       <Navbar />

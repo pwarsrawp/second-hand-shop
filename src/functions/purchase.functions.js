@@ -4,6 +4,7 @@ const sortPurchases = (allPurchases, user, products, state) => {
     if (!allPurchases) return sortedProducts
 
     allPurchases.forEach((purchase) => {
+
         if (
             purchase.state === state &&
             (purchase.seller === user._id || purchase.buyer === user._id)
