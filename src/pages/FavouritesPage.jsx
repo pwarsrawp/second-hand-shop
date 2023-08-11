@@ -1,14 +1,17 @@
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
 import Favorite from "../components/Favorite";
 
 function FavouritesPage() {
   return (
-    <>
+    <div className="favorites-wrapper">
       <Navbar />
+      <div className="favorites-test">
       <Favorite />
-      <Footer/>
-    </>
+      </div>   
+      <Footer />
+      
+    </div>
   );
 }
 

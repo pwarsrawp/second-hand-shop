@@ -54,9 +54,9 @@ function PurchasePage() {
       setAllPending(sortPurchases(allPurchases, user, allProducts, "pending"));
       setAllCancelled(
         sortPurchases(allPurchases, user, allProducts, "cancelled")
-      );
-      setAllFetched(true);
+      );      
     }
+    setAllFetched(true);
   }, [allPurchases, allProducts, user]);
 
   return allFetched ? (
