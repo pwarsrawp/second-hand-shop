@@ -172,7 +172,11 @@ table {
   width: 80%;
   max-width: 800px;
   background-color: var(--clr-primary-200);
+  border: 1px solid var(--clr-primary-200);
   outline: none;
+}
+.search-bar-container input:focus {
+  border: 1px solid var(--clr-primary-400);
 }
 .search-bar-container input::placeholder {
   font-family: "Poppins", sans-serif;
@@ -255,7 +259,11 @@ table {
   height: 30px;
   width: 250px;
   background-color: var(--clr-primary-200);
+  border: 1px solid var(--clr-primary-200);
   outline: none;
+}
+.login-form input:focus {
+  border: 1px solid var(--clr-primary-400);
 }
 .login-form button {
   border-radius: 15px;
@@ -305,7 +313,11 @@ table {
   height: 30px;
   width: 250px;
   background-color: var(--clr-primary-200);
+  border: 1px solid var(--clr-primary-200);
   outline: none;
+}
+.signup-form input:focus {
+  border: 1px solid var(--clr-primary-400);
 }
 .signup-form button {
   border-radius: 15px;
@@ -414,7 +426,11 @@ table {
   height: 30px;
   width: 250px;
   background-color: var(--clr-primary-200);
+  border: 1px solid var(--clr-primary-200);
   outline: none;
+}
+.update-form input:focus {
+  border: 1px solid var(--clr-primary-400);
 }
 .update-form button {
   border-radius: 15px;
@@ -617,7 +633,11 @@ table {
   height: 30px;
   width: 250px;
   background-color: var(--clr-primary-200);
+  border: 1px solid var(--clr-primary-200);
   outline: none;
+}
+.upload-page-container input:focus {
+  border: 1px solid var(--clr-primary-400);
 }
 .upload-page-container input::placeholder {
   font-family: "Poppins", sans-serif;
@@ -631,8 +651,12 @@ table {
   height: 100px;
   width: 250px;
   background-color: var(--clr-primary-200);
+  border: 1px solid var(--clr-primary-200);
   outline: none;
   font-family: "Poppins", sans-serif;
+}
+.upload-page-container textarea:focus {
+  border: 1px solid var(--clr-primary-400);
 }
 .upload-page-select-container {
   display: inline-block;
