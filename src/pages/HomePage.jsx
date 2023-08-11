@@ -69,16 +69,16 @@ function HomePage() {
             onChange={(event) => setQuery(event.target.value)}
           />
         </div>
-        {/* <div className="filter-buttons-container">
-          <button>Arts and Crafts</button>
+        <div className="filter-buttons-container">
+          {/* <button>Arts and Crafts</button>
           <button>Musical Instruments</button>
           <button>Literature</button>
           <button>Bicycles</button>
           <button>Fashion and Accesories</button>
           <button>Electronics</button>
           <button>Automotive</button>
-          <button>Miscellaneous</button>
-        </div> */}
+          <button>Miscellaneous</button> */}
+        </div>
         <div className="products-container">
           {filteredProducts.map((product) => {
             return (

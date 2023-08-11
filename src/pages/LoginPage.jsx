@@ -74,14 +74,7 @@ function LoginPage() {
 
         <button type="submit">Login</button>
       </form>
-      {isLoading ? ( 
-        <div className="loading-spinner-container">
-          <Spinner />
-        </div>
-      ) : (
-        errorMessage && <p className="error-message">{errorMessage}</p>
-      )}
-
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="login-form-bottom-text">
         <p>Not yet a member?</p>
         <Link to={"/signup"}>Sign Up</Link>
