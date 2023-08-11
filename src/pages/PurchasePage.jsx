@@ -83,32 +83,44 @@ function PurchasePage() {
               </div>
             ))
           ) : (
-            <p>No pending purchases to show</p>
+            <p>No completed purchases to show</p>
           )}
         </div>
 
         <div className="purchases-container">
-          <h2>Pending</h2>
-          {pending.length > 0 ? (
-            pending.map((purchaseArray, index) => (
-              <div key={index}>
-                {purchaseArray.map((purchase) => (
-                  <div key={purchase._id} className="purchase-card">
-                    <Link
-                      to={`/purchases/${purchase.purchaseId}/${purchase._id}`}
-                    >
-                      <h5>{purchase.title}</h5>
-                    </Link>
-                    <h5>{purchase.price}$</h5>
-                    <h5>{purchase.state}</h5>
+  <h2>Pending</h2>
+  {pending.length > 0 ? (
+    pending.map((purchaseArray, index) => (
+      <div key={index}>
+        {purchaseArray.map((purchase) => (
+          <div key={purchase._id} className="purchase-card">
+            {purchase.seller !== user._id ? (
+              <>
+                <Link to={`/purchases/${purchase.purchaseId}/${purchase._id}`}>
+                  <h5>{purchase.title}</h5>
+                </Link>
+                <h5>{purchase.price}$</h5>
+                <h5>{purchase.state}</h5>
+              </>
+            ) : (
+              <>
+                <h5>{purchase.title}</h5>
+                <h5>{purchase.price}$</h5>
+                <Link to={`/purchases/${purchase.purchaseId}/${purchase._id}`}>
+                  <div>
+                    <h5>Approve</h5>
                   </div>
-                ))}
-              </div>
-            ))
-          ) : (
-            <p>No pending purchases to show</p>
-          )}
-        </div>
+                </Link>
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+    ))
+  ) : (
+    <p>No pending purchases to show</p>
+  )}
+</div>
 
         <div className="purchases-container">
           <h2>Cancelled</h2>
@@ -129,7 +141,7 @@ function PurchasePage() {
               </div>
             ))
           ) : (
-            <p>No pending purchases to show</p>
+            <p>No cancelled purchases to show</p>
           )}
         </div>
       </div>
